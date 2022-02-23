@@ -1,0 +1,32 @@
+.toastt {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.toastt #error {
+  color: red;
+  text-decoration: underline;
+  font-weight: bold;
+  text-align: left;
+}
+
+.toastt #success {
+  color: green;
+  text-decoration: underline;
+  font-weight: bold;
+  text-align: left;
+}
+
+.toastt #button {
+  color: black;
+  cursor: pointer;
+  text-align: center;
+  width: 15px;
+  height: 25px;
+}
+
+.toastt #button:hover {
+  color: white;
+  background: black;
+}
