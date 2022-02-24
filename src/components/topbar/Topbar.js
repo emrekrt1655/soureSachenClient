@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./topbar.css";
 
 export default function Topbar() {
-  const user = false;
+  const user = true;
   return (
     <div className="top">
       <div className="topLeft">
@@ -22,32 +22,37 @@ export default function Topbar() {
               WRITE
             </Link>
           </div>
+
+          {!user ? (
+            <div>
+              <div className="topListItem">
+                <Link className="link" to="/login">
+                  LOGIN
+                </Link>
+              </div>
+              <div className="topListItem">
+                <Link className="link" to="/register">
+                  REGISTER
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
+
           {user && <li className="topListItem">LOGOUT</li>}
         </div>
       </div>
       <div className="topRight">
         <i className="topSearchIcon fas fa-search"></i>
-        {user ? (
+        {user && (
           <Link className="link" to="/settings">
             <img
               className="topImg"
-              src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src="https://miro.medium.com/fit/c/176/176/1*3g1mneT-qpOmMWVSRarnVg.jpeg"
               alt=""
             />
           </Link>
-        ) : (
-          <ul className="topList">
-            <li className="topListItem">
-              <Link className="link" to="/login">
-                LOGIN
-              </Link>
-            </li>
-            <li className="topListItem">
-              <Link className="link" to="/register">
-                REGISTER
-              </Link>
-            </li>
-          </ul>
         )}
       </div>
     </div>

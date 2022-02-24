@@ -171,3 +171,23 @@ ul li:nth-child(3):hover span {
 ul li:nth-child(4):hover span {
   background: #0072b1 !important;
 }
+
+.buttonAddTopic {
+  margin-top: 7%;
+  display: inline-block;
+  background: rgb(25, 167, 120);
+  color: #fff;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border-radius: 5px;
+  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  -webkit-transition: all ease-in-out 300ms;
+  transition: all ease-in-out 300ms;
+}
+.buttonAddTopic:hover {
+  box-shadow: 0px 37px 20px -20px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translate(0px, -10px) scale(1.2);
+  transform: translate(0px, -4px) scale(1);
+  color: black;
+}
