@@ -175,7 +175,7 @@ ul li:nth-child(4):hover span {
 .buttonAddTopic {
   margin-top: 7%;
   display: inline-block;
-  background: #4e3434;
+  background: rgb(25, 167, 120);
   color: #fff;
   text-transform: uppercase;
   padding: 5px 15px;
