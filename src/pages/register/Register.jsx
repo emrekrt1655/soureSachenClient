@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { register } from "../../redux/actions/authAction";
+import Alert from "../../components/alert/Alert";
 import "./register.css";
 
 export default function Register() {
@@ -7,9 +11,11 @@ export default function Register() {
     email: "",
     password: "",
   };
+  const dispatch = useDispatch();
   const [userRegister, setUserRegister] = useState(initialState);
-  const { userName, email, password } = userRegister;
+  const { userName, email, password, cf_pass } = userRegister;
   const [typePass, setTypePass] = useState(false);
+  const [typeCfPass, setTypeCfPass] = useState(false);
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
     setUserRegister({
@@ -17,17 +23,16 @@ export default function Register() {
       [name]: value,
     });
   };
-  const handleTypePass = () => {
-    setTypePass(!typePass);
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(register(userRegister));
   };
 
   return (
     <div className="register">
       <span className="registerTitle">Register</span>
-      <form className="registerForm">
+      <form className="registerForm" onSubmit={handleSubmit}>
         <label htmlFor="userName">Username</label>
         <input
           className="registerInput"
@@ -48,20 +53,41 @@ export default function Register() {
           value={email}
           onChange={handleChangeInput}
         />
-        <label>Password</label>
-        <input
-          className="registerInput"
-          type={typePass ? "text" : "password"}
-          placeholder="Enter your password..."
+                <label htmlFor="password">Password</label>
+
+        <input type={typePass ? "text" : "password"} 
+          className="registerInput" 
           id="password"
-          name="password"
-          value={password}
-          onChange={handleChangeInput}
-        />
-        <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>{" "}
-        <button className="registerButton">Register</button>
+          name="password" value={password} 
+          onChange={handleChangeInput} 
+          placeholder="Password must be at least 8 chars."
+          />
+
+          <small onClick={() => setTypePass(!typePass)}>
+            {typePass ? 'Hide' : 'Show'}
+          </small>
+          <label htmlFor="password" >
+          Confirm Password
+        </label>
+        <input type={typeCfPass ? "text" : "password"} 
+          className="registerInput" 
+          id="cf_pass"  
+          name="cf_pass" value={cf_pass} 
+          onChange={handleChangeInput} 
+          placeholder="Your confirm password."
+          />
+
+          <small onClick={() => setTypeCfPass(!typeCfPass)}>
+            {typeCfPass ? 'Hide' : 'Show'}
+          </small>
+        <Alert />
+        <button
+          className="registerButton"
+          type="submit"
+        >
+          Register
+        </button>
       </form>
-      <button className="registerLoginButton">Login</button>
     </div>
   );
 }

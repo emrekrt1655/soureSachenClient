@@ -69,8 +69,6 @@ export default function Login() {
           Login
         </button>
       </form>
-
-      <button className="loginRegisterButton">Register</button>
     </div>
   );
 }
