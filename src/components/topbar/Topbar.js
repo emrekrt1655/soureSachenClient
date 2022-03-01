@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux"
 import "./topbar.css";
 
 export default function Topbar() {
-  const user = true;
+  const token =  useSelector((state) => state.authReducer.token);
+  const user = useSelector((state) => state.authReducer.user);
   return (
     <div className="top">
       <div className="topLeft">
@@ -23,7 +25,7 @@ export default function Topbar() {
             </Link>
           </div>
 
-          {!user ? (
+          {!token ? (
             <div>
               <div className="topListItem">
                 <Link className="link" to="/login">
@@ -49,7 +51,7 @@ export default function Topbar() {
           <Link className="link" to="/settings">
             <img
               className="topImg"
-              src="https://miro.medium.com/fit/c/176/176/1*3g1mneT-qpOmMWVSRarnVg.jpeg"
+              src= {user?.avatar}
               alt=""
             />
           </Link>
