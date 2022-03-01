@@ -3,8 +3,8 @@ import {useSelector} from "react-redux"
 import "./topbar.css";
 
 export default function Topbar() {
-  const token =  useSelector((state) => state.authReducer.data.access_token);
-  const user = useSelector((state) => state.authReducer.data.user);
+  const token =  useSelector((state) => state?.authReducer?.data?.access_token);
+  const user = useSelector((state) => state?.authReducer?.data?.user);
   return (
     <div className="top">
       <div className="topLeft">
