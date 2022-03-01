@@ -17,6 +17,7 @@ export default function Login() {
   const { email, password } = userLogin;
   const [typePass, setTypePass] = useState(false);
   const { authReducer } = useSelector((state) => state);
+  console.log(authReducer)
 
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
@@ -33,8 +34,8 @@ export default function Login() {
     dispatch(login(userLogin));
   };
   useEffect(() => {
-    if (authReducer?.token) history.push("/");
-  }, [authReducer?.token, history]);
+    if (authReducer?.data?.access_token) history.push("/");
+  }, [authReducer?.data?.access_token, history]);
   return (
     <div className="login">
       <span className="loginTitle">Login</span>
