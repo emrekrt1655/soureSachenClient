@@ -26,42 +26,44 @@ export default function Register() {
 
   return (
     <div className="register">
-      <span className="registerTitle">Register</span>
-      <form className="registerForm">
-        <label htmlFor="userName">Username</label>
-        <input
-          className="registerInput"
-          type="text"
-          placeholder="Enter your username..."
-          id="userName"
-          name="userName"
-          value={userName}
-          onChange={handleChangeInput}
-        />
-        <label>Email</label>
-        <input
-          className="registerInput"
-          type="text"
-          placeholder="Enter your email..."
-          id="email"
-          name="email"
-          value={email}
-          onChange={handleChangeInput}
-        />
-        <label>Password</label>
-        <input
-          className="registerInput"
-          type={typePass ? "text" : "password"}
-          placeholder="Enter your password..."
-          id="password"
-          name="password"
-          value={password}
-          onChange={handleChangeInput}
-        />
-        <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>{" "}
-        <button className="registerButton">Register</button>
-      </form>
-      <button className="registerLoginButton">Login</button>
+      <div className="registerBorder">
+        <span className="registerTitle">Register</span>
+        <form className="registerForm">
+          <label htmlFor="userName">Username</label>
+          <input
+            className="registerInput"
+            type="text"
+            placeholder="Enter your username..."
+            id="userName"
+            name="userName"
+            value={userName}
+            onChange={handleChangeInput}
+          />
+          <label>Email</label>
+          <input
+            className="registerInput"
+            type="text"
+            placeholder="Enter your email..."
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChangeInput}
+          />
+          <label>Password</label>
+          <input
+            className="registerInput"
+            type={typePass ? "text" : "password"}
+            placeholder="Enter your password..."
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleChangeInput}
+          />
+          <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>{" "}
+          <button className="registerButton">Register</button>
+        </form>
+        <button className="registerLoginButton">Login</button>
+      </div>
     </div>
   );
 }

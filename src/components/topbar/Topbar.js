@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./topbar.css";
 
 export default function Topbar() {
-  const user = true;
+  const user = false;
   return (
     <div className="top">
       <div className="topLeft">
@@ -24,7 +24,7 @@ export default function Topbar() {
           </div>
 
           {!user ? (
-            <div>
+            <div className="topbarLoginRegister">
               <div className="topListItem">
                 <Link className="link" to="/login">
                   LOGIN

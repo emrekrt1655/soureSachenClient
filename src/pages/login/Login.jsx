@@ -37,40 +37,42 @@ export default function Login() {
   }, [authReducer?.token, history]);
   return (
     <div className="login">
-      <span className="loginTitle">Login</span>
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          className="loginInput"
-          type="text"
-          placeholder="Enter your email..."
-          id="email"
-          name="email"
-          value={email}
-          onChange={handleChangeInput}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          className="loginInput"
-          type={typePass ? "text" : "password"}
-          id="password"
-          name="password"
-          value={password}
-          onChange={handleChangeInput}
-          placeholder="Enter your password..."
-        />
-        <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>
-        <Alert />
-        <button
-          className="loginButton"
-          type="submit"
-          disabled={email && password ? false : true}
-        >
-          Login
-        </button>
-      </form>
+      <div className="loginBorder">
+        <span className="loginTitle">Login</span>
+        <form className="loginForm" onSubmit={handleSubmit}>
+          <label htmlFor="email">Email</label>
+          <input
+            className="loginInput"
+            type="text"
+            placeholder="Enter your email..."
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChangeInput}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            className="loginInput"
+            type={typePass ? "text" : "password"}
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleChangeInput}
+            placeholder="Enter your password..."
+          />
+          <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>
+          <Alert />
+          <button
+            className="loginButton"
+            type="submit"
+            disabled={email && password ? false : true}
+          >
+            Login
+          </button>
+        </form>
 
-      <button className="loginRegisterButton">Register</button>
+        <button className="loginRegisterButton">Register</button>
+      </div>
     </div>
   );
 }
