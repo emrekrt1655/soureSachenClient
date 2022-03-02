@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/authAction";
 import Alert from "../../components/alert/Alert";
+import { Link } from "react-router-dom";
+
 import "./register.css";
 
 export default function Register() {
@@ -32,6 +34,9 @@ export default function Register() {
   return (
     <div className="register">
       <div className="registerBorder">
+        <Link className="link" to="/">
+          <i className="topIcon fab fa-pied-piper-alt"></i>
+        </Link>
         <span className="registerTitle">Register</span>
         <form className="registerForm" onSubmit={handleSubmit}>
           <label htmlFor="userName">Username</label>

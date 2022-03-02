@@ -12,7 +12,7 @@
   flex-direction: column;
 
   /* align-items: center; */
-  border-left: rgba(25, 167, 120, 0.3) solid;
+  border-left: rgba(25, 167, 120, 0.3) solid 1px;
 }
 
 .sidebarItem {

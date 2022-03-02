@@ -19,8 +19,8 @@ function NewPostAdd() {
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "170px",
-        width: "698px",
+        height: "140px",
+        width: "788px",
         background: "#fffbfb",
         borderRadius: "10px",
         justifyContent: "space-around",
@@ -31,7 +31,6 @@ function NewPostAdd() {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
           marginTop: "7px",
         }}
       >

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import "./login.css";
 import { login } from "../../redux/actions/authAction";
 import Alert from "../../components/alert/Alert";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const history = useHistory();
@@ -16,7 +17,7 @@ export default function Login() {
   const [userLogin, setUserLogin] = useState(initialState);
   const { email, password } = userLogin;
   const [typePass, setTypePass] = useState(false);
-  const {authReducer} = useSelector((state) => state);
+  const { authReducer } = useSelector((state) => state);
 
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
@@ -32,13 +33,16 @@ export default function Login() {
     e.preventDefault();
     dispatch(login(userLogin));
   };
-  
+
   useEffect(() => {
     if (authReducer?.access_token) history.push("/");
   }, [authReducer?.access_token, history]);
   return (
     <div className="login">
       <div className="loginBorder">
+        <Link className="link" to="/">
+          <i className="topIcon fab fa-pied-piper-alt"></i>
+        </Link>
         <span className="loginTitle">Login</span>
         <form className="loginForm" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
