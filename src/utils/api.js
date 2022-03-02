@@ -7,3 +7,12 @@ export const postAPI = async (url, post, token) => {
 
   return res;
 };
+
+
+export const getAPI = async (url, token) => {
+  const res = await axios.get(`/api/${url}`, {
+    headers: { token: `${localStorage.getItem('logged')}` },
+  });
+
+  return res;
+};

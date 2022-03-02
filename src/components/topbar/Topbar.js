@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
+import { logOut } from "../../redux/actions/authAction"
 import "./topbar.css";
 
+
 export default function Topbar() {
-  const user = false;
+  const { authReducer } = useSelector((state) => state)
+  const dispatch = useDispatch();
+  
   return (
     <div className="top">
       <div className="topLeft">
@@ -23,8 +28,10 @@ export default function Topbar() {
             </Link>
           </div>
 
-          {!user ? (
+// hata olursa  'className="topbarLoginRegister" sıl
+          {!authReducer?.access_token ? (
             <div className="topbarLoginRegister">
+
               <div className="topListItem">
                 <Link className="link" to="/login">
                   LOGIN
@@ -40,17 +47,17 @@ export default function Topbar() {
             <div></div>
           )}
 
-          {user && <li className="topListItem">LOGOUT</li>}
+          {authReducer?.access_token && <Link className="link" to="/" onClick={() => dispatch(logOut())}> <li className="topListItem">LOGOUT</li> </Link>}
         </div>
       </div>
       <div className="topRight">
         <i className="topSearchIcon fas fa-search"></i>
-        {user && (
+        {authReducer?.user && (
           <Link className="link" to="/settings">
             <img
               className="topImg"
-              src="https://miro.medium.com/fit/c/176/176/1*3g1mneT-qpOmMWVSRarnVg.jpeg"
-              alt=""
+              src={authReducer?.user?.avatar}
+              alt="avatar"
             />
           </Link>
         )}

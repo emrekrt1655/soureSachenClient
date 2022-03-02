@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { register } from "../../redux/actions/authAction";
+import Alert from "../../components/alert/Alert";
 import "./register.css";
 
 export default function Register() {
@@ -7,9 +11,11 @@ export default function Register() {
     email: "",
     password: "",
   };
+  const dispatch = useDispatch();
   const [userRegister, setUserRegister] = useState(initialState);
-  const { userName, email, password } = userRegister;
+  const { userName, email, password, cf_pass } = userRegister;
   const [typePass, setTypePass] = useState(false);
+  const [typeCfPass, setTypeCfPass] = useState(false);
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
     setUserRegister({
@@ -17,11 +23,10 @@ export default function Register() {
       [name]: value,
     });
   };
-  const handleTypePass = () => {
-    setTypePass(!typePass);
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(register(userRegister));
   };
 
   return (

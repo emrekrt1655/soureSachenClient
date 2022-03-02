@@ -16,7 +16,7 @@ export default function Login() {
   const [userLogin, setUserLogin] = useState(initialState);
   const { email, password } = userLogin;
   const [typePass, setTypePass] = useState(false);
-  const { authReducer } = useSelector((state) => state);
+  const {authReducer} = useSelector((state) => state);
 
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
@@ -32,9 +32,10 @@ export default function Login() {
     e.preventDefault();
     dispatch(login(userLogin));
   };
+  
   useEffect(() => {
-    if (authReducer?.token) history.push("/");
-  }, [authReducer?.token, history]);
+    if (authReducer?.access_token) history.push("/");
+  }, [authReducer?.access_token, history]);
   return (
     <div className="login">
       <div className="loginBorder">
