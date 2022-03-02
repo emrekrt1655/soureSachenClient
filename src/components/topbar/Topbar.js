@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
-import { logOut } from "../../redux/actions/authAction"
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../../redux/actions/authAction";
 import "./topbar.css";
 
-
 export default function Topbar() {
-  const { authReducer } = useSelector((state) => state)
+  const { authReducer } = useSelector((state) => state);
   const dispatch = useDispatch();
-  
+
   return (
     <div className="top">
       <div className="topLeft">
-        <i className="topIcon fab fa-pied-piper-alt"></i>
+        <Link className="link" to="/">
+          <i className="topIcon fab fa-pied-piper-alt"></i>
+        </Link>
       </div>
       <div className="topCenter">
         <div className="topList">
@@ -28,10 +29,9 @@ export default function Topbar() {
             </Link>
           </div>
 
-// hata olursa  'className="topbarLoginRegister" sıl
+          {/* // hata olursa  'className="topbarLoginRegister" sıl */}
           {!authReducer?.access_token ? (
             <div className="topbarLoginRegister">
-
               <div className="topListItem">
                 <Link className="link" to="/login">
                   LOGIN
@@ -47,7 +47,12 @@ export default function Topbar() {
             <div></div>
           )}
 
-          {authReducer?.access_token && <Link className="link" to="/" onClick={() => dispatch(logOut())}> <li className="topListItem">LOGOUT</li> </Link>}
+          {authReducer?.access_token && (
+            <Link className="link" to="/" onClick={() => dispatch(logOut())}>
+              {" "}
+              <li className="topListItem">LOGOUT</li>{" "}
+            </Link>
+          )}
         </div>
       </div>
       <div className="topRight">

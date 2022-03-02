@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { register } from "../../redux/actions/authAction";
 import Alert from "../../components/alert/Alert";
+import { Link } from "react-router-dom";
+
 import "./register.css";
 
 export default function Register() {
@@ -32,6 +34,9 @@ export default function Register() {
   return (
     <div className="register">
       <div className="registerBorder">
+        <Link className="link" to="/">
+          <i className="topIcon fab fa-pied-piper-alt"></i>
+        </Link>
         <span className="registerTitle">Register</span>
         <form className="registerForm">
           <label htmlFor="userName">Username</label>
@@ -64,7 +69,7 @@ export default function Register() {
             value={password}
             onChange={handleChangeInput}
           />
-          <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>{" "}
+          <small onClick={handleSubmit}> {typePass ? "Hide" : "Show"} </small>{" "}
           <button className="registerButton">Register</button>
         </form>
         <button className="registerLoginButton">Login</button>
