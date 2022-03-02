@@ -20,7 +20,7 @@ function NewPostAdd() {
         display: "flex",
         flexDirection: "column",
         height: "140px",
-        width: "698px",
+        width: "788px",
         background: "#fffbfb",
         borderRadius: "10px",
         justifyContent: "space-around",
