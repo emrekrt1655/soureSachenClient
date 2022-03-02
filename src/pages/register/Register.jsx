@@ -31,63 +31,44 @@ export default function Register() {
 
   return (
     <div className="register">
-      <span className="registerTitle">Register</span>
-      <form className="registerForm" onSubmit={handleSubmit}>
-        <label htmlFor="userName">Username</label>
-        <input
-          className="registerInput"
-          type="text"
-          placeholder="Enter your username..."
-          id="userName"
-          name="userName"
-          value={userName}
-          onChange={handleChangeInput}
-        />
-        <label>Email</label>
-        <input
-          className="registerInput"
-          type="text"
-          placeholder="Enter your email..."
-          id="email"
-          name="email"
-          value={email}
-          onChange={handleChangeInput}
-        />
-                <label htmlFor="password">Password</label>
-
-        <input type={typePass ? "text" : "password"} 
-          className="registerInput" 
-          id="password"
-          name="password" value={password} 
-          onChange={handleChangeInput} 
-          placeholder="Password must be at least 8 chars."
+      <div className="registerBorder">
+        <span className="registerTitle">Register</span>
+        <form className="registerForm">
+          <label htmlFor="userName">Username</label>
+          <input
+            className="registerInput"
+            type="text"
+            placeholder="Enter your username..."
+            id="userName"
+            name="userName"
+            value={userName}
+            onChange={handleChangeInput}
           />
-
-          <small onClick={() => setTypePass(!typePass)}>
-            {typePass ? 'Hide' : 'Show'}
-          </small>
-          <label htmlFor="password" >
-          Confirm Password
-        </label>
-        <input type={typeCfPass ? "text" : "password"} 
-          className="registerInput" 
-          id="cf_pass"  
-          name="cf_pass" value={cf_pass} 
-          onChange={handleChangeInput} 
-          placeholder="Your confirm password."
+          <label>Email</label>
+          <input
+            className="registerInput"
+            type="text"
+            placeholder="Enter your email..."
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChangeInput}
           />
-
-          <small onClick={() => setTypeCfPass(!typeCfPass)}>
-            {typeCfPass ? 'Hide' : 'Show'}
-          </small>
-        <Alert />
-        <button
-          className="registerButton"
-          type="submit"
-        >
-          Register
-        </button>
-      </form>
+          <label>Password</label>
+          <input
+            className="registerInput"
+            type={typePass ? "text" : "password"}
+            placeholder="Enter your password..."
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleChangeInput}
+          />
+          <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>{" "}
+          <button className="registerButton">Register</button>
+        </form>
+        <button className="registerLoginButton">Login</button>
+      </div>
     </div>
   );
 }

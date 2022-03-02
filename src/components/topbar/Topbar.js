@@ -7,6 +7,7 @@ import "./topbar.css";
 export default function Topbar() {
   const { authReducer } = useSelector((state) => state)
   const dispatch = useDispatch();
+  
   return (
     <div className="top">
       <div className="topLeft">
@@ -27,8 +28,10 @@ export default function Topbar() {
             </Link>
           </div>
 
+// hata olursa  'className="topbarLoginRegister" sıl
           {!authReducer?.access_token ? (
-            <div>
+            <div className="topbarLoginRegister">
+
               <div className="topListItem">
                 <Link className="link" to="/login">
                   LOGIN

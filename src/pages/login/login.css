@@ -5,15 +5,28 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
+      rgba(134, 151, 132, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
     url("https://images.pexels.com/photos/768473/pexels-photo-768473.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
   background-size: cover;
 }
 
+.loginBorder {
+  padding: 20px 30px;
+  width: 15%;
+  height: 40%;
+  background-color: rgba(52, 54, 51, 0.5);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .loginTitle {
   font-size: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .loginForm {
