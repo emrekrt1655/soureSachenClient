@@ -1,5 +1,5 @@
 export const validRegister = (userRegister) => {
-    const { userName, email, password, cf_pass } = userRegister;
+    const { userName, email, password, cf_password } = userRegister;
     const errors = [];
   
     if(!userName){
@@ -16,7 +16,7 @@ export const validRegister = (userRegister) => {
   
     if(password.length < 8){
       errors.push("Password must be at least 8 chars.")
-    }else if(password !== cf_pass){
+    }else if(password !== cf_password){
       errors.push("Confirm password did not match.")
     }
   
