@@ -29,7 +29,6 @@ export default function Topbar() {
             </Link>
           </div>
 
-          {/* // hata olursa  'className="topbarLoginRegister" sıl */}
           {!authReducer?.access_token ? (
             <div className="topbarLoginRegister">
               <div className="topListItem">

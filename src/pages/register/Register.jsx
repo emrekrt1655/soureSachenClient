@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { register } from "../../redux/actions/authAction";
 import Alert from "../../components/alert/Alert";
 import { Link } from "react-router-dom";
@@ -12,18 +11,19 @@ export default function Register() {
     userName: "",
     email: "",
     password: "",
+    cf_password: "",
   };
-  const dispatch = useDispatch();
   const [userRegister, setUserRegister] = useState(initialState);
-  const { userName, email, password, cf_pass } = userRegister;
+  const { userName, email, password, cf_password } = userRegister;
+
   const [typePass, setTypePass] = useState(false);
   const [typeCfPass, setTypeCfPass] = useState(false);
+
+  const dispatch = useDispatch();
+
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
-    setUserRegister({
-      ...userRegister,
-      [name]: value,
-    });
+    setUserRegister({ ...userRegister, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -38,7 +38,7 @@ export default function Register() {
           <i className="topIcon fab fa-pied-piper-alt"></i>
         </Link>
         <span className="registerTitle">Register</span>
-        <form className="registerForm">
+        <form className="registerForm" onSubmit={handleSubmit}>
           <label htmlFor="userName">Username</label>
           <input
             className="registerInput"
@@ -59,20 +59,41 @@ export default function Register() {
             value={email}
             onChange={handleChangeInput}
           />
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
-            className="registerInput"
             type={typePass ? "text" : "password"}
-            placeholder="Enter your password..."
+            className="form-control"
             id="password"
             name="password"
             value={password}
             onChange={handleChangeInput}
+            placeholder="Password must be at least 6 chars."
           />
-          <small onClick={handleSubmit}> {typePass ? "Hide" : "Show"} </small>{" "}
-          <button className="registerButton">Register</button>
+
+          <small onClick={() => setTypePass(!typePass)}>
+            {typePass ? "Hide" : "Show"}
+          </small>
+          <label htmlFor="password" className="form-label">
+            Confirm Password
+          </label>
+          <input
+            type={typeCfPass ? "text" : "password"}
+            className="form-control"
+            id="cf_password"
+            name="cf_password"
+            value={cf_password}
+            onChange={handleChangeInput}
+            placeholder="Your confirm password."
+          />
+
+          <small onClick={() => setTypeCfPass(!typeCfPass)}>
+            {typeCfPass ? "Hide" : "Show"}
+          </small>
+          <Alert />
+          <button className="registerButton" type="submit">
+            Register
+          </button>
         </form>
-        <button className="registerLoginButton">Login</button>
       </div>
     </div>
   );
