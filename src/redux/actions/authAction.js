@@ -1,7 +1,6 @@
 import { AUTH, ALERT } from "../types/types";
-import { postAPI, getAPI } from "../../utils/api";
+import { postAPI, getAPI, putAPI } from "../../utils/api";
 import { validRegister } from '../../utils/validRegister'
-
 
 export const login = (userLogin) => async (dispatch) => {
   try {
@@ -31,6 +30,23 @@ export const register = (userRegister) => async (dispatch) => {
     dispatch({ type: ALERT, payload: { success: res.data.message } })
   } catch (err) {
     dispatch({ type: ALERT, payload: { errors: err.response.data.message } })
+  }
+}
+
+export const update = (userUpdate, id) => async (dispatch) => {
+  console.log(userUpdate)
+  console.log(id)
+  try {
+     const check = validRegister(userUpdate)
+
+      if (check?.errLength > 0)
+       return dispatch({ type: ALERT, payload: { errors: check.errMsg } })
+
+    dispatch({ type: ALERT, payload: { loading: true } });
+    const res = await putAPI(`useredit/${id}`, userUpdate);
+    dispatch({ type: ALERT, payload: { success: res.data.message } })
+  } catch (err) {
+    dispatch({ type: ALERT, payload: err?.response.data.message })
   }
 }
 

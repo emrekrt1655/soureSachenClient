@@ -56,7 +56,7 @@ export default function Topbar() {
       </div>
       <div className="topRight">
         <i className="topSearchIcon fas fa-search"></i>
-        {authReducer?.user && (
+        {authReducer?.access_token && (
           <Link className="link" to="/settings">
             <img
               className="topImg"
