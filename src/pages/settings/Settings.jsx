@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Sidebar from "../../components/sidebar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import "./settings.css";
-import { update } from "../../redux/actions/authAction";
+import { update, deleteAcccount } from "../../redux/actions/authAction";
 import Alert from "../../components/alert/Alert";
 
 export default function Settings() {
@@ -10,6 +9,8 @@ export default function Settings() {
   const { authReducer } = useSelector((state) => state);
   const user = authReducer?.user;
   const id = user?.userId;
+  const access_token = authReducer?.access_token;
+
 
   const initialState = {
     avatar: user?.avatar,
@@ -26,15 +27,18 @@ export default function Settings() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(update(userUpdate, id));
+    dispatch(update(userUpdate, id, access_token));
   };
+  const handleDeleteAccount = () => {
+    dispatch(deleteAcccount(id, access_token))
+  }
 
   return (
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsTitleUpdate">Update Your Account</span>
-          <span className="settingsTitleDelete">Delete Account</span>
+          <span className="settingsTitleDelete" onClick={handleDeleteAccount}  >Delete Account</span>
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label htmlFor="avatar">Profile Picture</label>
