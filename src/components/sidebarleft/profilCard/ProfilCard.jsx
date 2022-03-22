@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./profilCard.css";
 
 export default function ProfilCard({ img }) {
@@ -8,6 +7,7 @@ export default function ProfilCard({ img }) {
         <img
           src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-4.jpg"
           className="img img-responsive"
+          alt='profilcard'
         />
         <div className="profile-content">
           <div className="profile-name">

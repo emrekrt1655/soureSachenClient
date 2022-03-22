@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LikedPosts from "./likedposts/LikedPosts";
 import Modal from "../modal/modal";
 import "./sidebar.css";
 
 export default function Sidebar() {
-  const [open, setOpen] = React.useState(false);
+  const {  topicReducer } = useSelector((state) => state);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+
+  const topics = topicReducer?.data;
+  const sortedTopics = topics?.sort(function (topic1, topic2) {
+    return topic2._count.posts - topic1._count.posts;
+  });
 
   return (
     <div>
@@ -17,30 +25,22 @@ export default function Sidebar() {
           <span className="sidebarTitle">
             Topic <i className="fas fa-angle-double-right"></i>
           </span>
-          <div className="titleinfoSide">
-            <i className="fab fa-buffer"></i>
-            <p className="titleInfo">GSvTS </p>
-          </div>
-          <div className="titleinfoSide">
-            <i className="fab fa-buffer"></i>
-            <p className="titleInfo">Kadına Şiddet</p>
-          </div>
-          <div className="titleinfoSide">
-            <i className="fab fa-buffer"></i>
-            <p className="titleInfo">İkisideSözlşÖğrtEşdrmu </p>
-          </div>
-          <div className="titleinfoSide">
-            <i className="fab fa-buffer"></i>
-            <p className="titleInfo">SonRomantik12K </p>
-          </div>
-          <div className="titleinfoSide">
-            <i className="fab fa-buffer"></i>
-            <p className="titleInfo">SanaAşığım ZehSer </p>
-          </div>
+          {sortedTopics &&
+            sortedTopics?.slice(0,9)?.map((t) => (
+              <div className="titleinfoSide" key= {t?.topicId}>
+                <i className="fab fa-buffer"></i>
+                <p className="titleInfo"> {t?.text} </p>
+              </div>
+            ))}
+
           <span className="">
             <div onClick={handleOpen} className="buttonAddTopic">
               <i className="fab fa-buffer"></i>
-              <span style={{ margin: "5px" }}>Add Topic</span>
+              <span 
+              style={{ margin: "5px" }}
+              >
+                Add Topic
+              </span>
             </div>
           </span>
         </div>
@@ -91,20 +91,20 @@ export default function Sidebar() {
             <div>
               <ul>
                 <li>
-                  <a href="#">
+                  <a >
                     <span></span>
                     <span className="fa fa-facebook"></span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a >
                     <span></span>
                     <span></span>
                     <span className="fa fa-twitter"></span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a >
                     <span></span>
                     <span></span>
                     <span></span>
@@ -112,7 +112,7 @@ export default function Sidebar() {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a >
                     <span></span>
                     <span></span>
                     <span></span>

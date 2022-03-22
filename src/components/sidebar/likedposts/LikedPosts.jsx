@@ -44,9 +44,9 @@ export default function Post({img}) {
           </div>
         </div>
         <div>
-          <i class="far fa-hand-spock"></i>
-          <i class="far fa-comment"  style={{margin:"2%"}}></i>
-          <i class="fab fa-slideshare"  ></i>
+          <i className="far fa-hand-spock"></i>
+          <i className="far fa-comment"  style={{margin:"2%"}}></i>
+          <i className="fab fa-slideshare"  ></i>
         </div>
       </div>  
     </div>

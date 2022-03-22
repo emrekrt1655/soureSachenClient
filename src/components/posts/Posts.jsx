@@ -9,13 +9,16 @@ import { getTopics } from "../../redux/actions/topicAction";
 export default function Posts() {
   const dispatch = useDispatch();
   const { postReducer, topicReducer } = useSelector((state) => state);
+  const postData = postReducer?.data;
+  const topicData = topicReducer?.data;
   useEffect(() => {
     dispatch(getTopics());
     dispatch(getPosts());
   }, [dispatch]);
 
-  const postData = postReducer?.data;
-  const topicData = topicReducer?.data;
+  
+
+  
   return (
     <div className="posts">
       <NewPostAdd />
