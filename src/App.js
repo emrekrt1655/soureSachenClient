@@ -9,6 +9,7 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
+import TopicPosts from "./components/posts/TopicPosts";
 
 function App() {
   const {authReducer} = useSelector((state) => state);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/posts">
           <Homepage />
         </Route>
+        
         <Route path="/register">
           {authReducer?.user ? <Homepage /> : <Register />}
         </Route>
@@ -36,6 +38,9 @@ function App() {
         </Route>
         <Route path="/write">{authReducer?.user ? <Write /> : <Login />}</Route>
         <Route path="/settings">{authReducer?.user ? <Settings /> : <Login />}</Route>
+        <Route path="/topic/:topicId">
+          <TopicPosts />
+        </Route>
       </Switch>
     </Router>
   );

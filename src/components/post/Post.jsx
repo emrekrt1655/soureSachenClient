@@ -7,20 +7,21 @@ export default function Post({ post, topicData }) {
   });
 
   const topicText = topic?.map(({ text }) => text);
+  const topicId = topic?.map(({ topicId }) => topicId);
 
   return (
     <div className="post">
-      {post.photo && <img className="postImg" src={post.photo} alt="" />}
+      {post.photo && <img className="postImg" src={post.photo} alt="post" />}
       <div className="postInfo">
-        <Link to={`/post/${post?.postId}`} className="link">
-          <span className="postTitle">{topicText}</span>
+        <Link to={`topic/${topicId}`}>
+        
+        <p className="postTitle">{topicText}</p>
         </Link>
-        <hr />
+      <p className="postDesc">{post?.text}</p>
         <span className="postDate">
           {new Date(post.createdAt).toDateString()}
         </span>
       </div>
-      <p className="postDesc">{post?.text}</p>
     </div>
   );
 }
