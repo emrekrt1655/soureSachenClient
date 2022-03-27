@@ -5,8 +5,8 @@ import { validRegister } from '../../utils/validRegister'
 export const login = (userLogin, access_token) => async (dispatch) => {
   try {
     const accessToken = access_token
-    dispatch({ type: ALERT, payload: { loading: true } });
     const res = await postAPI("login", userLogin, accessToken);
+    dispatch({ type: ALERT, payload: { loading: true } });
     dispatch({
       type: AUTH,
       payload: res.data
@@ -27,7 +27,7 @@ export const register = (userRegister, access_token) => async (dispatch) => {
     if (check.errLength > 0)
       return dispatch({ type: ALERT, payload: { errors: check.errMsg } })
 
-    dispatch({ type: ALERT, payload: { loading: true } });
+    dispatch({ type: ALERT, payload: { loading: false } });
     const res = await postAPI("register", userRegister, accessToken);
     dispatch({ type: ALERT, payload: { success: res.data.message } })
   } catch (err) {
@@ -43,7 +43,7 @@ export const update = (userUpdate, id, access_token) => async (dispatch) => {
     if (check?.errLength > 0)
       return dispatch({ type: ALERT, payload: { errors: check.errMsg } })
 
-    dispatch({ type: ALERT, payload: { loading: true } });
+    dispatch({ type: ALERT, payload: { loading: false } });
     const res = await putAPI(`useredit/${id}`, userUpdate, accessToken);
     dispatch({ type: ALERT, payload: { success: res.data.message } })
   } catch (err) {
@@ -54,7 +54,7 @@ export const update = (userUpdate, id, access_token) => async (dispatch) => {
 export const deleteAcccount = (id, access_token) => async (dispatch) => {
   try {
     const accessToken = access_token
-    dispatch({ type: ALERT, payload: { loading: true } });
+    dispatch({ type: ALERT, payload: { loading: false } });
     const res = await deleteAPI(`userdelete/${id}`, accessToken);
     dispatch({ type: ALERT, payload: { success: res.data.message } })
   } catch (err) {

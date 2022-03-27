@@ -6,8 +6,10 @@ import Modal from "@mui/material/Modal";
 import SendIcon from "@mui/icons-material/Send";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
+import Alert from "../alert/Alert";
+import { useDispatch, useSelector } from "react-redux";
+import { createTopic, getTopics } from "../../redux/actions/topicAction";
 
 const style = {
   position: "absolute",
@@ -23,6 +25,28 @@ const style = {
 };
 
 export default function BasicModal({ open, handleClose }) {
+  const access_token = useSelector((state) => state?.authReducer?.access_token);
+  const initialState = {
+    text: "",
+  };
+
+  const dispatch = useDispatch();
+
+  const [topic, setTopic] = React.useState(initialState.text);
+
+  const handleChangeInput = (e) => {
+    const { value } = e.target;
+    setTopic({
+      ...topic,
+      text: value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createTopic(topic, access_token));
+    dispatch(getTopics())
+  };
+
   return (
     <div>
       <Modal
@@ -45,23 +69,17 @@ export default function BasicModal({ open, handleClose }) {
             fullWidth
             id="fullWidth"
             style={{ marginTop: "19px" }}
-            placeholder="Deine Topic"
+            placeholder="Add new Topic"
+            onChange={handleChangeInput}
           />
-
-          <TextField
-            style={{ marginTop: "19px" }}
-            placeholder="Schreibe deine gedanken"
-            fullWidth
-            multiline
-            rows={3}
-            maxRows={4}
-          />
+          <Alert />
           <Button
             variant="contained"
             endIcon={<SendIcon />}
             style={{ marginTop: "19px", float: "right" }}
+            onClick={handleSubmit}
           >
-            Send
+            Add
           </Button>
         </Box>
       </Modal>

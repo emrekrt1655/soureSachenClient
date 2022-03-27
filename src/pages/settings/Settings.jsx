@@ -42,7 +42,7 @@ export default function Settings() {
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label htmlFor="avatar">Profile Picture</label>
-            <img src={user?.avatar} alt={`Photo of ${user?.userName}`} className="ppimg"  />
+            <img src={user?.avatar} alt={`${user?.userName}`} className="ppimg"  />
             <input
               id="fileInput"
               type="text"
