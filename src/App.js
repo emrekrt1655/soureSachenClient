@@ -2,6 +2,8 @@ import {useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { refreshToken } from "./redux/actions/authAction"
+import {getTopics} from "./redux/actions//topicAction"
+import {getPosts} from "./redux/actions/postAction"
 import Topbar from "./components/topbar/Topbar";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
@@ -9,7 +11,7 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
-import TopicPosts from "./components/posts/TopicPosts";
+import TopicPosts from "./pages/TopicPosts/TopicPosts";
 
 function App() {
   const {authReducer} = useSelector((state) => state);
@@ -17,6 +19,8 @@ function App() {
 
   useEffect(() => {
     dispatch(refreshToken());
+    dispatch(getTopics());
+    dispatch(getPosts());
   }, [dispatch]);
   return (
     <Router>
