@@ -6,12 +6,12 @@ import Modal from "../modal/modal";
 import "./sidebar.css";
 
 export default function Sidebar() {
-  const {  topicReducer } = useSelector((state) => state);
+  const { authReducer, topicReducer } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
+  const user = authReducer?.user
   const topics = topicReducer?.data;
   const sortedTopics = topics?.sort(function (topic1, topic2) {
     return topic2._count.posts - topic1._count.posts;
@@ -34,14 +34,14 @@ export default function Sidebar() {
             ))}
 
           <span className="">
-            <div onClick={handleOpen} className="buttonAddTopic">
+            { user?.isTopicCreator === 'true'  && <div onClick={handleOpen} className="buttonAddTopic">
               <i className="fab fa-buffer"></i>
               <span 
               style={{ margin: "5px" }}
               >
                 Add Topic
               </span>
-            </div>
+            </div>}
           </span>
         </div>
         <div className="sidebarItem">
