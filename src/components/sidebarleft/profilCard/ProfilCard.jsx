@@ -1,18 +1,24 @@
 import "./profilCard.css";
+import { useSelector } from "react-redux";
 
 export default function ProfilCard({ img }) {
+  const user = useSelector((state) => state?.authReducer?.user);
+  const users = useSelector((state) => state?.userReducer?.data);
+
+  const currentUser = users?.find((u) => u.userId === user.userId);
+
   return (
     <div>
       <div className="profile-card-4 text-center">
         <img
-          src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-4.jpg"
+          src={user?.avatar}
           className="img img-responsive"
-          alt='profilcard'
+          alt="profilcard"
         />
         <div className="profile-content">
           <div className="profile-name">
-            John Doe
-            <p>@johndoedesigner</p>
+            {`${user?.name} ${user?.surname}`}
+            <p>{user?.email}</p>
           </div>
           <div className="profile-description">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -22,19 +28,19 @@ export default function ProfilCard({ img }) {
             <div className="col-xs-4">
               <div className="profile-overview">
                 <p>TWEETS</p>
-                <h4>1300</h4>
+                <h4>{currentUser?._count?.posts}</h4>
               </div>
             </div>
             <div className="col-xs-4">
               <div className="profile-overview">
                 <p>FOLLOWERS</p>
-                <h4>250</h4>
+                <h4>{currentUser?._count?.followers}</h4>
               </div>
             </div>
             <div className="col-xs-4">
               <div className="profile-overview">
                 <p>FOLLOWING</p>
-                <h4>168</h4>
+                <h4>{currentUser?._count?.followings}</h4>
               </div>
             </div>
           </div>
