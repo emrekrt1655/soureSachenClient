@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { refreshToken } from "./redux/actions/authAction"
 import {getTopics} from "./redux/actions//topicAction"
 import {getPosts} from "./redux/actions/postAction"
+import {getUsers} from "./redux/actions/userAction"
 import Topbar from "./components/topbar/Topbar";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
@@ -20,6 +21,7 @@ function App() {
   useEffect(() => {
     dispatch(refreshToken());
     dispatch(getTopics());
+    dispatch(getUsers());
     dispatch(getPosts());
   }, [dispatch]);
   return (
