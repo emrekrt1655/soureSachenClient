@@ -89,41 +89,6 @@ export default function Sidebar() {
           </span>
         </div>
         <div className="sidebarItem">
-          <span className="sidebarTitle categories">CATEGORIES</span>
-          <div className="sidebarList">
-            <div className="sidebarListItem">
-              <Link className="link" to="/posts?cat=Life">
-                Life
-              </Link>
-            </div>
-            <div className="sidebarListItem">
-              <Link className="link" to="/posts?cat=Music">
-                Music
-              </Link>
-            </div>
-            <div className="sidebarListItem">
-              <Link className="link" to="/posts?cat=Sport">
-                Sport
-              </Link>
-            </div>
-            <div className="sidebarListItem">
-              <Link className="link" to="/posts?cat=Style">
-                Style
-              </Link>
-            </div>
-            <div className="sidebarListItem">
-              <Link className="link" to="/posts?cat=Tech">
-                Tech
-              </Link>
-            </div>
-            <div className="sidebarListItem">
-              <Link className="link" to="/posts?cat=Cinema">
-                Cinema
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="sidebarItem">
           <div className="sidebarItem">
             <span className="sidebarTitle">THE MOST LIKED</span>
             <LikedPosts />

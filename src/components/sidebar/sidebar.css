@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1%;
 }
 .sidebarItem > img {
   margin-top: 15px;
@@ -36,7 +37,11 @@
   align-items: center;
   justify-content: space-between;
   border-top: solid 1px #a7a4a4;
-  border-bottom: solid 1px #a7a4a4
+  border-bottom: solid 1px #a7a4a4;
+}
+.sidebarTitle {
+  margin-bottom: 6%;
+  margin-top: 7%;
 }
 
 .sidebarItem .sidebarHead .sidebarTitle {
@@ -50,14 +55,14 @@
 }
 
 .sidebarItem .sidebarHead .sidebarIcons {
-  display:flex
+  display: flex;
 }
 
 .categories {
   display: block;
   margin-top: 10px !important;
   border-top: solid 1px #a7a4a4;
-  border-bottom: solid 1px #a7a4a4
+  border-bottom: solid 1px #a7a4a4;
 }
 
 .sidebarList {
@@ -83,8 +88,6 @@
   align-items: center;
   justify-content: center;
 }
-
-
 
 .titleinfoSide {
   display: flex;
@@ -203,4 +206,3 @@
   transform: translate(0px, -4px) scale(1);
   color: black;
 }
-
