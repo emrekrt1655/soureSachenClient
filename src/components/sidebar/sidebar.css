@@ -36,7 +36,7 @@
   align-items: center;
   justify-content: space-between;
   border-top: solid 1px #a7a4a4;
-  border-bottom: solid 1px #a7a4a4
+  border-bottom: solid 1px #a7a4a4;
 }
 
 .sidebarItem .sidebarHead .sidebarTitle {
@@ -49,15 +49,17 @@
   font-weight: 600;
 }
 
+
+
 .sidebarItem .sidebarHead .sidebarIcons {
-  display:flex
+  display: flex;
 }
 
 .categories {
   display: block;
   margin-top: 10px !important;
   border-top: solid 1px #a7a4a4;
-  border-bottom: solid 1px #a7a4a4
+  border-bottom: solid 1px #a7a4a4;
 }
 
 .sidebarList {
@@ -84,16 +86,20 @@
   justify-content: center;
 }
 
-
-
 .titleinfoSide {
+  width: 75%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-.titleInfo {
-  margin: 4px;
+.titleinfoSide .titleInfo {
+  padding-left: 10px;
+}
+
+.titleinfoSide .titleInfo:hover {
+  color:red;
+  cursor: pointer;
 }
 
 .sidebarSocial ul {
@@ -203,4 +209,3 @@
   transform: translate(0px, -4px) scale(1);
   color: black;
 }
-
