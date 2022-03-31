@@ -14,7 +14,6 @@ export const getTopics = () => async (dispatch) => {
 export const createTopic= (topic, access_token) => async (dispatch) => {
     try{
         const accessToken = access_token
-        console.log(topic, accessToken)
         const res = await postAPI("topicCreate", topic, accessToken)
         dispatch({
             type: TOPIC,
