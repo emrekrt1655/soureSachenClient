@@ -3,15 +3,28 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LikedPosts from "./likedposts/LikedPosts";
 import Modal from "../modal/modal";
+import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+import HourglassTopIcon from "@mui/icons-material/HourglassTop";
+import { makeStyles } from "@material-ui/core/styles";
+import Tooltip from "@mui/material/Tooltip";
 import "./sidebar.css";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    fontSize: "medium",
+    "&:hover, &.Mui-focusVisible": { fontSize: "large" },
+  },
+}));
+
 export default function Sidebar() {
+  const classes = useStyles();
   let sortedCountTopics;
   let sortedDateTopics;
   const { authReducer, topicReducer } = useSelector((state) => state);
   const [open, setOpen] = useState(false);
   const [lastAdded, setLastAdded] = useState(false);
-  const handleLastAdded = () => setLastAdded(!lastAdded);
+  const handleLastAdded = () => setLastAdded(true);
+  const handleMostRated = () => setLastAdded(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -35,13 +48,23 @@ export default function Sidebar() {
       <Modal open={open} handleClose={handleClose} />
       <div className="sidebar">
         <div className="sidebarItem">
-          <span className="sidebarTitle">
-            Topic{" "}
-            <i
-              className="fas fa-angle-double-right"
-              onClick={handleLastAdded}
-            ></i>
-          </span>
+          <div className="sidebarHead">
+            <span className="sidebarTitle">Topic</span>
+            <div className="sidebarIcons">
+              <Tooltip title="Most Rated">
+                <LocalFireDepartmentIcon
+                  className={classes.root}
+                  onClick={handleMostRated}
+                />
+              </Tooltip>
+              <Tooltip title="Last Added">
+                <HourglassTopIcon
+                  className={classes.root}
+                  onClick={handleLastAdded}
+                />
+              </Tooltip>
+            </div>
+          </div>
           {topics && lastAdded
             ? sortedDateTopics?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
@@ -66,7 +89,7 @@ export default function Sidebar() {
           </span>
         </div>
         <div className="sidebarItem">
-          <span className="sidebarTitle">CATEGORIES</span>
+          <span className="sidebarTitle categories">CATEGORIES</span>
           <div className="sidebarList">
             <div className="sidebarListItem">
               <Link className="link" to="/posts?cat=Life">

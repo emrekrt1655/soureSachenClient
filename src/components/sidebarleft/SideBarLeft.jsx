@@ -11,9 +11,9 @@ export default function SideBarLeft() {
   return (
     <div className="sidebarLeft">
       <ProfilCard />
-      <div className="sidebarItem">
-        <span className="sidebarTitle">WHO ARE FOLLOWED</span>
-        <div className="sidebarList">
+      <div className="sidebarLeftItem">
+        <span className="sidebarLeftTitle">WHO ARE FOLLOWED</span>
+        <div className="sidebarLeftList">
           <FollowedList />
         </div>
       </div>
