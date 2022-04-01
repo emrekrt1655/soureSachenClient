@@ -1,6 +1,6 @@
 .post {
-  width: 60%;
-  margin: 34px 25px 40px 25px;
+  width: 90%;
+  margin: 34px 25px 20px 25px;
   display: flex;
   /* flex-direction: column; */
   -webkit-box-shadow: 20px 12px 50px -7px rgba(0, 0, 0, 0.1);

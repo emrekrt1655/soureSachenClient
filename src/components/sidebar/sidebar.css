@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1%;
 }
 .sidebarItem > img {
   margin-top: 15px;
@@ -37,6 +38,10 @@
   justify-content: space-between;
   border-top: solid 1px #a7a4a4;
   border-bottom: solid 1px #a7a4a4;
+}
+.sidebarTitle {
+  margin-bottom: 6%;
+  margin-top: 7%;
 }
 
 .sidebarItem .sidebarHead .sidebarTitle {
