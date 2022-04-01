@@ -14,6 +14,7 @@ export default function Post({ post, topicData }) {
   const topic = topicData?.filter((topic) => {
     return topic?.topicId === post?.postTopicId;
   });
+  const { authReducer } = useSelector((state) => state);
   const userReducer = useSelector((state) => state?.userReducer?.data);
 
   const user = userReducer?.find((user) => user?.userId === post.postUserId);
@@ -44,7 +45,7 @@ export default function Post({ post, topicData }) {
             alt="Profil Foto"
             src={user?.avatar}
           />
-          <p>{user?.name}</p>
+          <p>{authReducer?.user && user?.name}</p>
         </Box>
         <div>
           <Tooltip
@@ -54,7 +55,7 @@ export default function Post({ post, topicData }) {
                 : `${post?._count?.likes} Likes`
             }
           >
-            <RecommendRoundedIcon />
+            <RecommendRoundedIcon disable={authReducer?.user && true} />
           </Tooltip>
         </div>
         <div>
@@ -65,7 +66,10 @@ export default function Post({ post, topicData }) {
                 : `${post?._count?.likes} Comments`
             }
           >
-            <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
+            <MarkChatUnreadIcon
+              style={{ margin: "0 2% " }}
+              disable={authReducer?.user && true}
+            />
           </Tooltip>
         </div>
         <div>

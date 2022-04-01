@@ -16,9 +16,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-left: -20px;
-  /* background-color: rgb(217, 135, 135);
-  border-radius: 30% 70% 0% 100% / 0% 0% 100% 100%; */
+  align-items: center;
+  margin-left: -29px;
+  margin-right: 11px;
+  /* background-color: rgb(217, 135, 217); */
+  /*border-radius: 10% 70% 0% 100% / 0% 0% 100% 100%; */
 }
 
 .postImg {
