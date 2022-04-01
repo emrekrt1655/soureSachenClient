@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import LikedPosts from "./likedposts/LikedPosts";
 import Modal from "../modal/modal";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Sidebar() {
+  const history = useHistory();
   const classes = useStyles();
   let sortedCountTopics;
   let sortedDateTopics;
@@ -68,14 +69,20 @@ export default function Sidebar() {
           {topics && lastAdded
             ? sortedDateTopics?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
+                  <div style={{display: 'flex'}}>
                   <i className="fab fa-buffer"></i>
-                  <p className="titleInfo"> {t?.text} </p>
+                  <p className="titleInfo" onClick={()=> history.push(`/topic/${t?.topicId}`)} > {t?.text} </p>
+                  </div>
+                  <p className="titleCountry"> {t?.country} </p>
                 </div>
               ))
             : sortedCountTopics?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
+                  <div style={{display: 'flex'}}>
                   <i className="fab fa-buffer"></i>
-                  <p className="titleInfo"> {t?.text} </p>
+                  <p className="titleInfo" onClick={()=> history.push(`/topic/${t?.topicId}`)}> {t?.text} </p>
+                  </div>
+                  <p className="titleCountry"> {t?.country} </p>
                 </div>
               ))}
 

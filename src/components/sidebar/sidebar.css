@@ -54,6 +54,8 @@
   font-weight: 600;
 }
 
+
+
 .sidebarItem .sidebarHead .sidebarIcons {
   display: flex;
 }
@@ -90,13 +92,19 @@
 }
 
 .titleinfoSide {
+  width: 75%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-.titleInfo {
-  margin: 4px;
+.titleinfoSide .titleInfo {
+  padding-left: 10px;
+}
+
+.titleinfoSide .titleInfo:hover {
+  color:red;
+  cursor: pointer;
 }
 
 .sidebarSocial ul {
