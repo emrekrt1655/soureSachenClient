@@ -1,0 +1,15 @@
+.whotofollowavatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.whotoFollowAvatar {
+  margin-bottom: 7px;
+}
+
+.whotoFollowButton {
+  background-color: rgb(57, 166, 95) !important;
+  padding: 5px 7px !important;
+}
