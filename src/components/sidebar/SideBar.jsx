@@ -88,6 +88,7 @@ export default function Sidebar() {
             )}
           </span>
         </div>
+
         <div className="sidebarItem">
           <div className="sidebarItem">
             <span className="sidebarTitle">THE MOST LIKED</span>
