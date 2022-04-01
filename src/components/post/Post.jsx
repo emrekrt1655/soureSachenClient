@@ -1,5 +1,10 @@
 import "./post.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
@@ -9,6 +14,10 @@ export default function Post({ post, topicData }) {
   const topic = topicData?.filter((topic) => {
     return topic?.topicId === post?.postTopicId;
   });
+  const userReducer = useSelector((state) => state?.userReducer?.data);
+
+  const user = userReducer?.find((user) => user?.userId === post.postUserId);
+  console.log(user);
 
   const topicText = topic?.map(({ text }) => text);
   const topicId = topic?.map(({ topicId }) => topicId);
@@ -29,6 +38,14 @@ export default function Post({ post, topicData }) {
       </div>
       {/* added post like and comment number acording to count */}
       <div className="postIcons">
+        <Box className="whotofollowavatar">
+          <Avatar
+            className="whotoFollowAvatar"
+            alt="Profil Foto"
+            src={user?.avatar}
+          />
+          <p>{user?.name}</p>
+        </Box>
         <div>
           <Tooltip
             title={
