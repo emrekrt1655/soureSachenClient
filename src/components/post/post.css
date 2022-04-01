@@ -1,10 +1,24 @@
-.post {
+.postContent {
   width: 90%;
   margin: 34px 25px 20px 25px;
   display: flex;
-  /* flex-direction: column; */
   -webkit-box-shadow: 20px 12px 50px -7px rgba(0, 0, 0, 0.1);
   box-shadow: 10px 1px 90px -7px rgba(0, 0, 0, 0.09);
+}
+
+.post {
+  width: 100% !important;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.postIcons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: -20px;
+  /* background-color: rgb(217, 135, 135);
+  border-radius: 30% 70% 0% 100% / 0% 0% 100% 100%; */
 }
 
 .postImg {
@@ -12,7 +26,7 @@
   height: 210px;
   object-fit: cover;
   border-radius: 30% 70% 0% 100% / 0% 0% 100% 100%;
-  margin-left: 10%;
+  margin-left: 2%;
   margin-right: 5%;
 }
 
@@ -28,10 +42,11 @@
 .extrainfo {
   display: flex;
 }
-.postInfo {
+.postInfoHomePage {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .postCat {
