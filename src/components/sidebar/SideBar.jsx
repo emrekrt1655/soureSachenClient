@@ -8,6 +8,7 @@ import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@mui/material/Tooltip";
 import "./sidebar.css";
+import WoToFollow from "./whoToFollow/WhoToFollow";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,18 +70,30 @@ export default function Sidebar() {
           {topics && lastAdded
             ? sortedDateTopics?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
-                  <div style={{display: 'flex'}}>
-                  <i className="fab fa-buffer"></i>
-                  <p className="titleInfo" onClick={()=> history.push(`/topic/${t?.topicId}`)} > {t?.text} </p>
+                  <div style={{ display: "flex" }}>
+                    <i className="fab fa-buffer"></i>
+                    <p
+                      className="titleInfo"
+                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                    >
+                      {" "}
+                      {t?.text}{" "}
+                    </p>
                   </div>
                   <p className="titleCountry"> {t?.country} </p>
                 </div>
               ))
             : sortedCountTopics?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
-                  <div style={{display: 'flex'}}>
-                  <i className="fab fa-buffer"></i>
-                  <p className="titleInfo" onClick={()=> history.push(`/topic/${t?.topicId}`)}> {t?.text} </p>
+                  <div style={{ display: "flex" }}>
+                    <i className="fab fa-buffer"></i>
+                    <p
+                      className="titleInfo"
+                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                    >
+                      {" "}
+                      {t?.text}{" "}
+                    </p>
                   </div>
                   <p className="titleCountry"> {t?.country} </p>
                 </div>
@@ -100,6 +113,12 @@ export default function Sidebar() {
           <div className="sidebarItem">
             <span className="sidebarTitle">THE MOST LIKED</span>
             <LikedPosts />
+          </div>
+        </div>
+        <div className="sidebarItem">
+          <div className="sidebarItem">
+            <span className="sidebarTitle">WHO TO FOLLOW</span>
+            <WoToFollow />
           </div>
         </div>
         <div className="sidebarItem">
