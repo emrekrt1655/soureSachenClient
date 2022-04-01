@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import "./likedposts.css";
 import { useSelector } from "react-redux";
+import Tooltip from "@mui/material/Tooltip";
+
+import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
+import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
+import MarkChatUnreadOutlinedIcon from "@mui/icons-material/MarkChatUnreadOutlined";
+import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 
 export default function Post({ img }) {
   const { postReducer, topicReducer } = useSelector((state) => state);
@@ -67,9 +73,15 @@ export default function Post({ img }) {
           </div>
         </div>
         <div>
-          <i className="far fa-hand-spock"></i>
-          <i className="far fa-comment" style={{ margin: "2%" }}></i>
-          <i className="fab fa-slideshare"></i>
+          <Tooltip title="Like">
+            <RecommendRoundedIcon />
+          </Tooltip>
+          <Tooltip title="Comment">
+            <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
+          </Tooltip>
+          <Tooltip title="Share">
+            <ShareRoundedIcon style={{ margin: "0 2% " }} />
+          </Tooltip>
         </div>
       </div>
     </div>
