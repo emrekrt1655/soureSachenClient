@@ -18,7 +18,6 @@ export default function Post({ post, topicData }) {
   const userReducer = useSelector((state) => state?.userReducer?.data);
 
   const user = userReducer?.find((user) => user?.userId === post.postUserId);
-  console.log(user);
 
   const topicText = topic?.map(({ text }) => text);
   const topicId = topic?.map(({ topicId }) => topicId);
