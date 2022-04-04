@@ -49,7 +49,7 @@ export default function CountrySelect({ setCountryName }) {
   );
 }
 
-const countries = [
+export const countries = [
   { code: "??", label: "Worldwide", phone: "???" },
   { code: "AD", label: "Andorra", phone: "376" },
   {
