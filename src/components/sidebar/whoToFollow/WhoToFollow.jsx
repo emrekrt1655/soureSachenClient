@@ -38,8 +38,8 @@ export default function WoToFollow() {
 
   return (
     <Stack direction="row" spacing={2}>
-      {suggestionList?.map((p) => (
-        <Box className="whotofollowavatar">
+      {suggestionList?.map((p, index) => (
+        <Box key={index} className="whotofollowavatar">
           <Avatar className="whotoFollowAvatar" alt={p?.name} src={p?.avatar} />
           <Typography variant="overline" display="block" gutterBottom>
             {p?.name + p?.surname}
