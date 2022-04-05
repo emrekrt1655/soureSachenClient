@@ -5,10 +5,12 @@ import LikedPosts from "./likedposts/LikedPosts";
 import Modal from "../modal/modal";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@mui/material/Tooltip";
 import "./sidebar.css";
 import WoToFollow from "./whoToFollow/WhoToFollow";
+import CountryFilter from "./countryfilter/CountryFilter";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,23 +24,48 @@ export default function Sidebar() {
   const classes = useStyles();
   let sortedCountTopics;
   let sortedDateTopics;
+  let topicList;
   const { authReducer, topicReducer } = useSelector((state) => state);
+  const [country, setCountry] = useState("");
   const [open, setOpen] = useState(false);
-  const [lastAdded, setLastAdded] = useState(false);
-  const handleLastAdded = () => setLastAdded(true);
-  const handleMostRated = () => setLastAdded(false);
+  const [open2, setOpen2] = useState(false);
+  const [filter, setFilter] = useState("mostRated");
   const handleOpen = () => setOpen(true);
+  const handleOpen2 = () => setOpen2(true);
   const handleClose = () => setOpen(false);
+  const handleClose2 = () => setOpen2(false);
 
   const user = authReducer?.user;
   const topics = topicReducer?.data;
+  const filteredCountryTopics = topics?.filter(
+    (topic) => topic.country === country
+  );
 
-  const sorted2count = topics?.sort(function (topic1, topic2) {
+  if (filter === "mostRated" && country === "") {
+    topicList = topics;
+  }
+  if (filter === "lastAdded" && country === "") {
+    topicList = topics;
+  }
+
+  if (filter === "countryTopic") {
+    topicList = filteredCountryTopics;
+  }
+
+  if (filter === "mostRated" && country) {
+    topicList = filteredCountryTopics;
+  }
+
+  if (filter === "lastAdded" && country) {
+    topicList = filteredCountryTopics;
+  }
+
+  const sorted2count = topicList?.sort(function (topic1, topic2) {
     return topic2?._count.posts - topic1?._count.posts;
   });
 
   sortedCountTopics = sorted2count?.map((t) => t);
-  const sorted2date = topics?.sort(function (topic1, topic2) {
+  const sorted2date = topicList?.sort(function (topic1, topic2) {
     let dateTopic1 = new Date(topic1.createdAt);
     let dateTopic2 = new Date(topic2.createdAt);
     return dateTopic2 - dateTopic1;
@@ -47,6 +74,12 @@ export default function Sidebar() {
 
   return (
     <div>
+      <CountryFilter
+        open2={open2}
+        handleClose2={handleClose2}
+        setCountry={setCountry}
+        setFilter={setFilter}
+      />
       <Modal open={open} handleClose={handleClose} />
       <div className="sidebar">
         <div className="sidebarItem">
@@ -56,48 +89,74 @@ export default function Sidebar() {
               <Tooltip title="Most Rated">
                 <LocalFireDepartmentIcon
                   className={classes.root}
-                  onClick={handleMostRated}
+                  onClick={() => setFilter("mostRated")}
                 />
               </Tooltip>
               <Tooltip title="Last Added">
                 <HourglassTopIcon
                   className={classes.root}
-                  onClick={handleLastAdded}
+                  onClick={() => setFilter("lastAdded")}
+                />
+              </Tooltip>
+              <Tooltip title="Filter Country">
+                <SettingsApplicationsIcon
+                  className={classes.root}
+                  onClick={handleOpen2}
                 />
               </Tooltip>
             </div>
           </div>
-          {topics && lastAdded
-            ? sortedDateTopics?.slice(0, 9)?.map((t) => (
-                <div className="titleinfoSide" key={t?.topicId}>
-                  <div style={{ display: "flex" }}>
-                    <i className="fab fa-buffer"></i>
-                    <p
-                      className="titleInfo"
-                      onClick={() => history.push(`/topic/${t?.topicId}`)}
-                    >
-                      {" "}
-                      {t?.text}{" "}
-                    </p>
-                  </div>
-                  <p className="titleCountry"> {t?.country} </p>
+          {topics && filter === "mostRated" ? (
+            sortedCountTopics?.slice(0, 9)?.map((t) => (
+              <div className="titleinfoSide" key={t?.topicId}>
+                <div style={{ display: "flex" }}>
+                  <i className="fab fa-buffer"></i>
+                  <p
+                    className="titleInfo"
+                    onClick={() => history.push(`/topic/${t?.topicId}`)}
+                  >
+                    {" "}
+                    {t?.text}{" "}
+                  </p>
                 </div>
-              ))
-            : sortedCountTopics?.slice(0, 9)?.map((t) => (
-                <div className="titleinfoSide" key={t?.topicId}>
-                  <div style={{ display: "flex" }}>
-                    <i className="fab fa-buffer"></i>
-                    <p
-                      className="titleInfo"
-                      onClick={() => history.push(`/topic/${t?.topicId}`)}
-                    >
-                      {" "}
-                      {t?.text}{" "}
-                    </p>
-                  </div>
-                  <p className="titleCountry"> {t?.country} </p>
+                <p className="titleCountry"> {t?.country} </p>
+              </div>
+            ))
+          ) : filter === "lastAdded" ? (
+            sortedDateTopics?.slice(0, 9)?.map((t) => (
+              <div className="titleinfoSide" key={t?.topicId}>
+                <div style={{ display: "flex" }}>
+                  <i className="fab fa-buffer"></i>
+                  <p
+                    className="titleInfo"
+                    onClick={() => history.push(`/topic/${t?.topicId}`)}
+                  >
+                    {" "}
+                    {t?.text}{" "}
+                  </p>
                 </div>
-              ))}
+                <p className="titleCountry"> {t?.country} </p>
+              </div>
+            ))
+          ) : filteredCountryTopics?.length > 0 ? (
+            topicList?.slice(0, 9)?.map((t) => (
+              <div className="titleinfoSide" key={t?.topicId}>
+                <div style={{ display: "flex" }}>
+                  <i className="fab fa-buffer"></i>
+                  <p
+                    className="titleInfo"
+                    onClick={() => history.push(`/topic/${t?.topicId}`)}
+                  >
+                    {" "}
+                    {t?.text}{" "}
+                  </p>
+                </div>
+                <p className="titleCountry"> {t?.country} </p>
+              </div>
+            ))
+          ) : (
+            <h4> There is no topics in this country </h4>
+          )}
 
           <span className="">
             {user?.isTopicCreator === "true" && (

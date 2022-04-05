@@ -13,9 +13,8 @@ export default function Post({ img }) {
   const posts = postReducer?.data;
   const topics = topicReducer?.data;
 
-  // console.log("postReducer :>> ", posts);
+
   let newList = [];
-  // console.log(posts);
 
   posts?.map((post) => {
     return newList.push({
@@ -27,14 +26,12 @@ export default function Post({ img }) {
   newList?.sort(function (a, b) {
     return b.count - a.count;
   });
-  // console.log("newList :>> ", newList);
 
   const post = posts?.find((post) => post.postId === newList[0].postId);
 
   const topic = topics?.find((t) => {
     return t.topicId === post?.postTopicId;
   });
-  // console.log("topic :>> ", topic);
 
   return (
     <div className="postlked">

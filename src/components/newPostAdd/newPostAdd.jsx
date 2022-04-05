@@ -1,82 +1,122 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import Modal from "@mui/material/Modal";
+import SendIcon from "@mui/icons-material/Send";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import ShareIcon from "@mui/icons-material/Share";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import CameraIcon from "@mui/icons-material/Camera";
-import DriveFileRenameOutlineOutlinedIcon from "@mui/icons-material/DriveFileRenameOutlineOutlined";
+import Input from "@mui/material/Input";
+import { useSelector, useDispatch } from "react-redux";
+import { createPost, getPosts } from "../../redux/actions/postAction";
+import { getTopics } from "../../redux/actions/topicAction";
+import "./newPostAdd.css";
 
-function NewPostAdd() {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 425,
+  bgcolor: "background.paper",
+  borderRadius: "3%",
+  border: "1px solid #195d49",
+  boxShadow: 24,
+  p: 8,
+};
+
+function NewPostAdd({ topicId, posts, handleClose, open }) {
+  const userId = useSelector((state) => state?.authReducer?.user?.userId);
+  const avatar = useSelector((state) => state?.authReducer?.user?.avatar);
+  const name = useSelector((state) => state?.authReducer?.user?.name);
+  const surname = useSelector((state) => state?.authReducer?.user?.surname);
+  const access_token = useSelector((state) => state?.authReducer?.access_token);
+  const dispatch = useDispatch();
+  const [imgInput, setImgInput] = React.useState(false);
+
+  const initialState = {
+    text: "",
+    postUserId: userId,
+    postTopicId: topicId,
+    image: "",
+  };
+
+  const [post, setPost] = React.useState(initialState);
+  const { text, image } = post;
+
+  const handleChangeInput = (e) => {
+    const { value, name } = e.target;
+    setPost({
+      ...post,
+      [name]: value,
+    });
+  };
+
+  const showImgInput = () => {
+    setImgInput(!imgInput);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPost(post, access_token)).then(() => {
+      handleClose();
+    });
+  };
+
+  React.useEffect(() => {
+    dispatch(getPosts());
+  }, [posts?.length]);
+
   return (
-    <Card
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "140px",
-        width: "788px",
-        background: "#fffbfb",
-        borderRadius: "10px",
-        justifyContent: "space-around",
-        margin: "10px auto",
-      }}
-    >
-      <CardContent
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "7px",
-        }}
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
-        <Stack>
-          <Avatar
-            alt="Remy Sharp"
-            src="https://miro.medium.com/fit/c/1360/1360/1*3g1mneT-qpOmMWVSRarnVg.jpeg"
-            sx={{ width: 56, height: 56 }}
-          />
-        </Stack>
-
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-            marginLeft: "20px",
-          }}
-        >
-          <TextField
+        <Box sx={style}>
+          <Stack direction="row" spacing={2}>
+            <Avatar alt="avatar" src={avatar} />
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {name} {surname}
+            </Typography>
+          </Stack>
+          <Input
             fullWidth
-            label="Beitrag schreiben"
-            id="fullWidth"
-            disabled
+            id="text"
+            name="text"
+            style={{ marginTop: "19px", marginBottom: "10px" }}
+            placeholder="Add your opinion.."
+            value={text}
+            onChange={handleChangeInput}
           />
+          <div className={!imgInput && "hideImg"}>
+            <Input
+              fullWidth
+              id="image"
+              name="image"
+              style={{ marginTop: "19px" }}
+              placeholder="Copy the Img url"
+              value={image}
+              onChange={handleChangeInput}
+            />
+          </div>
+          <AddAPhotoIcon onClick={showImgInput} />
+          <div className="buttonPartNewPost">
+            <Button
+              variant="contained"
+              endIcon={<SendIcon />}
+              style={{ marginTop: "19px", float: "right" }}
+              onClick={handleSubmit}
+            >
+              Add
+            </Button>
+          </div>
         </Box>
-      </CardContent>
-      <CardActions
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        <IconButton aria-label="add Foto">
-          <CameraIcon />
-          <span style={{ marginLeft: "7px" }}>Foto</span>
-        </IconButton>
-
-        <IconButton aria-label="Schreiben">
-          <DriveFileRenameOutlineOutlinedIcon />
-          <span style={{ marginLeft: "7px" }}> Schreiben</span>
-        </IconButton>
-
-        <IconButton aria-label="share">
-          <ShareIcon />
-          <span style={{ marginLeft: "7px" }}> Teilen</span>
-        </IconButton>
-      </CardActions>
-    </Card>
+      </Modal>
+    </div>
   );
 }
 
