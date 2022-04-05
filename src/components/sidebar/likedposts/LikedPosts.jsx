@@ -5,7 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
-import MarkChatUnreadOutlinedIcon from "@mui/icons-material/MarkChatUnreadOutlined";
+// import MarkChatUnreadOutlinedIcon from "@mui/icons-material/MarkChatUnreadOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 
 export default function Post({ img }) {
@@ -13,7 +13,7 @@ export default function Post({ img }) {
   const posts = postReducer?.data;
   const topics = topicReducer?.data;
 
-  console.log("postReducer :>> ", posts);
+  // console.log("postReducer :>> ", posts);
   let newList = [];
   // console.log(posts);
 
@@ -27,15 +27,14 @@ export default function Post({ img }) {
   newList?.sort(function (a, b) {
     return b.count - a.count;
   });
-  console.log("newList :>> ", newList);
+  // console.log("newList :>> ", newList);
 
   const post = posts?.find((post) => post.postId === newList[0].postId);
-  console.log(post);
 
   const topic = topics?.find((t) => {
     return t.topicId === post?.postTopicId;
   });
-  console.log("topic :>> ", topic);
+  // console.log("topic :>> ", topic);
 
   return (
     <div className="postlked">

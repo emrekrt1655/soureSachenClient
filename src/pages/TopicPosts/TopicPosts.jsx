@@ -11,15 +11,15 @@ export default function TopicPosts() {
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
 
-  const posts = postData?.filter((post) => post.postTopicId == topicId);
-  const currentTopic = topicData?.filter((top) => top.topicId == topicId);
+  const posts = postData?.filter((post) => post.postTopicId === topicId);
+  const currentTopic = topicData?.filter((top) => top.topicId === topicId);
   const topicText = currentTopic?.map(({ text }) => text);
   const topicImage = currentTopic?.map(({ image }) => image);
 
   return (
     <div className="topicPostContainer">
       <div className="topicHeader">
-        <img src={topicImage}></img>
+        <img src={topicImage} alt="topicImage"></img>
         <h1> {topicText}</h1>
       </div>
 

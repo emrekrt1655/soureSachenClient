@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LikedPosts from "./likedposts/LikedPosts";
 import Modal from "../modal/modal";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
@@ -127,20 +127,20 @@ export default function Sidebar() {
             <div>
               <ul>
                 <li>
-                  <a>
+                  <a href="https://faris35kanbur.medium.com/">
                     <span></span>
                     <span className="fa fa-facebook"></span>
                   </a>
                 </li>
                 <li>
-                  <a>
+                  <a href="https://faris35kanbur.medium.com/">
                     <span></span>
                     <span></span>
                     <span className="fa fa-twitter"></span>
                   </a>
                 </li>
                 <li>
-                  <a>
+                  <a href="https://github.com/Faris-Kanbur">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -148,7 +148,7 @@ export default function Sidebar() {
                   </a>
                 </li>
                 <li>
-                  <a>
+                  <a href="https://github.com/Faris-Kanbur">
                     <span></span>
                     <span></span>
                     <span></span>

@@ -2,8 +2,6 @@ import "./post.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
@@ -18,7 +16,7 @@ export default function Post({ post, topicData }) {
   const userReducer = useSelector((state) => state?.userReducer?.data);
 
   const user = userReducer?.find((user) => user?.userId === post.postUserId);
-  console.log(user);
+  // console.log(user);
 
   const topicText = topic?.map(({ text }) => text);
   const topicId = topic?.map(({ topicId }) => topicId);
