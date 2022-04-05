@@ -8,7 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Input from "@mui/material/Input";
-import Alert from "../alert/Alert";
+// import Alert from "../alert/Alert";
 import "./modal.css";
 import CountrySelect from "./CountryBox";
 import { useDispatch, useSelector } from "react-redux";
