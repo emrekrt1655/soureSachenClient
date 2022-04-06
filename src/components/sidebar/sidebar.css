@@ -15,6 +15,11 @@
   border-left: rgba(25, 167, 120, 0.3) solid 1px;
 }
 
+.sidebar .sidebarTopic {
+  margin-top: 10px;
+  width: 75%;
+}
+
 .sidebarItem {
   display: flex;
   flex-direction: column;
@@ -40,8 +45,8 @@
   border-bottom: solid 1px #a7a4a4;
 }
 .sidebarTitle {
-  margin-bottom: 6%;
-  margin-top: 7%;
+  margin-bottom: 3%;
+  margin-top: 4%;
 }
 
 .sidebarItem .sidebarHead .sidebarTitle {
@@ -53,8 +58,6 @@
   color: #222222;
   font-weight: 600;
 }
-
-
 
 .sidebarItem .sidebarHead .sidebarIcons {
   display: flex;
@@ -92,18 +95,25 @@
 }
 
 .titleinfoSide {
-  width: 75%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.titleinfoSide .titleInfo {
+.titleinfoSide .titleInfoPart {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleinfoSide .titleInfoPart .titleInfo {
   padding-left: 10px;
 }
 
-.titleinfoSide .titleInfo:hover {
-  color:red;
+.titleinfoSide .titleInfoPart .titleInfo:hover {
+  color: red;
   cursor: pointer;
 }
 
@@ -213,4 +223,8 @@
   -webkit-transform: translate(0px, -10px) scale(1.2);
   transform: translate(0px, -4px) scale(1);
   color: black;
+}
+
+#whotofollow {
+  margin-top: 0px;
 }

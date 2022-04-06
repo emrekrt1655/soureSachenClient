@@ -4,7 +4,7 @@ import TopicPost from "../../components/post/TopicPost";
 import { useSelector } from "react-redux";
 import "./topicPosts.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-
+import Sidebar from "../../components/sidebar/SideBar";
 import { useParams } from "react-router-dom";
 
 export default function TopicPosts() {
@@ -26,21 +26,26 @@ export default function TopicPosts() {
         topicId={currentTopic?.topicId}
         posts={posts}
       />
-      <div className="topicPostContainer">
-        <div className="topicHeader">
-          <img src={currentTopic?.image} alt="topic"></img>
-          <h1> {currentTopic?.text}</h1>
-        </div>
+      <div className="topicPost">
+        <div className="topicPostContainer">
+          <div className="topicHeader">
+            <img src={currentTopic?.image} alt="topic"></img>
+            <h1> {currentTopic?.text}</h1>
+          </div>
 
-        <div className="posts">
-          {postData &&
-            posts.map((p) => (
-              <TopicPost topicData={topicData} post={p} key={p.postId} />
-            ))}
+          <div className="posts">
+            {postData &&
+              posts.map((p) => (
+                <TopicPost topicData={topicData} post={p} key={p.postId} />
+              ))}
+          </div>
+          <div className="newPostAddSectionContainer">
+            <div className="newPostAddSection" onClick={handleOpen}>
+              <AddCircleIcon /> <span> Give your opinion.. </span>
+            </div>
+          </div>
         </div>
-        <div className="newPostAddSection">
-          <AddCircleIcon onClick={handleOpen} />
-        </div>
+        <Sidebar postData={posts} />
       </div>
     </>
   );

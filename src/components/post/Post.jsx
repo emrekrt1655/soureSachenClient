@@ -42,7 +42,7 @@ export default function Post({ post, topicData }) {
             alt="Profil Foto"
             src={user?.avatar}
           />
-          <p>{authReducer?.user && user?.name}</p>
+          <p>{authReducer?.user && "@"+user?.userName}</p>
         </Box>
         <div>
           <Tooltip
@@ -59,8 +59,8 @@ export default function Post({ post, topicData }) {
           <Tooltip
             title={
               `${post?._count?.comments}` <= 1
-                ? `${post?._count?.likes} Comment`
-                : `${post?._count?.likes} Comments`
+                ? `${post?._count?.comments} Comment`
+                : `${post?._count?.comments} Comments`
             }
           >
             <MarkChatUnreadIcon
