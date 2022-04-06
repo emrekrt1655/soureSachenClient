@@ -6,6 +6,8 @@ import "./login.css";
 import { login } from "../../redux/actions/authAction";
 import Alert from "../../components/alert/Alert";
 import { Link } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export default function Login() {
   const history = useHistory();
@@ -44,39 +46,50 @@ export default function Login() {
           <i className="topIcon fab fa-pied-piper-alt"></i>
         </Link>
         <span className="loginTitle">Login</span>
-        <form className="loginForm" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            className="loginInput"
-            type="text"
-            placeholder="Enter your email..."
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleChangeInput}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            className="loginInput"
-            type={typePass ? "text" : "password"}
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleChangeInput}
-            placeholder="Enter your password..."
-          />
-          <small onClick={handleTypePass}> {typePass ? "Hide" : "Show"} </small>
-          <Alert />
-          <button
-            className="loginButton"
-            type="submit"
-            disabled={email && password ? false : true}
-          >
-            Login
-          </button>
-        </form>
+        <div className="loginBorderDown">
+          <form className="loginForm" onSubmit={handleSubmit}>
+            <label htmlFor="email">Email</label>
+            <input
+              className="loginInput"
+              type="text"
+              placeholder="Enter your email..."
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleChangeInput}
+            />
+            <label htmlFor="password">Password</label>
+            <div>
+              <input
+                className="loginInput"
+                type={typePass ? "text" : "password"}
+                id="password"
+                name="password"
+                value={password}
+                onChange={handleChangeInput}
+                placeholder="Enter your password..."
+              />
+              <small onClick={handleTypePass} className="eyesOnPassword">
+                {!typePass ? <VisibilityOffIcon /> : <VisibilityIcon />}{" "}
+              </small>
+            </div>
 
-        <button className="loginRegisterButton">Register</button>
+            <Alert />
+            <button
+              className="loginButton"
+              type="submit"
+              disabled={email && password ? false : true}
+            >
+              Login
+            </button>
+            <p className="loginTextAcount">Don't you have an account?</p>
+          </form>
+          <button className="loginRegisterButton">
+            <Link className="link" to="/register">
+              Register
+            </Link>
+          </button>
+        </div>
       </div>
     </div>
   );

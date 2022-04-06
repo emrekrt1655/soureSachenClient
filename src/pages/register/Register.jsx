@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/authAction";
 import Alert from "../../components/alert/Alert";
 import { Link } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import "./register.css";
 
@@ -38,62 +40,79 @@ export default function Register() {
           <i className="topIcon fab fa-pied-piper-alt"></i>
         </Link>
         <span className="registerTitle">Register</span>
-        <form className="registerForm" onSubmit={handleSubmit}>
-          <label htmlFor="userName">Username</label>
-          <input
-            className="registerInput"
-            type="text"
-            placeholder="Enter your username..."
-            id="userName"
-            name="userName"
-            value={userName}
-            onChange={handleChangeInput}
-          />
-          <label>Email</label>
-          <input
-            className="registerInput"
-            type="text"
-            placeholder="Enter your email..."
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleChangeInput}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type={typePass ? "text" : "password"}
-            className="form-control"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleChangeInput}
-            placeholder="Password must be at least 6 chars."
-          />
+        <div className="registerBorderDown">
+          <form className="registerForm" onSubmit={handleSubmit}>
+            <label htmlFor="userName">Username</label>
+            <input
+              className="registerInput"
+              type="text"
+              placeholder="Enter your username..."
+              id="userName"
+              name="userName"
+              value={userName}
+              onChange={handleChangeInput}
+            />
+            <label>Email</label>
+            <input
+              className="registerInput"
+              type="text"
+              placeholder="Enter your email..."
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleChangeInput}
+            />
+            <label htmlFor="password">Password</label>
+            <div>
+              <input
+                type={typePass ? "text" : "password"}
+                className="registerInput"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handleChangeInput}
+                placeholder="Password must be at least 6 chars."
+              />
+              <small
+                onClick={() => setTypePass(!typePass)}
+                className="eyesOnPassword"
+              >
+                {!typeCfPass ? <VisibilityOffIcon /> : <VisibilityIcon />}{" "}
+              </small>
+            </div>
+            <label htmlFor="password" className="form-label">
+              Confirm Password
+            </label>
+            <div>
+              <input
+                type={typeCfPass ? "text" : "password"}
+                className="registerInput"
+                id="cf_password"
+                name="cf_password"
+                value={cf_password}
+                onChange={handleChangeInput}
+                placeholder="Your confirm password."
+              />
+              <small
+                onClick={() => setTypeCfPass(!typeCfPass)}
+                className="eyesOnPassword"
+              >
+                {!typeCfPass ? <VisibilityOffIcon /> : <VisibilityIcon />}{" "}
+              </small>
+            </div>
 
-          <small onClick={() => setTypePass(!typePass)}>
-            {typePass ? "Hide" : "Show"}
-          </small>
-          <label htmlFor="password" className="form-label">
-            Confirm Password
-          </label>
-          <input
-            type={typeCfPass ? "text" : "password"}
-            className="form-control"
-            id="cf_password"
-            name="cf_password"
-            value={cf_password}
-            onChange={handleChangeInput}
-            placeholder="Your confirm password."
-          />
-
-          <small onClick={() => setTypeCfPass(!typeCfPass)}>
-            {typeCfPass ? "Hide" : "Show"}
-          </small>
-          <Alert />
-          <button className="registerButton" type="submit">
-            Register
+            <Alert />
+            <button className="registerButton" type="submit">
+              Register
+            </button>
+            <p className="loginTextAcount">Already have an account?</p>
+          </form>
+          <button className="registerLoginButton">
+            <Link className="link" to="/login">
+              Login
+            </Link>
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
