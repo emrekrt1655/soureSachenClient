@@ -1,24 +1,26 @@
 import "./profilCard.css";
 import { useSelector } from "react-redux";
 
-export default function ProfilCard({ img }) {
+export default function ProfilCard({ profileOfUser }) {
   const user = useSelector((state) => state?.authReducer?.user);
   const users = useSelector((state) => state?.userReducer?.data);
 
-  const currentUser = users?.find((u) => u.userId === user.userId);
+  const currentUser = profileOfUser
+    ? profileOfUser
+    : users?.find((u) => u.userId === user.userId);
 
   return (
     <div>
       <div className="profile-card-4 text-center">
         <img
-          src={user?.avatar}
+          src={currentUser?.avatar}
           className="img img-responsive"
           alt="profilcard"
         />
         <div className="profile-content">
           <div className="profile-name">
-            {`${user?.name} ${user?.surname}`}
-            <p>{user?.email}</p>
+            {`${currentUser?.name} ${currentUser?.surname}`}
+            <p>{currentUser?.email}</p>
           </div>
           <div className="profile-description">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam

@@ -5,17 +5,15 @@ import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
+import {Link} from "react-router-dom"
 import "./post.css";
 
 export default function TopicPost({ post }) {
   const { authReducer, userReducer } = useSelector((state) => state);
-
   const authUser = authReducer?.user;
 
   const users = userReducer?.data;
-
   const userOfPost = users?.find((user) => user?.userId === post?.postUserId);
-
   return (
     <div className="postContent">
       <div className="post">
@@ -31,6 +29,7 @@ export default function TopicPost({ post }) {
       </div>
       {/* added post like and comment number acording to count */}
       <div className="postIcons">
+      <Link to={`userProfile/${userOfPost?.userId}`}  currentPath="/" className="postIconsUsername">
         <Box className="whotofollowavatar">
           <Avatar
             className="whotoFollowAvatar"
@@ -39,6 +38,7 @@ export default function TopicPost({ post }) {
           />
           <p>{authUser && "@" + userOfPost?.userName}</p>
         </Box>
+        </Link>
         <div>
           <Tooltip
             title={
