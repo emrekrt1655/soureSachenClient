@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sidebar() {
+export default function Sidebar({ postData }) {
   const history = useHistory();
   const classes = useStyles();
   let sortedCountTopics;
@@ -106,77 +106,81 @@ export default function Sidebar() {
               </Tooltip>
             </div>
           </div>
-          {topics && filter === "mostRated" ? (
-            sortedCountTopics?.slice(0, 9)?.map((t) => (
-              <div className="titleinfoSide" key={t?.topicId}>
-                <div style={{ display: "flex" }}>
+          <div className="sidebarTopic">
+            {topics && filter === "mostRated" ? (
+              sortedCountTopics?.slice(0, 9)?.map((t) => (
+                <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
-                  <p
-                    className="titleInfo"
-                    onClick={() => history.push(`/topic/${t?.topicId}`)}
-                  >
-                    {" "}
-                    {t?.text}{" "}
-                  </p>
+                  <div className="titleInfoPart">
+                    <p
+                      className="titleInfo"
+                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                    >
+                      {" "}
+                      {t?.text}{" "}
+                    </p>
+                    <p className="titleCountry"> {t?.country} </p>
+                  </div>
                 </div>
-                <p className="titleCountry"> {t?.country} </p>
-              </div>
-            ))
-          ) : filter === "lastAdded" ? (
-            sortedDateTopics?.slice(0, 9)?.map((t) => (
-              <div className="titleinfoSide" key={t?.topicId}>
-                <div style={{ display: "flex" }}>
+              ))
+            ) : filter === "lastAdded" ? (
+              sortedDateTopics?.slice(0, 9)?.map((t) => (
+                <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
-                  <p
-                    className="titleInfo"
-                    onClick={() => history.push(`/topic/${t?.topicId}`)}
-                  >
-                    {" "}
-                    {t?.text}{" "}
-                  </p>
+                  <div className="titleInfoPart">
+                    <p
+                      className="titleInfo"
+                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                    >
+                      {" "}
+                      {t?.text}{" "}
+                    </p>
+                    <p className="titleCountry"> {t?.country} </p>
+                  </div>
                 </div>
-                <p className="titleCountry"> {t?.country} </p>
-              </div>
-            ))
-          ) : filteredCountryTopics?.length > 0 ? (
-            topicList?.slice(0, 9)?.map((t) => (
-              <div className="titleinfoSide" key={t?.topicId}>
-                <div style={{ display: "flex" }}>
+              ))
+            ) : filteredCountryTopics?.length > 0 ? (
+              topicList?.slice(0, 9)?.map((t) => (
+                <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
-                  <p
-                    className="titleInfo"
-                    onClick={() => history.push(`/topic/${t?.topicId}`)}
-                  >
-                    {" "}
-                    {t?.text}{" "}
-                  </p>
+                  <div className="titleInfoPart">
+                    <p
+                      className="titleInfo"
+                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                    >
+                      {" "}
+                      {t?.text}{" "}
+                    </p>
+                    <p className="titleCountry"> {t?.country} </p>
+                  </div>
                 </div>
-                <p className="titleCountry"> {t?.country} </p>
-              </div>
-            ))
-          ) : (
-            <h4> There is no topics in this country </h4>
-          )}
-
-          <span className="">
-            {user?.isTopicCreator === "true" && (
-              <div onClick={handleOpen} className="buttonAddTopic">
-                <i className="fab fa-buffer"></i>
-                <span style={{ margin: "5px" }}>Add Topic</span>
-              </div>
+              ))
+            ) : (
+              <h4> There is no topics in this country </h4>
             )}
-          </span>
+
+            <span className="">
+              {user?.isTopicCreator === "true" && (
+                <div onClick={handleOpen} className="buttonAddTopic">
+                  <i className="fab fa-buffer"></i>
+                  <span style={{ margin: "5px" }}>Add Topic</span>
+                </div>
+              )}
+            </span>
+          </div>
         </div>
 
         <div className="sidebarItem">
           <div className="sidebarItem">
             <span className="sidebarTitle">THE MOST LIKED</span>
-            <LikedPosts />
+            <LikedPosts postData={postData} />
           </div>
         </div>
         <div className="sidebarItem">
           <div className="sidebarItem">
-            <span className="sidebarTitle">WHO TO FOLLOW</span>
+            <span id="whotofollow" className="sidebarTitle">
+              WHO TO FOLLOW
+            </span>
             <WoToFollow />
           </div>
         </div>

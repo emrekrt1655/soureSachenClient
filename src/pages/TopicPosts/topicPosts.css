@@ -1,26 +1,45 @@
-.topicPostContainer {
+.topicPost {
+  display:flex;
+}
+
+.topicPost .topicPostContainer {
   display: flex;
   flex-direction: column;
   margin: 20px;
   position: relative;
 }
 
-.topicPostContainer .topicHeader {
+.topicPost .topicPostContainer .topicHeader {
   display: flex;
 }
 
-.topicPostContainer .topicHeader h1 {
+.topicPost .topicPostContainer .topicHeader h1 {
   color: black;
   padding: 50px;
   text-decoration: underline;
 }
 
-.topicPostContainer .topicHeader img {
+.topicPost .topicPostContainer .topicHeader img {
   width: 100px;
 }
 
-.topicPostContainer .newPostAddSection {
+.topicPost .topicPostContainer .newPostAddSectionContainer {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topicPost .topicPostContainer .newPostAddSection {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   position: fixed;
-  bottom: 0;
-  left: 0;
+  width: 12rem;
+  height: 3rem;
+  border-radius: 1rem;
+  color: white;
+  bottom: 20px;
+  background-color: rgb(57, 166, 95) !important;
+  cursor: pointer;
 }
