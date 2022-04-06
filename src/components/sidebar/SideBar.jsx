@@ -114,7 +114,7 @@ export default function Sidebar({ postData }) {
                   <div className="titleInfoPart">
                     <p
                       className="titleInfo"
-                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                      onClick={() => history.push(`/${t?.topicId}`)}
                     >
                       {" "}
                       {t?.text}{" "}
