@@ -4,12 +4,9 @@ import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import HomeIcon from "@mui/icons-material/Home";
 import EditNotificationsRoundedIcon from "@mui/icons-material/EditNotificationsRounded";
 import SignpostRoundedIcon from "@mui/icons-material/SignpostRounded";
@@ -19,10 +16,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Badge from "@mui/material/Badge";
+import "./leftBarPostTopic.css";
 
 const drawerWidth = 100;
 
-export default function LeftBarPostTopic() {
+export default function LeftBarPostTopic({ handleOpen }) {
   const { authReducer } = useSelector((state) => state);
 
   return (
@@ -56,7 +54,8 @@ export default function LeftBarPostTopic() {
             {authReducer?.access_token && (
               <Link className="link" to="/settings">
                 <img
-                  className="topImg"
+                  className="topImgLeftBar"
+                  style={{ fontsize: "35px" }}
                   src={authReducer?.user?.avatar}
                   alt="avatar"
                 />
@@ -64,14 +63,14 @@ export default function LeftBarPostTopic() {
             )}
           </div>
           <Divider />
-          <div style={{ margin: "45px 25px" }}>
+          <div style={{ margin: "45px 20px" }}>
             <List>
               <ListItem button>
                 <Link className="link" to="/">
                   <ListItemIcon
                     style={{ display: "flex", flexDirection: "column" }}
                   >
-                    <HomeIcon />
+                    <HomeIcon className="fontSizeLeftbarIcon" />
                   </ListItemIcon>
                 </Link>
               </ListItem>
@@ -91,7 +90,7 @@ export default function LeftBarPostTopic() {
                       horizontal: "left",
                     }}
                   >
-                    <EditNotificationsRoundedIcon />
+                    <EditNotificationsRoundedIcon className="fontSizeLeftbarIcon" />
                   </Badge>
                 </ListItemIcon>
               </ListItem>
@@ -101,7 +100,7 @@ export default function LeftBarPostTopic() {
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <SignpostRoundedIcon />
+                  <SignpostRoundedIcon className="fontSizeLeftbarIcon" />
                 </ListItemIcon>
               </ListItem>
             </List>
@@ -110,7 +109,7 @@ export default function LeftBarPostTopic() {
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <FollowTheSignsRoundedIcon />
+                  <FollowTheSignsRoundedIcon className="fontSizeLeftbarIcon" />
                 </ListItemIcon>
               </ListItem>
             </List>
@@ -119,19 +118,22 @@ export default function LeftBarPostTopic() {
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <HistoryEduIcon />
+                  <HistoryEduIcon
+                    className="fontSizeLeftbarIcon"
+                    onClick={handleOpen}
+                  />
                 </ListItemIcon>
               </ListItem>
             </List>
           </div>
           <Divider />
-          <div style={{ margin: "55px 25px 10px" }}>
+          <div style={{ margin: "100px 20px" }}>
             <List>
               <ListItem button>
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <SettingsIcon />
+                  <SettingsIcon className="fontSizeLeftbarIcon" />
                 </ListItemIcon>
               </ListItem>
             </List>

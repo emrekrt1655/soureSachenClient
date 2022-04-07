@@ -208,7 +208,7 @@
 .buttonAddTopic {
   margin-top: 7%;
   display: inline-block;
-  background: rgb(25, 167, 120);
+  background: #9600cc;
   color: #fff;
   text-transform: uppercase;
   padding: 5px 15px;
@@ -227,4 +227,53 @@
 
 #whotofollow {
   margin-top: 0px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.search {
+  width: 80%;
+  position: relative;
+  display: flex;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.searchTerm {
+  width: 100%;
+  border: none;
+  height: 34px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9dbfaf;
+  background-color: #f2f6f7;
+}
+
+.searchTerm:focus {
+  color: #10292c;
+  background-color: #e4dde6;
+}
+
+.searchButton {
+  width: 40px;
+  height: 35px;
+  border: none;
+  background: #16a97b;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  /* height: 26px; */
+  position: relative;
+  margin: 10px 0px;
 }
