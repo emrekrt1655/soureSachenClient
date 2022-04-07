@@ -3,14 +3,10 @@ import { FollowedList } from "./followedList/FollowedList";
 import ProfilCard from "./profilCard/ProfilCard";
 import "./sidebarLeft.css";
 
-export default function SideBarLeft() {
-  //const [open, setOpen] = React.useState(false);
- // const handleOpen = () => setOpen(true);
-  //const handleClose = () => setOpen(false);
-
+export default function SideBarLeft({ profileOfUser }) {
   return (
     <div className="sidebarLeft">
-      <ProfilCard />
+      <ProfilCard profileOfUser={profileOfUser} />
       <div className="sidebarLeftItem">
         <span className="sidebarLeftTitle">WHO ARE FOLLOWED</span>
         <div className="sidebarLeftList">

@@ -7,8 +7,10 @@ import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
+import { useParams } from "react-router-dom";
 
 export default function Post({ post, topicData }) {
+  const { userId } = useParams();
   const topic = topicData?.filter((topic) => {
     return topic?.topicId === post?.postTopicId;
   });
@@ -25,7 +27,7 @@ export default function Post({ post, topicData }) {
       <div className="post">
         {post.image && <img className="postImg" src={post.image} alt="post" />}
         <div className="postInfoHomePage">
-          <Link to={`topic/${topicId}`}>
+          <Link to={`/${topicId}`} currentPath="/">
             <p className="postTitle">{topicText}</p>
           </Link>
           <p className="postDesc">{post?.text}</p>
@@ -36,14 +38,20 @@ export default function Post({ post, topicData }) {
       </div>
       {/* added post like and comment number acording to count */}
       <div className="postIcons">
-        <Box className="whotofollowavatar">
-          <Avatar
-            className="whotoFollowAvatar"
-            alt="Profil Foto"
-            src={user?.avatar}
-          />
-          <p>{authReducer?.user && "@"+user?.userName}</p>
-        </Box>
+        <Link
+          to={`/userProfile/${user?.userId}`}
+          currentPath="/"
+          className="postIconsUsername"
+        >
+          <Box className="whotofollowavatar">
+            <Avatar
+              className="whotoFollowAvatar"
+              alt="Profil Foto"
+              src={user?.avatar}
+            />
+            <p>{authReducer?.user && "@" + user?.userName}</p>
+          </Box>
+        </Link>
         <div>
           <Tooltip
             title={

@@ -24,6 +24,10 @@
   /*border-radius: 10% 70% 0% 100% / 0% 0% 100% 100%; */
 }
 
+.postIcons .postIconsUsername:hover {
+  color: rgb(57, 166, 95) !important
+}
+
 .postImg {
   width: 155px;
   height: 210px;
