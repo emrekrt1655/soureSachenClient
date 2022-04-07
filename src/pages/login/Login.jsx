@@ -82,13 +82,13 @@ export default function Login() {
             >
               Login
             </button>
-            <p className="loginTextAcount">Don't you have an account?</p>
+            <p className="loginTextAcount">
+              Don't you have an account?
+              <Link className="loginRegisterButton" to="/register">
+                <a>Register</a>
+              </Link>
+            </p>
           </form>
-          <button className="loginRegisterButton">
-            <Link className="link" to="/register">
-              Register
-            </Link>
-          </button>
         </div>
       </div>
     </div>

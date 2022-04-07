@@ -105,13 +105,13 @@ export default function Register() {
             <button className="registerButton" type="submit">
               Register
             </button>
-            <p className="loginTextAcount">Already have an account?</p>
+            <p className="loginTextAcount">
+              Already have an account?
+              <Link to="/login" className="registerLoginButton">
+                <a>Login</a>
+              </Link>
+            </p>
           </form>
-          <button className="registerLoginButton">
-            <Link className="link" to="/login">
-              Login
-            </Link>
-          </button>
         </div>
       </div>
     </div>
