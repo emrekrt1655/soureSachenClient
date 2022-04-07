@@ -21,7 +21,7 @@ export default function TopicPosts() {
 
   return (
     <div style={{ display: "flex" }}>
-      <LeftBarPostTopic />
+      <LeftBarPostTopic handleOpen={handleOpen} />
       <NewPostAdd
         open={open}
         handleClose={handleClose}
@@ -40,11 +40,6 @@ export default function TopicPosts() {
               posts.map((p) => (
                 <TopicPost topicData={topicData} post={p} key={p.postId} />
               ))}
-          </div>
-          <div className="newPostAddSectionContainer">
-            <div className="newPostAddSection" onClick={handleOpen}>
-              <AddCircleIcon /> <span> Give your opinion.. </span>
-            </div>
           </div>
         </div>
         <Sidebar postData={posts} />
