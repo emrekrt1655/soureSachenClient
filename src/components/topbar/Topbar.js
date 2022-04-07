@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions/authAction";
-import "./topbar.css";
+import "./topbar.scss";
 
 export default function Topbar() {
   const { authReducer } = useSelector((state) => state);
@@ -55,7 +55,7 @@ export default function Topbar() {
         </div>
       </div>
       <div className="topRight">
-        <i className="topSearchIcon fas fa-search"></i>
+        {/* <i className="topSearchIcon fas fa-search"></i> */}
         {authReducer?.access_token && (
           <Link className="link" to="/settings">
             <img

@@ -80,9 +80,22 @@ export default function Sidebar({ postData }) {
         setCountry={setCountry}
         setFilter={setFilter}
       />
+
       <Modal open={open} handleClose={handleClose} />
       <div className="sidebar">
         <div className="sidebarItem">
+          <div class="wrap">
+            <div class="search">
+              <input
+                type="text"
+                class="searchTerm"
+                placeholder="What are you looking for?"
+              />
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
           <div className="sidebarHead">
             <span className="sidebarTitle">Topic</span>
             <div className="sidebarIcons">
