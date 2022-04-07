@@ -1,5 +1,5 @@
 .login {
-  height: calc(100vh - 55px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +49,7 @@
   background-color: white;
   border: none;
   border-radius: 10px;
-  width: 200px;
+  width: 247px;
   align-items: center;
 }
 
@@ -69,13 +69,7 @@
 }
 
 .loginRegisterButton {
-  background-color: teal;
-  cursor: pointer;
-  padding: 10px;
-  border: none;
-  color: white;
-  border-radius: 10px;
-  align-items: unset !important;
+  margin-left: 5px;
 }
 
 form small {
@@ -92,5 +86,5 @@ form small {
 }
 
 .loginTextAcount {
-  padding: 10px;
+  padding: 10px 2px;
 }

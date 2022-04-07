@@ -1,5 +1,5 @@
 .postContent {
-  width: 90%;
+  width: 100%;
   margin: 34px 25px 20px 25px;
   display: flex;
   -webkit-box-shadow: 20px 12px 50px -7px rgba(0, 0, 0, 0.1);
@@ -10,6 +10,7 @@
   width: 100% !important;
   display: flex;
   flex-direction: row-reverse;
+  padding: 10px;
 }
 
 .postIcons {
@@ -31,7 +32,7 @@
   width: 155px;
   height: 210px;
   object-fit: cover;
-  border-radius: 30% 70% 0% 100% / 0% 0% 100% 100%;
+  border-radius: 100% 0% 91% 9% / 12% 100% 0% 88%;
   margin-left: 2%;
   margin-right: 5%;
 }
@@ -43,7 +44,7 @@
 .posttextinfo {
   display: flex;
   flex-direction: column;
-  margin-left: 5%;
+  margin-left: 5px;
 }
 .extrainfo {
   display: flex;
@@ -51,8 +52,10 @@
 .postInfoHomePage {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
+  margin-left: 15px;
 }
 
 .postCat {

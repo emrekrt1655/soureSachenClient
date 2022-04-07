@@ -1,5 +1,5 @@
 .topicPost {
-  display:flex;
+  display: flex;
 }
 
 .topicPost .topicPostContainer {
@@ -24,7 +24,6 @@
 }
 
 .topicPost .topicPostContainer .newPostAddSectionContainer {
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,4 +41,10 @@
   bottom: 20px;
   background-color: rgb(57, 166, 95) !important;
   cursor: pointer;
+}
+
+.topicHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -3,6 +3,7 @@ import Sidebar from "../../components/sidebar/SideBar";
 import { useSelector } from "react-redux";
 import "./homepage.css";
 import SideBarLeft from "../../components/sidebarleft/SideBarLeft";
+import Topbar from "../../components/topbar/Topbar";
 
 export default function Homepage() {
   const { authReducer, postReducer, topicReducer } = useSelector(
@@ -12,6 +13,7 @@ export default function Homepage() {
   const topicData = topicReducer?.data;
   return (
     <>
+      <Topbar />
       <div className="home">
         {authReducer?.user && <SideBarLeft />}
         <Posts topicData={topicData} postData={postData} />

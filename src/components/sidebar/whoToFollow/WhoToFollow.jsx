@@ -28,7 +28,6 @@ export default function WoToFollow() {
             filteredList[Math.floor(Math.random() * filteredList?.length)];
           if (newSuggestionList.indexOf(ran) === -1)
             newSuggestionList.push(ran);
-          console.log("ran =>> ", ran);
         }
 
         return newSuggestionList;

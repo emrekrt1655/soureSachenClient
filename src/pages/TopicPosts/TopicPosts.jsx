@@ -6,6 +6,7 @@ import "./topicPosts.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Sidebar from "../../components/sidebar/SideBar";
 import { useParams } from "react-router-dom";
+import LeftBarPostTopic from "../../components/leftBarPostTopic/LeftBarPostTopic";
 
 export default function TopicPosts() {
   const { topicId } = useParams();
@@ -19,7 +20,8 @@ export default function TopicPosts() {
   const currentTopic = topicData?.find((top) => top.topicId === topicId);
 
   return (
-    <>
+    <div style={{ display: "flex" }}>
+      <LeftBarPostTopic />
       <NewPostAdd
         open={open}
         handleClose={handleClose}
@@ -30,7 +32,7 @@ export default function TopicPosts() {
         <div className="topicPostContainer">
           <div className="topicHeader">
             <img src={currentTopic?.image} alt="topic"></img>
-            <h1> {currentTopic?.text}</h1>
+            <h1>{currentTopic?.text}</h1>
           </div>
 
           <div className="posts">
@@ -47,6 +49,6 @@ export default function TopicPosts() {
         </div>
         <Sidebar postData={posts} />
       </div>
-    </>
+    </div>
   );
 }
