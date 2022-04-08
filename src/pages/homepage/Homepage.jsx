@@ -6,17 +6,18 @@ import SideBarLeft from "../../components/sidebarleft/SideBarLeft";
 import Topbar from "../../components/topbar/Topbar";
 
 export default function Homepage() {
-  const { authReducer, postReducer, topicReducer } = useSelector(
+  const { authReducer, postReducer, topicReducer, likeReducer } = useSelector(
     (state) => state
   );
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
+  const likeData = likeReducer?.data;
   return (
     <>
       <Topbar />
       <div className="home">
         {authReducer?.user && <SideBarLeft />}
-        <Posts topicData={topicData} postData={postData} />
+        <Posts topicData={topicData} postData={postData} likeData={likeData} />
         <Sidebar />
       </div>
     </>

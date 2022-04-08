@@ -5,6 +5,7 @@ import { refreshToken } from "./redux/actions/authAction";
 import { getTopics } from "./redux/actions//topicAction";
 import { getPosts } from "./redux/actions/postAction";
 import { getUsers } from "./redux/actions/userAction";
+import { getLikes } from "./redux/actions/likeAction";
 
 import Topbar from "./components/topbar/Topbar";
 import Homepage from "./pages/homepage/Homepage";
@@ -15,7 +16,7 @@ import TopicPosts from "./pages/TopicPosts/TopicPosts";
 import UserProfil from "./pages/userProfil/UserProfil";
 
 function App() {
-  const { authReducer } = useSelector((state) => state);
+  const { authReducer} = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
     dispatch(getTopics());
     dispatch(getUsers());
     dispatch(getPosts());
+    dispatch(getLikes());
   }, [dispatch]);
   return (
     <Router>

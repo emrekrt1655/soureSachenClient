@@ -11,9 +11,12 @@ import LeftBarPostTopic from "../../components/leftBarPostTopic/LeftBarPostTopic
 export default function TopicPosts() {
   const { topicId } = useParams();
   const [open, setOpen] = useState(false);
-  const { postReducer, topicReducer } = useSelector((state) => state);
+  const { postReducer, topicReducer, likeReducer } = useSelector(
+    (state) => state
+  );
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
+  const likeData = likeReducer?.data;
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const posts = postData?.filter((post) => post.postTopicId === topicId);
@@ -38,7 +41,12 @@ export default function TopicPosts() {
           <div className="posts">
             {postData &&
               posts.map((p) => (
-                <TopicPost topicData={topicData} post={p} key={p.postId} />
+                <TopicPost
+                  topicData={topicData}
+                  likeData={likeData}
+                  post={p}
+                  key={p.postId}
+                />
               ))}
           </div>
         </div>
