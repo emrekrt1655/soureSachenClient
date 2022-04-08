@@ -127,7 +127,7 @@ export default function LeftBarPostTopic({ handleOpen }) {
             </List>
           </div>
           <Divider />
-          <div style={{ margin: "100px 20px" }}>
+          <div style={{ margin: "10px 20px" }}>
             <List>
               <ListItem button>
                 <ListItemIcon
