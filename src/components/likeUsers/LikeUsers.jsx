@@ -1,21 +1,25 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import "./likeUsers.css";
 
 const style = {
   position: "absolute",
-  top: "30%",
-  left: "70%",
+  top: "50%",
+  left: "50%",
   transform: "translate(-50%, -50%)",
   width: 325,
   height: 325,
-  bgcolor: "background.paper",
-  borderRadius: "3%",
-  border: "1px solid #195d49",
+  bgcolor: "#ffffff",
+  borderRadius: "5%",
+  border: "none",
   boxShadow: 24,
   p: 8,
-  overflow: "scroll",
+  overflowY: "scroll",
   display: "flex",
   flexDirection: "column",
 };
@@ -23,7 +27,7 @@ const style = {
 export default function LikeUsers({ open, handleClose, likes, users }) {
   let likeUsers = [];
 
-  likes?.map((like) => {
+  likes?.forEach((like) => {
     let userLike = users?.find((user) => user.userId === like?.likeUserId);
     if (userLike !== undefined) likeUsers.push(userLike);
   });
@@ -36,16 +40,30 @@ export default function LikeUsers({ open, handleClose, likes, users }) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <div className=""></div>
-        <ul className="">
+        <Stack direction="column" spacing={2}>
           {likes &&
             likeUsers?.map((user, index) => (
-              <li className="" key={index} onClick={() => [handleClose()]}>
-                {" "}
-                {user.name} {user.surname}
-              </li>
+              <Box
+                key={index}
+                className="likeUserfollowAvatarBox"
+                onClick={() => [handleClose()]}
+              >
+                <Box className="likeUserFollowAvatarName">
+                  <Avatar
+                    className="likeUserFollowAvatar"
+                    alt={user?.name}
+                    src={user?.avatar}
+                  />
+                  <Typography variant="overline" display="block" gutterBottom>
+                    {user?.name + " " + user?.surname}
+                  </Typography>
+                </Box>
+                <Button className="likeUserFollowButton" variant="contained">
+                  Follow
+                </Button>
+              </Box>
             ))}
-        </ul>
+        </Stack>
       </Box>
     </Modal>
   );

@@ -32,6 +32,7 @@
   font-size: 45px;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .loginForm {
@@ -87,4 +88,11 @@ form small {
 
 .loginTextAcount {
   padding: 10px 2px;
+  color: white;
+  font-weight: 500;
+}
+
+.LoginText {
+  color: white;
+  font-weight: 500;
 }

@@ -30,6 +30,7 @@
 
 .registerTitle {
   font-size: 40px;
+  color: white;
 }
 
 .registerForm {
@@ -80,4 +81,9 @@ form small {
   margin-left: -30px;
   cursor: pointer;
   margin-top: 10px;
+}
+
+.form-label {
+  color: white;
+  font-weight: 500;
 }

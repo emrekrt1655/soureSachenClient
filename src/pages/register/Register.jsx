@@ -42,7 +42,9 @@ export default function Register() {
         <span className="registerTitle">Register</span>
         <div className="registerBorderDown">
           <form className="registerForm" onSubmit={handleSubmit}>
-            <label htmlFor="userName">Username</label>
+            <label htmlFor="userName" className="form-label">
+              Username
+            </label>
             <input
               className="registerInput"
               type="text"
@@ -52,7 +54,7 @@ export default function Register() {
               value={userName}
               onChange={handleChangeInput}
             />
-            <label>Email</label>
+            <label className="form-label">Email</label>
             <input
               className="registerInput"
               type="text"
@@ -62,7 +64,9 @@ export default function Register() {
               value={email}
               onChange={handleChangeInput}
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
             <div>
               <input
                 type={typePass ? "text" : "password"}
