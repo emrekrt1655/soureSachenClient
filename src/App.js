@@ -16,7 +16,7 @@ import TopicPosts from "./pages/TopicPosts/TopicPosts";
 import UserProfil from "./pages/userProfil/UserProfil";
 
 function App() {
-  const { authReducer} = useSelector((state) => state);
+  const { authReducer, postReducer} = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,6 +26,7 @@ function App() {
     dispatch(getPosts());
     dispatch(getLikes());
   }, [dispatch]);
+  
   return (
     <Router>
       <Switch>
