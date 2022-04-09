@@ -48,7 +48,9 @@ export default function Login() {
         <span className="loginTitle">Login</span>
         <div className="loginBorderDown">
           <form className="loginForm" onSubmit={handleSubmit}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className="LoginText">
+              Email
+            </label>
             <input
               className="loginInput"
               type="text"
@@ -58,7 +60,9 @@ export default function Login() {
               value={email}
               onChange={handleChangeInput}
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="LoginText">
+              Password
+            </label>
             <div>
               <input
                 className="loginInput"
