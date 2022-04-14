@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import LikeUsers from "../likeUsers/LikeUsers";
 import "./post.css";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
-import { getPosts } from "../../redux/actions/postAction";
 
 export default function TopicPost({ post, likeData }) {
   const dispatch = useDispatch();
@@ -27,9 +26,9 @@ export default function TopicPost({ post, likeData }) {
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
 
   const likeCounts =
-    `${post?._count?.likes}` <= 1
-      ? `${post?._count?.likes} Like`
-      : `${post?._count?.likes} Likes`;
+  `${likes?.length}}` <= 1
+    ? `${likes?.length} Like`
+    : `${likes?.length} Likes`;
 
   const likeState = {
     likePostId: post?.postId,
@@ -40,13 +39,11 @@ export default function TopicPost({ post, likeData }) {
     ?.filter((l) => l.likeUserId === authUserId)
     ?.map(({ likeId }) => likeId);
 
-  const onLike = () =>
+    const onLike = () =>
     dispatch(like(likeState, access_token))
-      .then(() => dispatch(getPosts()))
       .then(() => dispatch(getLikes()));
   const onUnlike = () =>
     dispatch(unlike(id, access_token))
-      .then(() => dispatch(getPosts()))
       .then(() => dispatch(getLikes()));
 
   return (
@@ -73,7 +70,6 @@ export default function TopicPost({ post, likeData }) {
         <div className="postIcons">
           <Link
             to={`userProfile/${userOfPost?.userId}`}
-            currentPath="/"
             className="postIconsUsername"
           >
             <Box className="whotofollowavatar">
@@ -85,23 +81,16 @@ export default function TopicPost({ post, likeData }) {
               <p>{authUser && "@" + userOfPost?.userName}</p>
             </Box>
           </Link>
-          <div>
-            <div onClick={id?.length === 0 ? onLike : onUnlike}>
-              <Tooltip title="Like">
-                {id?.length === 0 ? (
-                  <RecommendRoundedIcon />
-                ) : (
-                  <RecommendOutlinedIcon />
-                )}
-              </Tooltip>
-            </div>
-
-            {likes?.length > 0 ? (
-              <span onClick={handleOpen}>{likeCounts}</span>
-            ) : (
-              <span>{likeCounts}</span>
-            )}
+          <div onClick={id?.length === 0 ? onLike : onUnlike}>
+            <Tooltip title={likeCounts}>
+              {id?.length === 0 ? (
+                <RecommendRoundedIcon />
+              ) : (
+                <RecommendOutlinedIcon />
+              )}
+            </Tooltip>
           </div>
+          
           <div>
             <Tooltip
               title={

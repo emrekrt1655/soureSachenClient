@@ -1,16 +1,25 @@
 import { Link } from "react-router-dom";
 import "./likedposts.css";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Tooltip from "@mui/material/Tooltip";
 
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
+import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
+import { getLikes, like, unlike } from "../../../redux/actions/likeAction";
 
-export default function Post({ postData }) {
-  const { postReducer, topicReducer } = useSelector((state) => state);
-  const posts = postData ? postData : postReducer?.data;
-  const topics = topicReducer?.data;
+export default function Post({
+  postData,
+  topicData,
+  likeData,
+  user,
+  access_token,
+}) {
+  const dispatch = useDispatch();
+  const posts = postData;
+  const topics = topicData;
+  const authUserId = user?.userId;
 
   let newList = [];
 
@@ -30,6 +39,27 @@ export default function Post({ postData }) {
     return t.topicId === post?.postTopicId;
   });
 
+  const topicId = topic?.topicId;
+
+  const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
+  const likeCounts =
+    `${likes?.length}}` <= 1
+      ? `${likes?.length} Like`
+      : `${likes?.length} Likes`;
+  const likeState = {
+    likePostId: post?.postId,
+    likeUserId: authUserId,
+  };
+
+  const id = likes
+    ?.filter((l) => l.likeUserId === authUserId)
+    ?.map(({ likeId }) => likeId);
+
+  const onLike = () =>
+    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
+  const onUnlike = () =>
+    dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
+
   return (
     <div className="postlked">
       {post?.image && (
@@ -38,7 +68,7 @@ export default function Post({ postData }) {
       <div className="posttextinfo">
         <div className="postInfo">
           <span className="postTitle">
-            <Link to="/post/abc" className="link">
+            <Link to={`/${topicId}`} className="link">
               {topic?.text}
             </Link>
           </span>
@@ -52,15 +82,15 @@ export default function Post({ postData }) {
           </span>
         </div>
         <div>
-          <Tooltip
-            title={
-              `${post?._count?.likes}` <= 1
-                ? `${post?._count?.likes} Like`
-                : `${post?._count?.likes} Likes`
-            }
-          >
-            <RecommendRoundedIcon />
-          </Tooltip>
+          <span onClick={id?.length === 0 ? onLike : onUnlike}>
+            <Tooltip title={likeCounts}>
+              {id?.length === 0 ? (
+                <RecommendRoundedIcon />
+              ) : (
+                <RecommendOutlinedIcon />
+              )}
+            </Tooltip>
+          </span>
           <Tooltip
             title={
               `${post?._count?.comments}` <= 1
