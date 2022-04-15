@@ -31,15 +31,14 @@ export const like = (likeState, access_token) => async (dispatch) => {
 
 
 export const unlike = (id, access_token) => async (dispatch) => {
-    console.log('access_token', access_token)
     try {
-      const accessToken = access_token
+        const accessToken = access_token
 
-      dispatch({ type: ALERT, payload: { loading: false } });
-      const res = await deleteAPI(`unlike/${id}`, accessToken);
-      dispatch({ type: ALERT, payload: { success: res.data.message } })
+        dispatch({ type: ALERT, payload: { loading: false } });
+        const res = await deleteAPI(`unlike/${id}`, accessToken);
+        dispatch({ type: ALERT, payload: { success: res.data.message } })
     } catch (err) {
-      dispatch({ type: ALERT, payload: err?.response.data.message })
+        dispatch({ type: ALERT, payload: err?.response.data.message })
     }
-  }
+}
 

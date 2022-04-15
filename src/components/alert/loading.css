@@ -1,4 +1,9 @@
 .loading {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100px;
+  height: 100px;
   text-align: center;
 }

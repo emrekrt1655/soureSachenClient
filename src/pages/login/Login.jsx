@@ -77,8 +77,6 @@ export default function Login() {
                 {!typePass ? <VisibilityOffIcon /> : <VisibilityIcon />}{" "}
               </small>
             </div>
-
-            <Alert />
             <button
               className="loginButton"
               type="submit"

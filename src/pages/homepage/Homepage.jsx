@@ -12,13 +12,15 @@ export default function Homepage() {
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
   const likeData = likeReducer?.data;
+  const user = authReducer?.user;
+  const access_token = authReducer?.access_token;
   return (
     <>
       <Topbar />
       <div className="home">
-        {authReducer?.user && <SideBarLeft />}
+        {user && <SideBarLeft />}
         <Posts topicData={topicData} postData={postData} likeData={likeData} />
-        <Sidebar />
+        <Sidebar user={user} access_token={access_token}  postData={postData} topicData={topicData} likeData={likeData} />
       </div>
     </>
   );

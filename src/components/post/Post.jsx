@@ -11,7 +11,6 @@ import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
 import LikeUsers from "../likeUsers/LikeUsers";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
-import { getPosts } from "../../redux/actions/postAction";
 
 export default function Post({ post, topicData, likeData }) {
   const dispatch = useDispatch();
@@ -31,9 +30,9 @@ export default function Post({ post, topicData, likeData }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const likeCounts =
-    `${post?._count?.likes}` <= 1
-      ? `${post?._count?.likes} Like`
-      : `${post?._count?.likes} Likes`;
+    `${likes?.length}}` <= 1
+      ? `${likes?.length} Like`
+      : `${likes?.length} Likes`;
 
   const likeState = {
     likePostId: post?.postId,
@@ -46,11 +45,9 @@ export default function Post({ post, topicData, likeData }) {
 
   const onLike = () =>
     dispatch(like(likeState, access_token))
-      .then(() => dispatch(getPosts()))
       .then(() => dispatch(getLikes()));
   const onUnlike = () =>
     dispatch(unlike(id, access_token))
-      .then(() => dispatch(getPosts()))
       .then(() => dispatch(getLikes()));
 
   return (
@@ -67,7 +64,7 @@ export default function Post({ post, topicData, likeData }) {
             <img className="postImg" src={post.image} alt="post" />
           )}
           <div className="postInfoHomePage">
-            <Link to={`/${topicId}`} currentPath="/">
+            <Link to={`/${topicId}`}>
               <p className="postTitle">{topicText}</p>
             </Link>
             <p className="postDesc">{post?.text}</p>
@@ -80,7 +77,6 @@ export default function Post({ post, topicData, likeData }) {
         <div className="postIcons">
           <Link
             to={`/userProfile/${user?.userId}`}
-            currentPath="/"
             className="postIconsUsername"
           >
             <Box className="whotofollowavatar">
@@ -93,20 +89,13 @@ export default function Post({ post, topicData, likeData }) {
             </Box>
           </Link>
           <div onClick={id?.length === 0 ? onLike : onUnlike}>
-            <Tooltip title="Like">
+            <Tooltip title={likeCounts}>
               {id?.length === 0 ? (
                 <RecommendRoundedIcon />
               ) : (
                 <RecommendOutlinedIcon />
               )}
             </Tooltip>
-          </div>
-          <div>
-            {likes?.length > 0 ? (
-              <span onClick={handleOpen}>{likeCounts}</span>
-            ) : (
-              <span>{likeCounts}</span>
-            )}
           </div>
           <div>
             <Tooltip

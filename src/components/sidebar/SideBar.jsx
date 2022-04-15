@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import LikedPosts from "./likedposts/LikedPosts";
 import Modal from "../modal/modal";
@@ -19,13 +18,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sidebar({ postData }) {
+export default function Sidebar({
+  postData,
+  topicData,
+  likeData,
+  user,
+  access_token,
+}) {
   const history = useHistory();
   const classes = useStyles();
   let sortedCountTopics;
   let sortedDateTopics;
   let topicList;
-  const { authReducer, topicReducer } = useSelector((state) => state);
   const [country, setCountry] = useState("");
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -35,8 +39,7 @@ export default function Sidebar({ postData }) {
   const handleClose = () => setOpen(false);
   const handleClose2 = () => setOpen2(false);
 
-  const user = authReducer?.user;
-  const topics = topicReducer?.data;
+  const topics = topicData;
   const filteredCountryTopics = topics?.filter(
     (topic) => topic.country === country
   );
@@ -186,7 +189,13 @@ export default function Sidebar({ postData }) {
         <div className="sidebarItem">
           <div className="sidebarItem">
             <span className="sidebarTitle">THE MOST LIKED</span>
-            <LikedPosts postData={postData} />
+            <LikedPosts
+              postData={postData}
+              topicData={topicData}
+              likeData={likeData}
+              user={user}
+              access_token={access_token}
+            />
           </div>
         </div>
         <div className="sidebarItem">

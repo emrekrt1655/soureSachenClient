@@ -3,7 +3,6 @@ import { postAPI, getAPI } from "../../utils/api";
 
 export const getTopics = () => async (dispatch) => {
     try {
-        dispatch({ type: ALERT, payload: {loading: false}})
         const res = await getAPI('topics');
         dispatch({ type: TOPIC, payload: res.data})
     } catch(err) {
@@ -14,6 +13,7 @@ export const getTopics = () => async (dispatch) => {
 export const createTopic= (topic, access_token) => async (dispatch) => {
     try{
         const accessToken = access_token
+        dispatch({ type: ALERT, payload: {loading: true}})
         const res = await postAPI("topicCreate", topic, accessToken)
         dispatch({
             type: TOPIC,

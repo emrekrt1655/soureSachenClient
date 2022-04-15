@@ -104,8 +104,6 @@ export default function Register() {
                 {!typeCfPass ? <VisibilityOffIcon /> : <VisibilityIcon />}{" "}
               </small>
             </div>
-
-            <Alert />
             <button className="registerButton" type="submit">
               Register
             </button>

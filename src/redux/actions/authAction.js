@@ -1,19 +1,19 @@
 import { AUTH, ALERT } from "../types/types";
 import { postAPI, getAPI, putAPI, deleteAPI } from "../../utils/api";
 import { validRegister } from '../../utils/validRegister'
+import { checkTokenExpire } from '../../utils/checkTokenExpire'
 
-export const login = (userLogin, access_token) => async (dispatch) => {
+export const login = (userLogin) => async (dispatch) => {
   try {
-    const accessToken = access_token
-    const res = await postAPI("login", userLogin, accessToken);
     dispatch({ type: ALERT, payload: { loading: true } });
+    const res = await postAPI("login", userLogin);
     dispatch({
       type: AUTH,
       payload: res.data
     });
     dispatch({ type: ALERT, payload: { success: res.data.message } });
     localStorage.setItem("refresh", "soureSachen");
-    localStorage.setItem("logged", res.data.access_token)
+    //localStorage.setItem("logged", res.data.access_token)
   } catch (err) {
     dispatch({ type: ALERT, payload: { errors: err?.response?.data.message } });
   }
@@ -27,7 +27,7 @@ export const register = (userRegister, access_token) => async (dispatch) => {
     if (check.errLength > 0)
       return dispatch({ type: ALERT, payload: { errors: check.errMsg } })
 
-    dispatch({ type: ALERT, payload: { loading: false } });
+    dispatch({ type: ALERT, payload: { loading: true } });
     const res = await postAPI("register", userRegister, accessToken);
     dispatch({ type: ALERT, payload: { success: res.data.message } })
   } catch (err) {
@@ -43,7 +43,7 @@ export const update = (userUpdate, id, access_token) => async (dispatch) => {
     if (check?.errLength > 0)
       return dispatch({ type: ALERT, payload: { errors: check.errMsg } })
 
-    dispatch({ type: ALERT, payload: { loading: false } });
+    dispatch({ type: ALERT, payload: { loading: true } });
     const res = await putAPI(`useredit/${id}`, userUpdate, accessToken);
     dispatch({ type: ALERT, payload: { success: res.data.message } })
   } catch (err) {
@@ -54,7 +54,7 @@ export const update = (userUpdate, id, access_token) => async (dispatch) => {
 export const deleteAcccount = (id, access_token) => async (dispatch) => {
   try {
     const accessToken = access_token
-    dispatch({ type: ALERT, payload: { loading: false } });
+    dispatch({ type: ALERT, payload: { loading: true } });
     const res = await deleteAPI(`userdelete/${id}`, accessToken);
     dispatch({ type: ALERT, payload: { success: res.data.message } })
   } catch (err) {
@@ -63,30 +63,32 @@ export const deleteAcccount = (id, access_token) => async (dispatch) => {
 }
 
 export const refreshToken =
-  (access_token) => async (dispatch) => {
+  () => async (dispatch) => {
     const refresh = localStorage.getItem("refresh");
     if (refresh !== "soureSachen") return;
     try {
-      const accessToken = access_token
-      dispatch({ type: ALERT, payload: { loading: false } });
-      const res = await getAPI("refresh_token", accessToken);
+      //const accessToken = access_token
+      dispatch({ type: ALERT, payload: { loading: true } });
+      const res = await getAPI("refresh_token");
       dispatch({
         type: AUTH, payload:
           res.data
       });
-      localStorage.setItem("logged", res.data.access_token);
+      //localStorage.setItem("logged", res.data.access_token);
+      dispatch({ type: ALERT, payload: {} })
     } catch (err) {
       dispatch({ type: ALERT, payload: err?.response.data.message });
     }
   };
 
 export const logOut =
-  (access_token) => async (dispatch) => {
+  (token) => async (dispatch) => {
+    const result = await checkTokenExpire(token, dispatch)
+    const access_token = result ? result : token
     try {
-      const accessToken = access_token
-      localStorage.removeItem("logged");
+      //localStorage.removeItem("logged");
       localStorage.removeItem("refresh")
-      await getAPI("/logout", accessToken);
+      await getAPI("/logout", access_token);
       window.location.href = "/";
     } catch (err) {
       dispatch({ type: ALERT, payload: err.response.data.message });
