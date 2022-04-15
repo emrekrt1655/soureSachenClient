@@ -6,6 +6,7 @@ import "./topbar.scss";
 export default function Topbar() {
   const { authReducer } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const token = authReducer?.access_token
 
   return (
     <div className="top">
@@ -47,7 +48,7 @@ export default function Topbar() {
           )}
 
           {authReducer?.access_token && (
-            <Link className="link" to="/" onClick={() => dispatch(logOut())}>
+            <Link className="link" to="/" onClick={() => dispatch(logOut(token))}>
               {" "}
               <li className="topListItem">LOGOUT</li>{" "}
             </Link>

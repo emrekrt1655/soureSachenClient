@@ -1,17 +1,34 @@
-import { useSelector } from "react-redux";
-import Loading from "./Loading";
-import Toast from "./Toast";
+import { useSelector } from 'react-redux'
+
+import Loading from './Loading'
+import Toast from './Toast'
 
 const Alert = () => {
-  const alert = useSelector((state) => state.alertReducer);
+  const { alertReducer } = useSelector(state => state)
 
   return (
-    <div className="loading">
-      {alert.loading && <Loading />}
-      {alert.errors && <Toast body={alert?.errors} title="Error" />}
-      {alert.success && <Toast body={alert?.success} />}
-    </div>
-  );
-};
+    <div>
+      { alertReducer.loading && <Loading /> }
 
-export default Alert;
+      { 
+        alertReducer.errors && 
+        <Toast 
+        title="Errors"
+        body={alertReducer.errors}
+        bgColor="bg-danger"
+        />
+      }
+
+      { 
+        alertReducer.success && 
+        <Toast 
+        title="Success"
+        body={alertReducer.success}
+        bgColor="bg-success"
+        />
+      }
+    </div>
+  )
+}
+
+export default Alert

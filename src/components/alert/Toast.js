@@ -1,41 +1,42 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { ALERT } from "../../redux/types/types";
-import "./toast.css"
+import { useDispatch } from 'react-redux'
+import { ALERT } from '../../redux/types/types'
 
-const Toast = ({ body, title }) => {
-  const dispatch = useDispatch();
+
+const Toast = ({ title, body, bgColor }) => {
+
+  const dispatch = useDispatch()
+
   const handleClose = () => {
-    dispatch({ type: ALERT, payload: {} });
-  };
+    dispatch({ type: ALERT, payload: {} })
+  }
 
   return (
-    <div className="toastt">
-      {title ? (
-        typeof body === "string" ? (
-          <span id="error"> {body} </span>
-        ) : (
-          <ul id="error">
-            {body?.map((text, index) => (
-              <li key={index}> {text} </li>
-            ))}
-          </ul>
-        )
-      ) : typeof body === "string" ? (
-        <span id="success"> {body} </span>
-      ) : (
-        <ul id="success">
-          {body?.map((text, index) => (
-            <li key={index}> {text} </li>
-          ))}
-        </ul>
-      )}
+    <div className={`toast show position-fixed text-light ${bgColor}`}
+      style={{ top: '55px', right: '5px', zIndex: 50, minWidth: '200px' }}>
 
-      <span onClick={handleClose} id="button">
-        x
-      </span>
+      <div className={`toast-header text-light ${bgColor}`}>
+        <strong className="me-auto">{title}</strong>
+        <button type="button" className="btn-close"
+          data-bs-dismiss="toast" aria-label="Close"
+          onClick={handleClose} />
+      </div>
+
+      <div className="toast-body">
+        {
+          typeof (body) === 'string'
+            ? body
+            : <ul>
+              {
+                body.map((text, index) => (
+                  <li key={index}>{text}</li>
+                ))
+              }
+            </ul>
+        }
+      </div>
+
     </div>
-  );
-};
+  )
+}
 
-export default Toast;
+export default Toast

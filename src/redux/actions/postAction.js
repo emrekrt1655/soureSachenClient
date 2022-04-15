@@ -3,7 +3,6 @@ import { getAPI, postAPI } from "../../utils/api";
 
 export const getPosts = () => async (dispatch) => {
     try {
-        dispatch({ type: ALERT, payload: { loading: false } })
         const res = await getAPI('posts', null);
         dispatch({ type: POST, payload: res.data })
     } catch (err) {
@@ -13,6 +12,7 @@ export const getPosts = () => async (dispatch) => {
 
 export const createPost = (post, access_token) => async (dispatch) => {
     try {
+        dispatch({ type: ALERT, payload: { loading: true } });
         const accessToken = access_token
         const res = await postAPI("postCreate", post, accessToken)
         dispatch({

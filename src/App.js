@@ -7,7 +7,7 @@ import { getPosts } from "./redux/actions/postAction";
 import { getUsers } from "./redux/actions/userAction";
 import { getLikes } from "./redux/actions/likeAction";
 
-import Topbar from "./components/topbar/Topbar";
+import Alert from "./components/alert/Alert";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
@@ -16,7 +16,7 @@ import TopicPosts from "./pages/TopicPosts/TopicPosts";
 import UserProfil from "./pages/userProfil/UserProfil";
 
 function App() {
-  const { authReducer, postReducer} = useSelector((state) => state);
+  const { authReducer} = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,6 +29,7 @@ function App() {
   
   return (
     <Router>
+      <Alert/>
       <Switch>
         <Route exact path="/">
           <Homepage />
