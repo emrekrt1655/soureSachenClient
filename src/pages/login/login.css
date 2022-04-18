@@ -14,7 +14,7 @@
 
 .loginBorder {
   padding: 10px 30px;
-  width: 275px;
+  width: 335px;
   height: 500px;
   background-color: rgba(52, 54, 51, 0.5);
   border-radius: 20px;
@@ -50,7 +50,7 @@
   background-color: white;
   border: none;
   border-radius: 10px;
-  width: 247px;
+  width: 277px;
   align-items: center;
 }
 

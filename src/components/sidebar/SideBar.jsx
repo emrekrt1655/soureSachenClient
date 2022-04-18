@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import "./sidebar.css";
 import WoToFollow from "./whoToFollow/WhoToFollow";
 import CountryFilter from "./countryfilter/CountryFilter";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +75,9 @@ export default function Sidebar({
     return dateTopic2 - dateTopic1;
   });
   sortedDateTopics = sorted2date?.map((t) => t);
+
+  const { authReducer, userReducer } = useSelector((state) => state);
+  const authUser = authReducer?.user?.userId;
 
   return (
     <div>
@@ -200,14 +204,17 @@ export default function Sidebar({
         </div>
         <div className="sidebarItem">
           <div className="sidebarItem">
-            <span id="whotofollow" className="sidebarTitle">
-              WHO TO FOLLOW
-            </span>
+            {authUser && (
+              <span id="whotofollow" className="sidebarTitle">
+                WHO TO FOLLOW
+              </span>
+            )}
             <WoToFollow />
           </div>
         </div>
         <div className="sidebarItem">
           <span className="sidebarTitle">FOLLOW US</span>
+
           <div className="sidebarSocial">
             <div>
               <ul>

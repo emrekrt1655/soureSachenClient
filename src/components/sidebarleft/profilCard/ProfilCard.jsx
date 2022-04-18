@@ -9,6 +9,8 @@ export default function ProfilCard({ profileOfUser }) {
     ? profileOfUser
     : users?.find((u) => u.userId === user.userId);
 
+  console.log(currentUser);
+
   return (
     <div>
       <div className="profile-card-4 text-center">
@@ -23,10 +25,9 @@ export default function ProfilCard({ profileOfUser }) {
             <p>{currentUser?.email}</p>
           </div>
           <div className="profile-description">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor.
+            <p style={{ color: "blue" }}>{currentUser?.bio}</p>
           </div>
-          <div className="row">
+          <div className="rowProfil">
             <div className="col-xs-4">
               <div className="profile-overview">
                 <p>TWEETS</p>
