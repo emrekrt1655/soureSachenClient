@@ -5,6 +5,7 @@ import { postReducer } from "./postReducer";
 import { topicReducer } from "./topicReducer";
 import { userReducer } from "./userReducer";
 import { likeReducer } from "./likeReducer";
+import { commentReducer } from "./commentReducer";
 
 export default combineReducers({
   authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   postReducer,
   topicReducer,
   userReducer,
-  likeReducer
+  likeReducer,
+  commentReducer
 });
