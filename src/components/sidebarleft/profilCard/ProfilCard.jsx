@@ -26,7 +26,7 @@ export default function ProfilCard({ profileOfUser }) {
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor.
           </div>
-          <div className="row">
+          <div className="rowProfil">
             <div className="col-xs-4">
               <div className="profile-overview">
                 <p>TWEETS</p>

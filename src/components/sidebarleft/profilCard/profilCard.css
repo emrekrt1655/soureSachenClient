@@ -106,7 +106,7 @@ a:focus {
   filter: brightness(110%);
 }
 
-.row {
+.rowProfil {
   display: flex;
   justify-content: space-between;
 }
