@@ -77,7 +77,7 @@ export const refreshToken =
       //localStorage.setItem("logged", res.data.access_token);
       dispatch({ type: ALERT, payload: {} })
     } catch (err) {
-      dispatch({ type: ALERT, payload: err?.response.data.message });
+      dispatch({ type: ALERT, payload: "Something happened!" });
     }
   };
 
