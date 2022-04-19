@@ -1,10 +1,10 @@
 import { ALERT, FOLLOWER } from "../types/types";
-import { getAPI, postAPI } from "../../utils/api";
+import { getAPI, postAPI, deleteAPI } from "../../utils/api";
 
 
 
 
-export const getFollowers = ({ access_token }) => async (dispatch) => {
+export const getFollowers = ( access_token ) => async (dispatch) => {
     try {
         const accessToken = access_token
         const res = await getAPI(`followers`, accessToken);

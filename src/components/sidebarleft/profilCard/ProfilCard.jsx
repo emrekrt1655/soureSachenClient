@@ -1,7 +1,7 @@
 import "./profilCard.css";
 import { useSelector } from "react-redux";
 
-export default function ProfilCard({ profileOfUser }) {
+export default function ProfilCard({ profileOfUser, followerData }) {
   const user = useSelector((state) => state?.authReducer?.user);
   const users = useSelector((state) => state?.userReducer?.data);
 
@@ -9,7 +9,12 @@ export default function ProfilCard({ profileOfUser }) {
     ? profileOfUser
     : users?.find((u) => u.userId === user.userId);
 
-  console.log(currentUser);
+  const followers = followerData?.filter(
+    (follower) => follower?.followedId === currentUser.userId
+  );
+  const followings = followerData?.filter(
+    (follower) => follower?.followerId === currentUser.userId
+  );
 
   return (
     <div>
@@ -37,13 +42,13 @@ export default function ProfilCard({ profileOfUser }) {
             <div className="col-xs-4">
               <div className="profile-overview">
                 <p>FOLLOWERS</p>
-                <h4>{currentUser?._count?.followers}</h4>
+                <h4>{followers?.length}</h4>
               </div>
             </div>
             <div className="col-xs-4">
               <div className="profile-overview">
                 <p>FOLLOWING</p>
-                <h4>{currentUser?._count?.followings}</h4>
+                <h4>{followings?.length}</h4>
               </div>
             </div>
           </div>

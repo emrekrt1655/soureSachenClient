@@ -3,10 +3,10 @@ import { FollowedList } from "./followedList/FollowedList";
 import ProfilCard from "./profilCard/ProfilCard";
 import "./sidebarLeft.css";
 
-export default function SideBarLeft({ profileOfUser }) {
+export default function SideBarLeft({ profileOfUser, followerData }) {
   return (
     <div className="sidebarLeft">
-      <ProfilCard profileOfUser={profileOfUser} />
+      <ProfilCard profileOfUser={profileOfUser} followerData={followerData} />
       <div className="sidebarLeftItem">
         <span className="sidebarLeftTitle">WHO ARE FOLLOWED</span>
         <div className="sidebarLeftList">

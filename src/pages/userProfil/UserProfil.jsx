@@ -7,13 +7,18 @@ import "./userProfil.css";
 
 const UserProfil = () => {
   const { userId } = useParams();
-  const { userReducer, topicReducer, postReducer, likeReducer } = useSelector(
-    (state) => state
-  );
+  const {
+    userReducer,
+    topicReducer,
+    postReducer,
+    likeReducer,
+    followerReducer,
+  } = useSelector((state) => state);
   const topicData = topicReducer?.data;
   const posts = postReducer?.data;
   const users = userReducer?.data;
   const likeData = likeReducer?.data;
+  const followerData = followerReducer?.data;
   const profileOfUser = users?.find((u) => u?.userId === userId);
 
   const postData = posts?.filter(
@@ -22,7 +27,7 @@ const UserProfil = () => {
 
   return (
     <div className="userProfilContainer">
-      <SideBarLeft profileOfUser={profileOfUser} />
+      <SideBarLeft profileOfUser={profileOfUser} followerData={followerData} />
       <Posts topicData={topicData} postData={postData} likeData={likeData} />
     </div>
   );

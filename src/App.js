@@ -6,6 +6,7 @@ import { getTopics } from "./redux/actions//topicAction";
 import { getPosts } from "./redux/actions/postAction";
 import { getUsers } from "./redux/actions/userAction";
 import { getLikes } from "./redux/actions/likeAction";
+import { getFollowers } from "./redux/actions/followerAction";
 
 import Alert from "./components/alert/Alert";
 import Homepage from "./pages/homepage/Homepage";
@@ -16,8 +17,10 @@ import TopicPosts from "./pages/TopicPosts/TopicPosts";
 import UserProfil from "./pages/userProfil/UserProfil";
 
 function App() {
-  const { authReducer} = useSelector((state) => state);
+  const { authReducer } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const access_token = authReducer?.access_token
+
 
   useEffect(() => {
     dispatch(refreshToken());
@@ -25,11 +28,17 @@ function App() {
     dispatch(getUsers());
     dispatch(getPosts());
     dispatch(getLikes());
-  }, [dispatch]);
-  
+  }, [dispatch])
+
+  useEffect(() => access_token && dispatch(getFollowers(access_token)), [dispatch, access_token])
+
+
+
+
+
   return (
     <Router>
-      <Alert/>
+      <Alert />
       <Switch>
         <Route exact path="/">
           <Homepage />
