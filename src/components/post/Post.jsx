@@ -44,11 +44,9 @@ export default function Post({ post, topicData, likeData }) {
     ?.map(({ likeId }) => likeId);
 
   const onLike = () =>
-    dispatch(like(likeState, access_token))
-      .then(() => dispatch(getLikes()));
+    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
   const onUnlike = () =>
-    dispatch(unlike(id, access_token))
-      .then(() => dispatch(getLikes()));
+    dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   return (
     <>

@@ -14,9 +14,10 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import TopicPosts from "./pages/TopicPosts/TopicPosts";
 import UserProfil from "./pages/userProfil/UserProfil";
+import Single from "./pages/single/Single";
 
 function App() {
-  const { authReducer} = useSelector((state) => state);
+  const { authReducer } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,10 +27,10 @@ function App() {
     dispatch(getPosts());
     dispatch(getLikes());
   }, [dispatch]);
-  
+
   return (
     <Router>
-      <Alert/>
+      <Alert />
       <Switch>
         <Route exact path="/">
           <Homepage />
@@ -40,10 +41,15 @@ function App() {
         <Route path="/register">
           {authReducer?.user ? <Homepage /> : <Register />}
         </Route>
-        <Route path="/login">{authReducer?.user ? <Homepage /> : <Login />}</Route>
-        <Route path="/settings">{authReducer?.user ? <Settings /> : <Login />}</Route>
+        <Route path="/login">
+          {authReducer?.user ? <Homepage /> : <Login />}
+        </Route>
+        <Route path="/settings">
+          {authReducer?.user ? <Settings /> : <Login />}
+        </Route>
         <Route exact path="/:topicId" component={TopicPosts} />
         <Route exact path="/userProfile/:userId" component={UserProfil} />
+        <Route exact path="/post/:postId" component={Single} />
       </Switch>
     </Router>
   );

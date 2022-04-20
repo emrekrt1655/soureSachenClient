@@ -26,9 +26,9 @@ export default function TopicPost({ post, likeData }) {
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
 
   const likeCounts =
-  `${likes?.length}}` <= 1
-    ? `${likes?.length} Like`
-    : `${likes?.length} Likes`;
+    `${likes?.length}}` <= 1
+      ? `${likes?.length} Like`
+      : `${likes?.length} Likes`;
 
   const likeState = {
     likePostId: post?.postId,
@@ -39,12 +39,10 @@ export default function TopicPost({ post, likeData }) {
     ?.filter((l) => l.likeUserId === authUserId)
     ?.map(({ likeId }) => likeId);
 
-    const onLike = () =>
-    dispatch(like(likeState, access_token))
-      .then(() => dispatch(getLikes()));
+  const onLike = () =>
+    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
   const onUnlike = () =>
-    dispatch(unlike(id, access_token))
-      .then(() => dispatch(getLikes()));
+    dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   return (
     <>
@@ -55,17 +53,19 @@ export default function TopicPost({ post, likeData }) {
         users={users}
       />
       <div className="postContent">
-        <div className="post">
-          {post?.image && (
-            <img className="postImg" src={post?.image} alt="post" />
-          )}
-          <div className="postInfoHomePage">
-            <p className="postDesc">{post?.text}</p>
-            <span className="postDate">
-              {new Date(post?.createdAt).toDateString()}
-            </span>
+        <Link to={`post/${post?.postId}`}>
+          <div className="post">
+            {post?.image && (
+              <img className="postImg" src={post?.image} alt="post" />
+            )}
+            <div className="postInfoHomePage">
+              <p className="postDesc">{post?.text}</p>
+              <span className="postDate">
+                {new Date(post?.createdAt).toDateString()}
+              </span>
+            </div>
           </div>
-        </div>
+        </Link>
         {/* added post like and comment number acording to count */}
         <div className="postIcons">
           <Link
@@ -90,7 +90,7 @@ export default function TopicPost({ post, likeData }) {
               )}
             </Tooltip>
           </div>
-          
+
           <div>
             <Tooltip
               title={
