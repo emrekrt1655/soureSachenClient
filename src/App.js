@@ -31,8 +31,8 @@ function App() {
     dispatch(getLikes());
   }, [dispatch])
 
+
   useEffect(() => access_token && dispatch(getFollowers(access_token)), [dispatch, access_token])
-  }, [dispatch]);
 
 
   return (
