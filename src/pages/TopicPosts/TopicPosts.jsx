@@ -51,7 +51,13 @@ export default function TopicPosts() {
               ))}
           </div>
         </div>
-        <Sidebar user={user} access_token={access_token} postData={posts} topicData={topicData} likeData={likeData}  />
+        <Sidebar
+          user={user}
+          access_token={access_token}
+          postData={posts}
+          topicData={topicData}
+          likeData={likeData}
+        />
       </div>
     </div>
   );
