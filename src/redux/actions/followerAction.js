@@ -4,7 +4,7 @@ import { getAPI, postAPI, deleteAPI } from "../../utils/api";
 
 
 
-export const getFollowers = ( access_token ) => async (dispatch) => {
+export const getFollowers = (access_token) => async (dispatch) => {
     try {
         const accessToken = access_token
         const res = await getAPI(`followers`, accessToken);
@@ -35,6 +35,7 @@ export const follow = (follower, access_token) => async (dispatch) => {
 export const deleteFollower = (folId, access_token) => async (dispatch) => {
     try {
         const accessToken = access_token
+        console.log(folId, access_token)
         dispatch({ type: ALERT, payload: { loading: true } });
         const res = await deleteAPI(`unfollow/${folId}`, accessToken);
         dispatch({ type: ALERT, payload: { success: res.data.message } })
