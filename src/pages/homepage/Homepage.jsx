@@ -6,7 +6,7 @@ import SideBarLeft from "../../components/sidebarleft/SideBarLeft";
 import Topbar from "../../components/topbar/Topbar";
 
 export default function Homepage() {
-  const { authReducer, postReducer, topicReducer, likeReducer } = useSelector(
+  const { authReducer, postReducer, topicReducer, likeReducer, followerReducer } = useSelector(
     (state) => state
   );
   const postData = postReducer?.data;
@@ -14,11 +14,12 @@ export default function Homepage() {
   const likeData = likeReducer?.data;
   const user = authReducer?.user;
   const access_token = authReducer?.access_token;
+  const followerData = followerReducer?.data;
   return (
     <>
       <Topbar />
       <div className="home">
-        {user && <SideBarLeft />}
+        {user && <SideBarLeft  followerData={followerData} />}
         <Posts topicData={topicData} postData={postData} likeData={likeData} />
         <Sidebar user={user} access_token={access_token}  postData={postData} topicData={topicData} likeData={likeData} />
       </div>

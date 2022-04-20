@@ -1,5 +1,5 @@
 import { ALERT, COMMENT } from "../types/types";
-import { getAPI, postAPI } from "../../utils/api";
+import { getAPI, postAPI, deleteAPI } from "../../utils/api";
 
 export const getComments = ({ postId }) => async (dispatch) => {
     try {
