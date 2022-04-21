@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import "./singlePost.css";
+import Comments from "./comments/Comments";
 
 export default function SinglePost({ post, topicTitle, userOfPost }) {
   const { authReducer } = useSelector((state) => state);
@@ -39,6 +40,7 @@ export default function SinglePost({ post, topicTitle, userOfPost }) {
         <div className="singlePostEdit">
           <i className="singlePostIcon far fa-trash-alt"></i>
         </div>
+        <Comments />
       </div>
     </div>
   );
