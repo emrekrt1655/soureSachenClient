@@ -28,20 +28,36 @@
   text-align: center;
 }
 
+.postImageTitleComments {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  width: 710px;
+  height: 300px;
+  border-radius: 10px;
+}
+
 .singlePostImg {
   width: 100%;
-  height: 300px;
+  height: 100%;
   border-radius: 5px;
-  /* object-fit: cover; */
-  margin-bottom: 15px !important;
 }
 
 .singlePostTitle {
-  text-align: center;
+  width: 710px;
+  height: 300px;
+  background: linear-gradient(
+      10deg,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    ),
+    linear-gradient(50deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+  position: absolute;
   /* padding: 15px; */
   font-size: 28px;
   font-family: "Lora", sans-serif;
-  color: saddlebrown;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +65,10 @@
 }
 
 .singlePostEdit {
-  float: right;
+  display: flex;
+  /* float: right; */
+  justify-content: space-around;
+
   font-size: 16px;
 }
 
@@ -66,6 +85,7 @@
 }
 
 .singlePostInfo {
+  display: flex;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
@@ -76,6 +96,21 @@
 
 .singlePostAuthor {
   margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  margin-top: 100px;
+  background: linear-gradient(
+      10deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.4) 100%
+    ),
+    linear-gradient(50deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+  border-radius: 50px;
+  width: 100px;
+  height: 79px;
 }
 
 .singlePostDesc {
@@ -90,4 +125,35 @@
   font-size: 30px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.postTextTime {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.commentPostAvatar {
+  color: white;
+}
+
+.toolPostComments {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 190px;
+  height: 30px;
+  background: linear-gradient(
+      10deg,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    ),
+    linear-gradient(50deg, rgba(0, 0, 0, 0.1) 0%, transparent 100%);
+  border-radius: 50px;
+}
+
+.toolPostComments:hover {
+  position: inherit;
 }
