@@ -1,0 +1,16 @@
+.Comments {
+  font-family: sans-serif;
+  padding: 14px;
+}
+
+.CommentsTitle {
+  /* background-color: rgb(223, 227, 230); */
+  padding-top: 20px;
+  color: black;
+}
+
+.CommentsLike {
+  height: 50px !important;
+  width: 40px !important;
+  margin-top: 15px !important;
+}

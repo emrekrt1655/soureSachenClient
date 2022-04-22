@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SinglePost from "../../components/singlePost/SinglePost";
 import LeftBarPostTopic from "../../components/leftBarPostTopic/LeftBarPostTopic";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../../components/sidebar/SideBar";
+import { getComments } from "../../redux/actions/commentAction";
+
 import "./single.css";
 
 export default function Single() {
+  const dispatch = useDispatch();
   const { postId } = useParams();
   const [open, setOpen] = useState(false);
-  const { postReducer, topicReducer, userReducer } = useSelector(
-    (state) => state
-  );
+  const { postReducer, topicReducer, userReducer, commentReducer } =
+    useSelector((state) => state);
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
 
@@ -25,6 +27,16 @@ export default function Single() {
 
   const users = userReducer?.data;
   const userOfPost = users?.find((user) => user?.userId === post?.postUserId);
+
+  useEffect(() => {
+    dispatch(getComments(postId));
+  }, [postId, dispatch]);
+
+  const comments = commentReducer?.data;
+  const postUserComments = comments?.filter(
+    (comments) => comments?.userId === postId
+  );
+
   return (
     <div className="single">
       <LeftBarPostTopic handleOpen={handleOpen} />
