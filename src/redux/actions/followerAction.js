@@ -10,7 +10,7 @@ export const getFollowers = (access_token) => async (dispatch) => {
         const res = await getAPI(`followers`, accessToken);
         dispatch({ type: FOLLOWER, payload: res.data })
     } catch (err) {
-        dispatch({ type: ALERT, payload: err?.response.data.message })
+        dispatch({ type: ALERT, payload: "Service error for followers" })
     }
 }
 
