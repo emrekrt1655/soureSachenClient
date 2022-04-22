@@ -21,14 +21,14 @@ export default function ProfilCard({ profileOfUser, followerData }) {
 
   const currentUser = profileOfUser
     ? profileOfUser
-    : users?.find((u) => u.userId === user.userId);
+    : users?.find((u) => u.userId === user?.userId);
 
   const followers = followerData?.filter(
-    (follower) => follower?.followedId === currentUser.userId
+    (follower) => follower?.followedId === currentUser?.userId
   );
 
   const followings = followerData?.filter(
-    (follower) => follower?.followerId === currentUser.userId
+    (follower) => follower?.followerId === currentUser?.userId
   );
 
   return (
@@ -39,6 +39,8 @@ export default function ProfilCard({ profileOfUser, followerData }) {
         openFollower={openFollower}
         users={users}
         access_token={access_token}
+        followerData={followerData}
+        user={user}
       />
       <FollowingList
         user={user}

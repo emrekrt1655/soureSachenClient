@@ -8,7 +8,7 @@ export const getLikes = () => async (dispatch) => {
         const res = await getAPI(`likes`);
         dispatch({ type: LIKE, payload: res.data })
     } catch (err) {
-        dispatch({ type: ALERT, payload: err?.response.data.message })
+        dispatch({ type: ALERT, payload: "Service Error" })
     }
 }
 
