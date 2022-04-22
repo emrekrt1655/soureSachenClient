@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+
 import "./singlePost.css";
 import Comments from "./comments/Comments";
+import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
+import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
+import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
+import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 
 export default function SinglePost({ post, topicTitle, userOfPost }) {
   const { authReducer } = useSelector((state) => state);
@@ -13,32 +19,51 @@ export default function SinglePost({ post, topicTitle, userOfPost }) {
     <div className="singlePost">
       <div className="singlePostWrapper">
         <div className="singlePostavatarTime">
-          <div>
-            <img className="singlePostImg" src={post?.image} alt="postImage" />
-          </div>
-          <div className="singlePostInfo">
+          <div className="postImageTitleComments">
+            <h1 className="singlePostTitle">{topicTitle?.text}</h1>
             <div className="singlePostAuthor">
               <Link className="link" to={`userProfile/${userOfPost?.userId}`}>
                 <Box className="avatarPostSingle">
                   <Avatar
-                    className="whotoFollowAvatar"
+                    className="whotoFollowAvatarComments"
                     alt="Profil Foto"
                     src={userOfPost?.avatar}
                   />
-                  <p>{authUser && "@" + userOfPost?.userName}</p>
+                  <p className="commentPostAvatar">
+                    {authUser && "@" + userOfPost?.userName}
+                  </p>
                 </Box>
               </Link>
             </div>
-            <h1 className="singlePostTitle">{topicTitle?.text}</h1>
+
+            <img className="singlePostImg" src={post?.image} alt="postImage" />
+          </div>
+        </div>
+        <div className="postTextTime">
+          <p className="singlePostDesc">{post?.text}</p>
+          <div className="singlePostInfo">
             <span className="singlePostDate">
               {" "}
               {new Date(post?.createdAt).toDateString()}
             </span>
           </div>
         </div>
-        <p className="singlePostDesc">{post?.text}</p>
         <div className="singlePostEdit">
-          <i className="singlePostIcon far fa-trash-alt"></i>
+          <div className="toolPostComments">
+            <Tooltip title="Like">
+              <RecommendRoundedIcon style={{ margin: "0 2% " }} />
+            </Tooltip>
+          </div>
+          <div className="toolPostComments">
+            <Tooltip title="Comment">
+              <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
+            </Tooltip>
+          </div>
+          <div className="toolPostComments">
+            <Tooltip title="Share">
+              <ShareRoundedIcon style={{ margin: "0 2% " }} />
+            </Tooltip>
+          </div>
         </div>
         <Comments />
       </div>
