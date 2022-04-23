@@ -33,12 +33,11 @@ export default function FollowerList({
   users,
   followerData,
   user,
+  access_token,
 }) {
   let followerList = [];
 
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state?.authReducer?.user);
-  const access_token = useSelector((state) => state?.authReducer?.access_token);
 
   followers?.forEach((follower) => {
     let userFollower = users?.find(
@@ -52,7 +51,7 @@ export default function FollowerList({
     ?.map((u) => u?.followedId);
 
   const authList = followerList?.find(
-    (follower) => follower?.userId === authUser?.userId
+    (follower) => follower?.userId === user?.userId
   );
 
   return (
@@ -100,7 +99,7 @@ export default function FollowerList({
                         dispatch(
                           follow(
                             {
-                              followerId: authUser?.userId,
+                              followerId: user?.userId,
                               followedId: i?.userId,
                             },
                             access_token
