@@ -6,10 +6,11 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../../likeUsers/likeUsers.css";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   deleteFollower,
   getFollowers,
+  follow,
 } from "../../../redux/actions/followerAction";
 
 const style = {
@@ -29,7 +30,7 @@ const style = {
   flexDirection: "column",
 };
 
-export default function FollowerList({
+export default function FollowingList({
   openFollowing,
   handleCloseFollowing,
   followings,
@@ -37,9 +38,12 @@ export default function FollowerList({
   access_token,
   currentUser,
   user,
+  followerData,
 }) {
   let followingList = [];
   let folIdList = [];
+  const authUser = useSelector((state) => state?.authReducer?.user);
+
   const dispatch = useDispatch();
   followings?.forEach((following) => {
     let userFollowing = users?.find(
@@ -55,6 +59,13 @@ export default function FollowerList({
     if (userFollowing !== undefined) folIdList.push(userFollowing?.folId);
   });
 
+  const authFollowings = followerData
+    ?.filter((following) => following?.followerId === user?.userId)
+    ?.map((u) => u?.followedId);
+
+  const authList = followingList?.find(
+    (follower) => follower?.userId === user?.userId
+  );
   const handleDeleteFollow = (folId, access_token) => {
     dispatch(deleteFollower(folId, access_token)).then(() =>
       dispatch(getFollowers(access_token))
@@ -70,24 +81,24 @@ export default function FollowerList({
       <Box sx={style}>
         <Stack direction="column" spacing={2}>
           Followings
-          {followings &&
-            followingList?.map((following, index) => (
-              <Box
-                key={index}
-                className="likeUserfollowAvatarBox"
-                onClick={() => [handleCloseFollowing()]}
-              >
-                <Box className="likeUserFollowAvatarName">
-                  <Avatar
-                    className="likeUserFollowAvatar"
-                    alt={following?.name}
-                    src={following?.avatar}
-                  />
-                  <Typography variant="overline" display="block" gutterBottom>
-                    {following?.name + " " + following?.surname}
-                  </Typography>
-                </Box>
-                {currentUser?.userId === user?.userId && (
+          {followings && currentUser?.userId === user?.userId
+            ? followingList?.map((following, index) => (
+                <Box
+                  key={index}
+                  className="likeUserfollowAvatarBox"
+                  onClick={() => [handleCloseFollowing()]}
+                >
+                  <Box className="likeUserFollowAvatarName">
+                    <Avatar
+                      className="likeUserFollowAvatar"
+                      alt={following?.name}
+                      src={following?.avatar}
+                    />
+                    <Typography variant="overline" display="block" gutterBottom>
+                      {following?.name + " " + following?.surname}
+                    </Typography>
+                  </Box>
+
                   <Button
                     className="likeUserFollowButton"
                     variant="contained"
@@ -97,9 +108,56 @@ export default function FollowerList({
                   >
                     Unfollow
                   </Button>
-                )}
-              </Box>
-            ))}
+                </Box>
+              ))
+            : followingList?.map((i, index) => (
+                <Box
+                  key={index}
+                  className="likeUserfollowAvatarBox"
+                  onClick={() => [handleCloseFollowing()]}
+                >
+                  <Box className="likeUserFollowAvatarName">
+                    <Avatar
+                      className="likeUserFollowAvatar"
+                      alt={i?.name}
+                      src={i?.avatar}
+                    />
+                    <Typography variant="overline" display="block" gutterBottom>
+                      {i?.name + " " + i?.surname}
+                    </Typography>
+                  </Box>
+
+                  {i?.userId ===
+                  authList?.userId ? null : authFollowings?.includes(
+                      i?.userId
+                    ) ? (
+                    <Button
+                      className="likeUserFollowButton"
+                      variant="contained"
+                    >
+                      Following
+                    </Button>
+                  ) : (
+                    <Button
+                      className="likeUserFollowButton"
+                      variant="contained"
+                      onClick={() => {
+                        dispatch(
+                          follow(
+                            {
+                              followerId: user?.userId,
+                              followedId: i?.userId,
+                            },
+                            access_token
+                          )
+                        )?.then(() => dispatch(getFollowers(access_token)));
+                      }}
+                    >
+                      Follow
+                    </Button>
+                  )}
+                </Box>
+              ))}
         </Stack>
       </Box>
     </Modal>

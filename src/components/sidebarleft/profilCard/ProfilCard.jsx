@@ -50,6 +50,7 @@ export default function ProfilCard({ profileOfUser, followerData }) {
         openFollowing={openFollowing}
         users={users}
         access_token={access_token}
+        followerData={followerData}
       />
       <div>
         <div className="profile-card-4 text-center">
