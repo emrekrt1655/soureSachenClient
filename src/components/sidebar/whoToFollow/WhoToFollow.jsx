@@ -1,53 +1,90 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { follow, getFollowers } from "../../../redux/actions/followerAction";
 import "./whoToFollow.css";
 
 export default function WoToFollow() {
-  const [suggestionList, setSuggestionList] = useState();
-  const { authReducer, userReducer } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const { authReducer, userReducer, followerReducer } = useSelector(
+    (state) => state
+  );
   const authUser = authReducer?.user?.userId;
+  const access_token = authReducer?.access_token;
   const userList = userReducer?.data;
+  const followerData = followerReducer?.data;
 
-  useEffect(() => {
-    if (authUser && userList) {
-      setSuggestionList(() => {
-        const filteredList = userList?.filter(
-          (user) => user?.userId !== authUser
-        );
+  let authFollowers = followerData
+    ?.filter((user) => user?.followerId === authUser)
+    ?.map(({ followedId }) => followedId);
+  authFollowers?.push(authUser);
 
-        const newSuggestionList = [];
+  let filteredList = [];
 
-        while (newSuggestionList.length < 3) {
-          const ran =
-            filteredList[Math.floor(Math.random() * filteredList?.length)];
-          if (newSuggestionList.indexOf(ran) === -1)
-            newSuggestionList.push(ran);
-        }
-
-        return newSuggestionList;
-      });
+  userList?.forEach((follower) => {
+    if (authFollowers?.indexOf(follower?.userId) === -1) {
+      filteredList?.push(follower);
     }
-  }, [userList, authUser]);
+  });
+
+  const newSuggestionList = [];
+
+  if (filteredList?.length <= 3) {
+    newSuggestionList?.push(...filteredList);
+  } else {
+    while (true) {
+      const ran =
+        filteredList[Math.floor(Math.random() * filteredList?.length)];
+      if (newSuggestionList.indexOf(ran) === -1) newSuggestionList.push(ran);
+      if (newSuggestionList.length === 3) break;
+    }
+  }
 
   return (
-    <Stack direction="row" spacing={2}>
-      {suggestionList?.map((p, index) => (
-        <Box key={index} className="whotofollowavatar">
-          <Avatar className="whotoFollowAvatar" alt={p?.name} src={p?.avatar} />
-          <Typography variant="overline" display="block" gutterBottom>
-            {p?.name + p?.surname}
-          </Typography>
-          <Button className="whotoFollowButton" variant="contained">
-            Follow
-          </Button>
-        </Box>
-      ))}
-    </Stack>
+    <div className="whotoFollowContainer">
+      {newSuggestionList?.length > 0 && (
+        <p id="whotofollow" className="sidebarTitle">
+          WHO TO FOLLOW
+        </p>
+      )}
+      <Stack direction="row" spacing={2} className="whoToFollowSugg">
+        {newSuggestionList?.map((p, index) => (
+          <Box key={index} className="whotofollowavatar">
+            <Link to={`/userProfile/${p?.userId}`}>
+              <Avatar
+                className="whotoFollowAvatar"
+                alt={p?.name}
+                src={p?.avatar}
+              />
+            </Link>
+            <Typography variant="overline" display="block" gutterBottom>
+              @{p?.userName}
+            </Typography>
+            <Button
+              className="whotoFollowButton"
+              variant="contained"
+              onClick={() =>
+                dispatch(
+                  follow(
+                    {
+                      followerId: authUser,
+                      followedId: p?.userId,
+                    },
+                    access_token
+                  )
+                )?.then(() => dispatch(getFollowers(access_token)))
+              }
+            >
+              Follow
+            </Button>
+          </Box>
+        ))}
+      </Stack>
+    </div>
   );
 }

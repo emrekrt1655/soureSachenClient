@@ -203,16 +203,6 @@ export default function Sidebar({
           </div>
         </div>
         <div className="sidebarItem">
-          <div className="sidebarItem">
-            {authUser && (
-              <span id="whotofollow" className="sidebarTitle">
-                WHO TO FOLLOW
-              </span>
-            )}
-            <WoToFollow />
-          </div>
-        </div>
-        <div className="sidebarItem">
           <span className="sidebarTitle">FOLLOW US</span>
 
           <div className="sidebarSocial">

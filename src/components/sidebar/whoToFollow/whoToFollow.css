@@ -1,15 +1,35 @@
-.whotofollowavatar {
+.whotoFollowContainer {
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  margin: 10px auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.whotoFollowContainer #whotofollow {
+  width: 100%;
+  text-align: center;
+}
+
+.css-e53awj-MuiStack-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.css-e53awj-MuiStack-root .whotofollowavatar {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.whotoFollowAvatar {
   margin-bottom: 7px;
 }
 
-.whotoFollowButton {
-  background-color: rgb(57, 166, 95) !important;
+.css-e53awj-MuiStack-root .whotofollowavatar .whotoFollowButton {
+  background-color: rgb(148, 58, 204) !important;
   padding: 5px 7px !important;
 }
