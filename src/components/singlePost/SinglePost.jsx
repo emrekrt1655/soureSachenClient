@@ -11,7 +11,7 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 
-export default function SinglePost({ post, topicTitle, userOfPost }) {
+export default function SinglePost({ post, topicTitle, userOfPost, comments }) {
   const { authReducer } = useSelector((state) => state);
   const authUser = authReducer?.user;
 
@@ -35,8 +35,19 @@ export default function SinglePost({ post, topicTitle, userOfPost }) {
                 </Box>
               </Link>
             </div>
-
-            <img className="singlePostImg" src={post?.image} alt="postImage" />
+            {post?.image ? (
+              <img
+                className="singlePostImg"
+                src={post?.image}
+                alt="postImage"
+              />
+            ) : (
+              <img
+                className="singlePostImg"
+                src="https://wallpaperaccess.com/full/3800967.jpg"
+                alt="postImage"
+              />
+            )}
           </div>
         </div>
         <div className="postTextTime">
@@ -65,7 +76,10 @@ export default function SinglePost({ post, topicTitle, userOfPost }) {
             </Tooltip>
           </div>
         </div>
-        <Comments />
+        {comments &&
+          comments.map((comment) => (
+            <Comments key={comment?.commentPostId} comment={comment} />
+          ))}
       </div>
     </div>
   );

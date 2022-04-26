@@ -20,7 +20,6 @@ export default function Single() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const post = postData?.find((post) => post?.postId === postId);
-  console.log(post);
   const currentTopic = topicData?.find(
     (top) => top.topicId === post?.postTopicId
   );
@@ -29,12 +28,12 @@ export default function Single() {
   const userOfPost = users?.find((user) => user?.userId === post?.postUserId);
 
   useEffect(() => {
-    dispatch(getComments(postId));
+    postId && dispatch(getComments(postId));
   }, [postId, dispatch]);
 
-  const comments = commentReducer?.data;
-  const postUserComments = comments?.filter(
-    (comments) => comments?.userId === postId
+  const comments = commentReducer.data;
+  const userOfCommnets = users?.find(
+    (user) => user?.userId === comments.commentUserId
   );
 
   return (
@@ -44,6 +43,8 @@ export default function Single() {
         post={post}
         topicTitle={currentTopic}
         userOfPost={userOfPost}
+        comments={comments}
+        userOfCommnets={userOfCommnets}
       />
       <Sidebar />
     </div>

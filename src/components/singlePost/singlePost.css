@@ -9,7 +9,7 @@
   padding: 20px;
   padding-right: 0;
   margin-top: 10px !important;
-  /* background-color: #f8f7f7; */
+  /* background-color: #b96c6c; */
 }
 
 .singlePostavatarTime {
@@ -33,7 +33,6 @@
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
-  width: 710px;
   height: 300px;
   border-radius: 10px;
 }
@@ -45,8 +44,8 @@
 }
 
 .singlePostTitle {
-  width: 710px;
-  height: 300px;
+  width: 30%;
+  height: 250px;
   background: linear-gradient(
       10deg,
       rgba(0, 0, 0, 0.6) 0%,
@@ -62,6 +61,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 50%;
 }
 
 .singlePostEdit {
