@@ -21,6 +21,15 @@
   align-items: center;
 }
 
+.sidebarLeftItem #whotofollow {
+  margin-top: 0px;
+}
+
+.sidebarLeftItem .sidebarTitle {
+  margin-bottom: 3%;
+  margin-top: 4%;
+}
+
 .sidebarLeftItem .sidebarLeftTitle {
   margin: 10px;
   padding: 5px;

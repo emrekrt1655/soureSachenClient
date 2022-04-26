@@ -38,12 +38,13 @@ a:focus {
   overflow: hidden;
   position: relative;
   margin: 10px auto;
-  cursor: pointer;
 }
 
 .profile-card-4 img {
   transition: all 0.25s linear;
   max-height: 300px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .profile-card-4 .profile-content {
@@ -54,11 +55,8 @@ a:focus {
 
 .profile-card-4 .profile-name {
   font-weight: bold;
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: -70px;
-  color: #fff;
+  position: relative;
+  color: #000;
   font-size: 17px;
 }
 
@@ -76,6 +74,7 @@ a:focus {
 
 .profile-card-4 .profile-overview {
   padding: 15px 0px;
+  cursor: pointer;
 }
 
 .profile-card-4 .profile-overview p {

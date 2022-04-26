@@ -1,6 +1,7 @@
 import "./profilCard.css";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import FollowerList from "../followList/FollowerList";
 import FollowingList from "../followList/FollowingList";
 
@@ -54,18 +55,20 @@ export default function ProfilCard({ profileOfUser, followerData }) {
       />
       <div>
         <div className="profile-card-4 text-center">
-          <img
-            src={currentUser?.avatar}
-            className="img img-responsive"
-            alt="profilcard"
-          />
+          <Link to={`/userProfile/${currentUser?.userId}`}>
+            <img
+              src={currentUser?.avatar}
+              className="img img-responsive"
+              alt="profilcard"
+            />
+          </Link>
           <div className="profile-content">
             <div className="profile-name">
               {`${currentUser?.name} ${currentUser?.surname}`}
-              <p>{currentUser?.email}</p>
+              <p>@{currentUser?.userName}</p>
             </div>
             <div className="profile-description">
-              <p style={{ color: "blue" }}>{currentUser?.bio}</p>
+              <p>{currentUser?.bio}</p>
             </div>
             <div className="rowProfil">
               <div className="col-xs-4">
