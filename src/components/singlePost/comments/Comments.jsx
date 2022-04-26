@@ -27,7 +27,7 @@ function Comments({ comment }) {
           <Grid item>
             <Link
               to={`/userProfile/${userOfCommnets?.userId}`}
-              className="postIconsUsername"
+              className="commentIconsUserAvatar"
             >
               <Avatar alt="userName" src={userOfCommnets?.avatar} />
             </Link>
@@ -38,18 +38,22 @@ function Comments({ comment }) {
             </Tooltip>
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
-            <h4 style={{ margin: 0, textAlign: "left" }}>
+            <div
+               className="commentsAvatartName"
+            >
               <Link
                 to={`/userProfile/${userOfCommnets?.userId}`}
-                className="postIconsUsername"
+                className="commentIconsUsername"
               >
                 <p>{authReducer?.user && "@" + userOfCommnets?.userName}</p>
               </Link>
-            </h4>
-            <p style={{ textAlign: "left" }}>{comment?.text}</p>
-            <p style={{ textAlign: "left", color: "gray" }}>
-              {new Date(comment?.createdAt).toDateString()}
-            </p>
+            </div>
+            <div className="commentText">
+              <p style={{ textAlign: "left" }}>{comment?.text}</p>
+              <p style={{ textAlign: "left", color: "gray" }}>
+                {new Date(comment?.createdAt).toDateString()}
+              </p>
+            </div>
           </Grid>
         </Grid>
       </Paper>
