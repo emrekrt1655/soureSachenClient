@@ -21,7 +21,7 @@ export default function Single() {
   const handleClose = () => setOpen(false);
   const post = postData?.find((post) => post?.postId === postId);
   const currentTopic = topicData?.find(
-    (top) => top.topicId === post?.postTopicId
+    (top) => top?.topicId === post?.postTopicId
   );
 
   const users = userReducer?.data;
@@ -33,7 +33,7 @@ export default function Single() {
 
   const comments = commentReducer.data;
   const userOfCommnets = users?.find(
-    (user) => user?.userId === comments.commentUserId
+    (user) => user?.userId === comments?.commentUserId
   );
 
   return (

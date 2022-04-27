@@ -53,7 +53,7 @@ export default function TopicPost({ post, likeData }) {
         users={users}
       />
       <div className="postContent">
-        <Link to={`post/${post?.postId}`}>
+        <Link to={`post/${post?.postId}`} className="topicPosttextDate">
           <div className="post">
             {post?.image && (
               <img className="postImg" src={post?.image} alt="post" />
@@ -72,9 +72,9 @@ export default function TopicPost({ post, likeData }) {
             to={`userProfile/${userOfPost?.userId}`}
             className="postIconsUsername"
           >
-            <Box className="whotofollowavatar">
+            <Box className="postAvatarIcon">
               <Avatar
-                className="whotoFollowAvatar"
+                className="postAvatarIconAvatar"
                 alt="Profil Foto"
                 src={userOfPost?.avatar}
               />

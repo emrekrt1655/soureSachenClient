@@ -62,10 +62,10 @@ export default function Post({ post, topicData, likeData }) {
             <img className="postImg" src={post.image} alt="post" />
           )}
           <div className="postInfoHomePage">
-            <Link to={`/${topicId}`}>
+            <Link className="postTitleLink" to={`/${topicId}`}>
               <p className="postTitle">{topicText}</p>
+              <p className="postDesc">{post?.text}</p>
             </Link>
-            <p className="postDesc">{post?.text}</p>
             <span className="postDate">
               {new Date(post.createdAt).toDateString()}
             </span>
@@ -77,9 +77,9 @@ export default function Post({ post, topicData, likeData }) {
             to={`/userProfile/${user?.userId}`}
             className="postIconsUsername"
           >
-            <Box className="whotofollowavatar">
+            <Box className="postAvatarIcon">
               <Avatar
-                className="whotoFollowAvatar"
+                className="postAvatarIconAvatar"
                 alt="Profil Foto"
                 src={user?.avatar}
               />
