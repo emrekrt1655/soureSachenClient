@@ -18,62 +18,64 @@ export default function SinglePost({ post, topicTitle, userOfPost, comments }) {
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <div className="singlePostavatarTime">
-          <div className="postImageTitleComments">
-            <h1 className="singlePostTitle">{topicTitle?.text}</h1>
-            <div className="singlePostAuthor">
-              <Link className="link" to={`userProfile/${userOfPost?.userId}`}>
-                <Box className="avatarPostSingle">
-                  <Avatar
-                    className="whotoFollowAvatarComments"
-                    alt="Profil Foto"
-                    src={userOfPost?.avatar}
-                  />
-                  <p className="commentPostAvatar">
-                    {authUser && "@" + userOfPost?.userName}
-                  </p>
-                </Box>
-              </Link>
+        <div className="singlePostRealPost">
+          <div className="singlePostavatarTime">
+            <div className="postImageTitleComments">
+              <h1 className="singlePostTitle">{topicTitle?.text}</h1>
+              <div className="singlePostAuthor">
+                <Link className="link" to={`userProfile/${userOfPost?.userId}`}>
+                  <Box className="avatarPostSingle">
+                    <Avatar
+                      className="whotoFollowAvatarComments"
+                      alt="Profil Foto"
+                      src={userOfPost?.avatar}
+                    />
+                    <p className="commentPostAvatar">
+                      {authUser && "@" + userOfPost?.userName}
+                    </p>
+                  </Box>
+                </Link>
+              </div>
+              {post?.image ? (
+                <img
+                  className="singlePostImg"
+                  src={post?.image}
+                  alt="postImage"
+                />
+              ) : (
+                <img
+                  className="singlePostImg"
+                  src="https://wallpaperaccess.com/full/3800967.jpg"
+                  alt="postImage"
+                />
+              )}
             </div>
-            {post?.image ? (
-              <img
-                className="singlePostImg"
-                src={post?.image}
-                alt="postImage"
-              />
-            ) : (
-              <img
-                className="singlePostImg"
-                src="https://wallpaperaccess.com/full/3800967.jpg"
-                alt="postImage"
-              />
-            )}
           </div>
-        </div>
-        <div className="postTextTime">
-          <p className="singlePostDesc">{post?.text}</p>
-          <div className="singlePostInfo">
-            <span className="singlePostDate">
-              {" "}
-              {new Date(post?.createdAt).toDateString()}
-            </span>
+          <div className="postTextTime">
+            <p className="singlePostDesc">{post?.text}</p>
+            <div className="singlePostInfo">
+              <span className="singlePostDate">
+                {" "}
+                {new Date(post?.createdAt).toDateString()}
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="singlePostEdit">
-          <div className="toolPostComments">
-            <Tooltip title="Like">
-              <RecommendRoundedIcon style={{ margin: "0 2% " }} />
-            </Tooltip>
-          </div>
-          <div className="toolPostComments">
-            <Tooltip title="Comment">
-              <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
-            </Tooltip>
-          </div>
-          <div className="toolPostComments">
-            <Tooltip title="Share">
-              <ShareRoundedIcon style={{ margin: "0 2% " }} />
-            </Tooltip>
+          <div className="singlePostEdit">
+            <div className="toolPostComments">
+              <Tooltip title="Like">
+                <RecommendRoundedIcon style={{ margin: "0 2% " }} />
+              </Tooltip>
+            </div>
+            <div className="toolPostComments">
+              <Tooltip title="Comment">
+                <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
+              </Tooltip>
+            </div>
+            <div className="toolPostComments">
+              <Tooltip title="Share">
+                <ShareRoundedIcon style={{ margin: "0 2% " }} />
+              </Tooltip>
+            </div>
           </div>
         </div>
         {comments &&

@@ -11,6 +11,7 @@ import Input from "@mui/material/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { createPost, getPosts } from "../../redux/actions/postAction";
 import { getTopics } from "../../redux/actions/topicAction";
+import { typeText } from "../../redux/actions/alertAction";
 import "./newPostAdd.css";
 
 const style = {
@@ -59,10 +60,16 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(post, access_token)).then(() => {
-      handleClose();
-    });
+    if (text.length > 40) {
+      dispatch(createPost(post, access_token)).then(() => {
+        handleClose();
+      });
+    } else {
+      dispatch(typeText("Enter a text of at least 40 characters"));
+    }
   };
+
+
 
   React.useEffect(() => {
     dispatch(getPosts());
@@ -106,9 +113,13 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
           <AddAPhotoIcon onClick={showImgInput} />
           <div className="buttonPartNewPost">
             <Button
+              // disabled={text.length > 40 ? false : true}
               variant="contained"
               endIcon={<SendIcon />}
-              style={{ marginTop: "19px", float: "right" }}
+              style={{
+                marginTop: "19px",
+                float: "right",
+              }}
               onClick={handleSubmit}
             >
               Add
