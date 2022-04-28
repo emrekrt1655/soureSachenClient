@@ -8,7 +8,7 @@ import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@mui/material/Tooltip";
 import "./sidebar.css";
-import WoToFollow from "./whoToFollow/WhoToFollow";
+import SearchBar from "./searchBar/SearchBar";
 import CountryFilter from "./countryfilter/CountryFilter";
 import { useSelector } from "react-redux";
 
@@ -91,18 +91,12 @@ export default function Sidebar({
       <Modal open={open} handleClose={handleClose} />
       <div className="sidebar">
         <div className="sidebarItem">
-          <div class="wrap">
-            <div class="search">
-              <input
-                type="text"
-                class="searchTerm"
-                placeholder="What are you looking for?"
-              />
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-          </div>
+         <SearchBar
+         topics = {topics}
+         posts = {postData}
+         />
+         </div>
+         <div className="sidebarItem">
           <div className="sidebarHead">
             <span className="sidebarTitle">Topic</span>
             <div className="sidebarIcons">
@@ -179,14 +173,14 @@ export default function Sidebar({
               <h4> There is no topics in this country </h4>
             )}
 
-            <span className="">
+            <div className="addButtonContainer">
               {user?.isTopicCreator === "true" && (
                 <div onClick={handleOpen} className="buttonAddTopic">
                   <i className="fab fa-buffer"></i>
                   <span style={{ margin: "5px" }}>Add Topic</span>
                 </div>
               )}
-            </span>
+            </div>
           </div>
         </div>
 
