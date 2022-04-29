@@ -9,7 +9,7 @@ import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 import LikeUsers from "../likeUsers/LikeUsers";
-import "./post.css";
+import "./topicPost.css";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 
 export default function TopicPost({ post, likeData }) {
@@ -52,29 +52,29 @@ export default function TopicPost({ post, likeData }) {
         likes={likes}
         users={users}
       />
-      <div className="postContent">
+      <div className="topicpostContent">
         <Link to={`post/${post?.postId}`} className="topicPosttextDate">
-          <div className="post">
+          <div className="topicpost">
             {post?.image && (
-              <img className="postImg" src={post?.image} alt="post" />
+              <img className="topicpostImg" src={post?.image} alt="post" />
             )}
-            <div className="postInfoHomePage">
-              <p className="postDesc">{post?.text}</p>
-              <span className="postDate">
+            <div className="topicpostInfoHomePage">
+              <p className="topicpostDesc">{post?.text}</p>
+              <span className="topicpostDate">
                 {new Date(post?.createdAt).toDateString()}
               </span>
             </div>
           </div>
         </Link>
         {/* added post like and comment number acording to count */}
-        <div className="postIcons">
+        <div className="topicpostIcons">
           <Link
             to={`userProfile/${userOfPost?.userId}`}
-            className="postIconsUsername"
+            className="topicpostIconsUsername"
           >
-            <Box className="postAvatarIcon">
+            <Box className="topicpostAvatarIcon">
               <Avatar
-                className="postAvatarIconAvatar"
+                className="topicpostAvatarIconAvatar"
                 alt="Profil Foto"
                 src={userOfPost?.avatar}
               />

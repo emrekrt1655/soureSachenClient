@@ -4,9 +4,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import FollowerList from "../followList/FollowerList";
 import FollowingList from "../followList/FollowingList";
+import FingerprintIcon from "@mui/icons-material/Fingerprint";
+import AttractionsSharpIcon from "@mui/icons-material/AttractionsSharp";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function ProfilCard({ profileOfUser, followerData }) {
   const user = useSelector((state) => state?.authReducer?.user);
+  console.log(user);
   const access_token = useSelector((state) => state?.authReducer?.access_token);
   const users = useSelector((state) => state?.userReducer?.data);
   const [openFollower, setOpenFollower] = useState(false);
@@ -66,6 +70,12 @@ export default function ProfilCard({ profileOfUser, followerData }) {
             <div className="profile-name">
               {`${currentUser?.name} ${currentUser?.surname}`}
               <p>@{currentUser?.userName}</p>
+              <Tooltip title="Verified User">
+                {user?.isVerified ? <FingerprintIcon /> : ""}
+              </Tooltip>
+              <Tooltip title="Topic Creator">
+                {user?.isTopicCreator ? <AttractionsSharpIcon /> : ""}
+              </Tooltip>
             </div>
             <div className="profile-description">
               <p>{currentUser?.bio}</p>
