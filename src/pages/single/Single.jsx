@@ -12,13 +12,17 @@ export default function Single() {
   const dispatch = useDispatch();
   const { postId } = useParams();
   const [open, setOpen] = useState(false);
-  const { postReducer, topicReducer, userReducer, commentReducer } =
+  const { authReducer, likeReducer, postReducer, topicReducer, userReducer, commentReducer } =
     useSelector((state) => state);
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
+  const likeData = likeReducer?.data;
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const user = authReducer?.user
+  const access_token = authReducer?.access_token;
   const post = postData?.find((post) => post?.postId === postId);
   const currentTopic = topicData?.find(
     (top) => top?.topicId === post?.postTopicId
@@ -46,7 +50,7 @@ export default function Single() {
         comments={comments}
         userOfCommnets={userOfCommnets}
       />
-      <Sidebar />
+      <Sidebar user={user} access_token={access_token}  postData={postData} topicData={topicData} likeData={likeData} />
     </div>
   );
 }
