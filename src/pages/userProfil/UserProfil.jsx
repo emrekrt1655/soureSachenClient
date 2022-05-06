@@ -3,6 +3,8 @@ import SideBarLeft from "../../components/sidebarleft/SideBarLeft";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Posts from "../../components/posts/Posts";
+import Topbar from "../../components/topbar/Topbar";
+
 import "./userProfil.css";
 
 const UserProfil = () => {
@@ -26,9 +28,16 @@ const UserProfil = () => {
   );
 
   return (
-    <div className="userProfilContainer">
-      <SideBarLeft profileOfUser={profileOfUser} followerData={followerData} />
-      <Posts topicData={topicData} postData={postData} likeData={likeData} />
+    <div>
+      <Topbar />
+
+      <div className="userProfilContainer">
+        <SideBarLeft
+          profileOfUser={profileOfUser}
+          followerData={followerData}
+        />
+        <Posts topicData={topicData} postData={postData} likeData={likeData} />
+      </div>
     </div>
   );
 };
