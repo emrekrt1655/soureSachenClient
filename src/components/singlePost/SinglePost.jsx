@@ -6,6 +6,7 @@ import Tooltip from "@mui/material/Tooltip";
 import LikeUsers from "../likeUsers/LikeUsers";
 import "./singlePost.css";
 import Comments from "./comments/Comments";
+import CreateNewComment from "../newCommentAdd/CreateComment";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
@@ -26,6 +27,8 @@ export default function SinglePost({
   const authUser = authReducer?.user;
   const access_token = authReducer?.access_token;
   const [openLikeUsers, setOpenLikeUsers] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [showComments, setShowComments] = useState(false);
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
   const likeCounts =
     `${likes?.length}}` <= 1
@@ -34,6 +37,10 @@ export default function SinglePost({
   const comments = commentData?.filter(
     (comment) => comment.commentPostId === post?.postId
   );
+  const commentCounts =
+    `${comments?.length}}` <= 1
+      ? `${comments?.length} Comment`
+      : `${comments?.length} Comments`;
 
   const id = likes
     ?.filter((l) => l.likeUserId === authUser?.userId)
@@ -41,6 +48,8 @@ export default function SinglePost({
 
   const handleOpenLikeUsers = () => setOpenLikeUsers(true);
   const handleCloseLikeUsers = () => setOpenLikeUsers(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const likeState = {
     likePostId: post?.postId,
@@ -52,6 +61,10 @@ export default function SinglePost({
   const onUnlike = () =>
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
+  const showComment = () => {
+    setShowComments(!showComments);
+  };
+
   return (
     <>
       <LikeUsers
@@ -60,6 +73,7 @@ export default function SinglePost({
         likes={likes}
         users={users}
       />
+      <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="singlePost">
         <div className="singlePostWrapper">
           <div className="singlePostRealPost">
@@ -120,20 +134,17 @@ export default function SinglePost({
                   )}
                 </Tooltip>
               </div>
-              <span onClick={handleOpenLikeUsers}>
+              <span onClick={handleOpenLikeUsers} style={{ cursor: "pointer" }}>
                 {" "}
                 {likes?.length > 0 ? likeCounts : ""}{" "}
               </span>
               <div className="toolPostComments">
-                <Tooltip title="Comment">
+                <Tooltip title="Comment" onClick={handleOpen}>
                   <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
                 </Tooltip>
               </div>
-              <span>
-                {" "}
-                {comments?.length > 0
-                  ? comments?.length + " Comments"
-                  : ""}{" "}
+              <span onClick={showComment} style={{ cursor: "pointer" }}>
+                {comments?.length > 0 ? commentCounts : ""}
               </span>
               <div className="toolPostComments">
                 <Tooltip title="Share">
@@ -142,10 +153,12 @@ export default function SinglePost({
               </div>
             </div>
           </div>
-          {comments &&
-            comments.map((comment) => (
-              <Comments key={comment?.commentId} comment={comment} />
-            ))}
+          <div className={!showComments && "comments"}>
+            {comments &&
+              comments.map((comment) => (
+                <Comments key={comment?.commentId} comment={comment} />
+              ))}
+          </div>
         </div>
       </div>
     </>

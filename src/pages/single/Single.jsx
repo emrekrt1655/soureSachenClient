@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SinglePost from "../../components/singlePost/SinglePost";
 import LeftBarPostTopic from "../../components/leftBarPostTopic/LeftBarPostTopic";
+import NewPostAdd from "../../components/newPostAdd/newPostAdd";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../../components/sidebar/SideBar";
@@ -43,22 +44,30 @@ export default function Single() {
   const commentData = commentReducer.data;
 
   return (
-    <div className="single">
-      <LeftBarPostTopic handleOpen={handleOpen} />
-      <SinglePost
-        post={post}
-        topicTitle={currentTopic}
-        userOfPost={userOfPost}
-        commentData={commentData}
-        likeData={likeData}
+    <>
+      <NewPostAdd
+        open={open}
+        handleClose={handleClose}
+        topicId={currentTopic?.topicId}
+        posts={postData}
       />
-      <Sidebar
-        user={user}
-        access_token={access_token}
-        postData={postData}
-        topicData={topicData}
-        likeData={likeData}
-      />
-    </div>
+      <div className="single">
+        <LeftBarPostTopic handleOpen={handleOpen} />
+        <SinglePost
+          post={post}
+          topicTitle={currentTopic}
+          userOfPost={userOfPost}
+          commentData={commentData}
+          likeData={likeData}
+        />
+        <Sidebar
+          user={user}
+          access_token={access_token}
+          postData={postData}
+          topicData={topicData}
+          likeData={likeData}
+        />
+      </div>
+    </>
   );
 }
