@@ -70,12 +70,16 @@ export default function ProfilCard({ profileOfUser, followerData }) {
             <div className="profile-name">
               {`${currentUser?.name} ${currentUser?.surname}`}
               <p>@{currentUser?.userName}</p>
-              <Tooltip title="Verified User">
-                {user?.isVerified ? <FingerprintIcon /> : ""}
-              </Tooltip>
-              <Tooltip title="Topic Creator">
-                {user?.isTopicCreator ? <AttractionsSharpIcon /> : ""}
-              </Tooltip>
+              {currentUser?.isVerified === "true" && (
+                <Tooltip title="Verified User">
+                  <FingerprintIcon />
+                </Tooltip>
+              )}
+              {currentUser?.isTopicCreator === "true" && (
+                <Tooltip title="Topic Creator">
+                  <AttractionsSharpIcon />
+                </Tooltip>
+              )}
             </div>
             <div className="profile-description">
               <p>{currentUser?.bio}</p>
@@ -83,7 +87,7 @@ export default function ProfilCard({ profileOfUser, followerData }) {
             <div className="rowProfil">
               <div className="col-xs-4">
                 <div className="profile-overview">
-                  <p>TWEETS</p>
+                  <p>OPINIONS</p>
                   <h4>{currentUser?._count?.posts}</h4>
                 </div>
               </div>

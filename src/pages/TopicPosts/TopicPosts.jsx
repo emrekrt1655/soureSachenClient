@@ -41,12 +41,12 @@ export default function TopicPosts() {
 
           <div className="posts">
             {postData &&
-              posts.map((p) => (
+              posts.map((p, index) => (
                 <TopicPost
                   topicData={topicData}
                   likeData={likeData}
                   post={p}
-                  key={p.postId}
+                  key={index}
                 />
               ))}
           </div>
