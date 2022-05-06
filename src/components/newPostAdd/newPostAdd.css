@@ -6,6 +6,11 @@
   justify-content: space-between;
 }
 
+.topicTextofNewPost {
+  margin-top: 10px;
+  text-align: center;
+}
+
 .hideImg {
   display: none;
 }
