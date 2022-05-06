@@ -13,6 +13,7 @@ import "./modal.css";
 import CountrySelect from "./CountryBox";
 import { useDispatch, useSelector } from "react-redux";
 import { createTopic, getTopics } from "../../redux/actions/topicAction";
+import { typeText } from "../../redux/actions/alertAction";
 
 const style = {
   position: "absolute",
@@ -59,10 +60,14 @@ export default function BasicModal({ open, handleClose }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createTopic(topicData, access_token)).then(() => {
-      dispatch(getTopics());
-    });
-    handleClose();
+    if (text.length) {
+      dispatch(createTopic(topicData, access_token)).then(() => {
+        dispatch(getTopics());
+      });
+      handleClose();
+    } else {
+      dispatch(typeText("Topic cannot be left empty"));
+    }
   };
 
   const showImgInput = () => {
