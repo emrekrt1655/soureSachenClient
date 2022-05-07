@@ -39,15 +39,11 @@ export default function Homepage() {
     followingsID.push(following?.followedId);
   });
 
-  console.log(followingsID);
-
   postData?.forEach((post) => {
     if (followingsID?.indexOf(post?.postUserId) !== -1) {
       filteredListforInterested?.push(post);
     }
   });
-
-  console.log(filteredListforInterested);
 
   return (
     <>
