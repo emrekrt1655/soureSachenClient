@@ -8,7 +8,7 @@ import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
-import LikeUsers from "../likeUsers/LikeUsers";
+import CreateNewComment from "../newCommentAdd/CreateComment";
 import "./topicPost.css";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 
@@ -35,6 +35,7 @@ export default function TopicPost({ post, likeData }) {
     likeUserId: authUserId,
   };
 
+
   const id = likes
     ?.filter((l) => l.likeUserId === authUserId)
     ?.map(({ likeId }) => likeId);
@@ -46,12 +47,7 @@ export default function TopicPost({ post, likeData }) {
 
   return (
     <>
-      <LikeUsers
-        open={open}
-        handleClose={handleClose}
-        likes={likes}
-        users={users}
-      />
+      <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="topicpostContent">
         <Link to={`post/${post?.postId}`} className="topicPosttextDate">
           <div className="topicpost">
@@ -93,6 +89,7 @@ export default function TopicPost({ post, likeData }) {
 
           <div>
             <Tooltip
+              onClick={handleOpen}
               title={
                 `${post?._count?.comments}` <= 1
                   ? `${post?._count?.comments} Comment`

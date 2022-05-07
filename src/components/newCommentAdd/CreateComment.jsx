@@ -33,9 +33,6 @@ function CreateNewComment({ handleClose, open, post }) {
   const surname = useSelector((state) => state?.authReducer?.user?.surname);
   const access_token = useSelector((state) => state?.authReducer?.access_token);
   const dispatch = useDispatch();
-  const [imgInput, setImgInput] = React.useState(false);
-  const comments = useSelector((state) => state?.commentReducer?.data);
-
   const commentPostId = post?.postId;
 
   const initialState = {

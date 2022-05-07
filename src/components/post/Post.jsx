@@ -9,7 +9,7 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
-import LikeUsers from "../likeUsers/LikeUsers";
+import CreateNewComment from "../newCommentAdd/CreateComment";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 
 export default function Post({ post, topicData, likeData }) {
@@ -50,12 +50,7 @@ export default function Post({ post, topicData, likeData }) {
 
   return (
     <>
-      <LikeUsers
-        open={open}
-        handleClose={handleClose}
-        likes={likes}
-        users={users}
-      />
+      <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="postContent">
         <div className="post">
           {post.image && (
@@ -97,6 +92,7 @@ export default function Post({ post, topicData, likeData }) {
           </div>
           <div>
             <Tooltip
+              onClick={handleOpen}
               title={
                 `${post?._count?.comments}` <= 1
                   ? `${post?._count?.comments} Comment`
