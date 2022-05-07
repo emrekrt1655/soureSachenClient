@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import CreateNewComment from "../newCommentAdd/CreateComment";
 import "./topicPost.css";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
+import { typeText } from "../../redux/actions/alertAction";
 
 export default function TopicPost({ post, likeData }) {
   const dispatch = useDispatch();
@@ -19,7 +20,12 @@ export default function TopicPost({ post, likeData }) {
   const authUserId = authReducer?.user?.userId;
   const access_token = authReducer?.access_token;
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+
+  const handleOpen = () => {
+    authUserId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to comment!"));
+  };
   const handleClose = () => setOpen(false);
   const users = userReducer?.data;
   const userOfPost = users?.find((user) => user?.userId === post?.postUserId);
@@ -35,14 +41,15 @@ export default function TopicPost({ post, likeData }) {
     likeUserId: authUserId,
   };
 
-
   const id = likes
     ?.filter((l) => l.likeUserId === authUserId)
     ?.map(({ likeId }) => likeId);
 
   const onLike = () =>
+    authUserId &&
     dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
   const onUnlike = () =>
+    authUserId &&
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   return (
@@ -65,7 +72,7 @@ export default function TopicPost({ post, likeData }) {
         {/* added post like and comment number acording to count */}
         <div className="topicpostIcons">
           <Link
-            to={`userProfile/${userOfPost?.userId}`}
+            to={authUserId && `/userProfile/${userOfPost?.userId}`}
             className="topicpostIconsUsername"
           >
             <Box className="topicpostAvatarIcon">

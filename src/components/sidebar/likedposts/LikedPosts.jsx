@@ -8,7 +8,7 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import { getLikes, like, unlike } from "../../../redux/actions/likeAction";
-import { getComments } from "../../../redux/actions/commentAction";
+import { typeText } from "../../../redux/actions/alertAction";
 import CreateNewComment from "../../newCommentAdd/CreateComment";
 
 export default function Post({
@@ -23,7 +23,11 @@ export default function Post({
   const topics = topicData;
   const authUserId = user?.userId;
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    authUserId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to comment!"));
+  };
   const handleClose = () => setOpen(false);
 
   let newList = [];
@@ -63,8 +67,11 @@ export default function Post({
     ?.map(({ likeId }) => likeId);
 
   const onLike = () =>
-    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
+    authUserId
+      ? dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()))
+      : dispatch(typeText("Please Login now to like!"));
   const onUnlike = () =>
+    authUserId &&
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   return (

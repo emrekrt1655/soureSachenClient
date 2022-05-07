@@ -12,6 +12,7 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
+import { typeText } from "../../redux/actions/alertAction";
 import { useState } from "react";
 
 export default function SinglePost({
@@ -46,9 +47,17 @@ export default function SinglePost({
     ?.filter((l) => l.likeUserId === authUser?.userId)
     ?.map(({ likeId }) => likeId);
 
-  const handleOpenLikeUsers = () => setOpenLikeUsers(true);
+  const handleOpenLikeUsers = () => {
+    authUser?.userId
+      ? setOpenLikeUsers(true)
+      : dispatch(typeText("Please Login now to see who likes this opinion!"));
+  };
   const handleCloseLikeUsers = () => setOpenLikeUsers(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    authUser?.userId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to comment!"));
+  };
   const handleClose = () => setOpen(false);
 
   const likeState = {
@@ -57,7 +66,9 @@ export default function SinglePost({
   };
 
   const onLike = () =>
-    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
+    authUser?.userId
+      ? dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()))
+      : dispatch(typeText("Please Login now to Like!"));
   const onUnlike = () =>
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 

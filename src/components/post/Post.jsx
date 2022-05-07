@@ -11,6 +11,7 @@ import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
 import CreateNewComment from "../newCommentAdd/CreateComment";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
+import { typeText } from "../../redux/actions/alertAction";
 
 export default function Post({ post, topicData, likeData }) {
   const dispatch = useDispatch();
@@ -27,7 +28,11 @@ export default function Post({ post, topicData, likeData }) {
   const topicText = topic?.map(({ text }) => text);
   const topicId = topic?.map(({ topicId }) => topicId);
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    authUserId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to comment!"));
+  };
   const handleClose = () => setOpen(false);
   const likeCounts =
     `${likes?.length}}` <= 1
@@ -44,8 +49,11 @@ export default function Post({ post, topicData, likeData }) {
     ?.map(({ likeId }) => likeId);
 
   const onLike = () =>
-    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
+    authUserId
+      ? dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()))
+      : dispatch(typeText("Please Login now to like!"));
   const onUnlike = () =>
+    authUserId &&
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   return (
@@ -69,7 +77,7 @@ export default function Post({ post, topicData, likeData }) {
         {/* added post like and comment number acording to count */}
         <div className="postIcons">
           <Link
-            to={`/userProfile/${user?.userId}`}
+            to={authUserId && `/userProfile/${user?.userId}`}
             className="postIconsUsername"
           >
             <Box className="postAvatarIcon">
