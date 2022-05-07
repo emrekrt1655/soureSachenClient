@@ -44,18 +44,21 @@ export default function TopicPosts() {
             <img src={currentTopic?.image} alt="topic"></img>
             <h1>{currentTopic?.text}</h1>
           </div>
-
-          <div className="posts">
-            {postData &&
-              posts.map((p, index) => (
-                <TopicPost
-                  topicData={topicData}
-                  likeData={likeData}
-                  post={p}
-                  key={index}
-                />
-              ))}
-          </div>
+          {posts?.length > 0 ? (
+            <div className="posts">
+              {posts &&
+                posts.map((p, index) => (
+                  <TopicPost
+                    topicData={topicData}
+                    likeData={likeData}
+                    post={p}
+                    key={index}
+                  />
+                ))}
+            </div>
+          ) : (
+            <h2> There is no any Opinions about this topic. </h2>
+          )}
         </div>
         <Sidebar
           user={user}
