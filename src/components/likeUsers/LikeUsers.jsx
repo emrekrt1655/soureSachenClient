@@ -24,7 +24,12 @@ const style = {
   flexDirection: "column",
 };
 
-export default function LikeUsers({ open, handleClose, likes, users }) {
+export default function LikeUsers({
+  openLikeUsers,
+  handleCloseLikeUsers,
+  likes,
+  users,
+}) {
   let likeUsers = [];
 
   likes?.forEach((like) => {
@@ -34,8 +39,8 @@ export default function LikeUsers({ open, handleClose, likes, users }) {
 
   return (
     <Modal
-      open={open}
-      onClose={handleClose}
+      open={openLikeUsers}
+      onClose={handleCloseLikeUsers}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -46,7 +51,7 @@ export default function LikeUsers({ open, handleClose, likes, users }) {
               <Box
                 key={index}
                 className="likeUserfollowAvatarBox"
-                onClick={() => [handleClose()]}
+                onClick={() => [handleCloseLikeUsers()]}
               >
                 <Box className="likeUserFollowAvatarName">
                   <Avatar
@@ -58,9 +63,9 @@ export default function LikeUsers({ open, handleClose, likes, users }) {
                     {user?.name + " " + user?.surname}
                   </Typography>
                 </Box>
-                <Button className="likeUserFollowButton" variant="contained">
+                {/* <Button className="likeUserFollowButton" variant="contained">
                   Follow
-                </Button>
+                </Button> */}
               </Box>
             ))}
         </Stack>
