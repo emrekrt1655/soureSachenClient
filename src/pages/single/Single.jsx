@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../../components/sidebar/SideBar";
 import { getComments } from "../../redux/actions/commentAction";
+import { typeText } from "../../redux/actions/alertAction";
 import "./single.css";
 
 export default function Single() {
@@ -24,7 +25,11 @@ export default function Single() {
   const topicData = topicReducer?.data;
   const likeData = likeReducer?.data;
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    user?.userId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to share your Opinion!"));
+  };
   const handleClose = () => setOpen(false);
   const user = authReducer?.user;
   const access_token = authReducer?.access_token;
