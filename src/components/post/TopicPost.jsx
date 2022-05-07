@@ -8,9 +8,10 @@ import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
-import LikeUsers from "../likeUsers/LikeUsers";
+import CreateNewComment from "../newCommentAdd/CreateComment";
 import "./topicPost.css";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
+import { typeText } from "../../redux/actions/alertAction";
 
 export default function TopicPost({ post, likeData }) {
   const dispatch = useDispatch();
@@ -19,7 +20,12 @@ export default function TopicPost({ post, likeData }) {
   const authUserId = authReducer?.user?.userId;
   const access_token = authReducer?.access_token;
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+
+  const handleOpen = () => {
+    authUserId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to comment!"));
+  };
   const handleClose = () => setOpen(false);
   const users = userReducer?.data;
   const userOfPost = users?.find((user) => user?.userId === post?.postUserId);
@@ -40,18 +46,15 @@ export default function TopicPost({ post, likeData }) {
     ?.map(({ likeId }) => likeId);
 
   const onLike = () =>
+    authUserId &&
     dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
   const onUnlike = () =>
+    authUserId &&
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   return (
     <>
-      <LikeUsers
-        open={open}
-        handleClose={handleClose}
-        likes={likes}
-        users={users}
-      />
+      <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="topicpostContent">
         <Link to={`post/${post?.postId}`} className="topicPosttextDate">
           <div className="topicpost">
@@ -69,7 +72,7 @@ export default function TopicPost({ post, likeData }) {
         {/* added post like and comment number acording to count */}
         <div className="topicpostIcons">
           <Link
-            to={`userProfile/${userOfPost?.userId}`}
+            to={authUserId && `/userProfile/${userOfPost?.userId}`}
             className="topicpostIconsUsername"
           >
             <Box className="topicpostAvatarIcon">
@@ -93,6 +96,7 @@ export default function TopicPost({ post, likeData }) {
 
           <div>
             <Tooltip
+              onClick={handleOpen}
               title={
                 `${post?._count?.comments}` <= 1
                   ? `${post?._count?.comments} Comment`

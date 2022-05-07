@@ -36,7 +36,15 @@ const UserProfil = () => {
           profileOfUser={profileOfUser}
           followerData={followerData}
         />
-        <Posts topicData={topicData} postData={postData} likeData={likeData} />
+        {postData?.length > 0 ? (
+          <Posts
+            topicData={topicData}
+            postData={postData}
+            likeData={likeData}
+          />
+        ) : (
+          <h2>There is no Opinions for this User</h2>
+        )}
       </div>
     </div>
   );

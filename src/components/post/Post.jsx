@@ -9,8 +9,9 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
-import LikeUsers from "../likeUsers/LikeUsers";
+import CreateNewComment from "../newCommentAdd/CreateComment";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
+import { typeText } from "../../redux/actions/alertAction";
 
 export default function Post({ post, topicData, likeData }) {
   const dispatch = useDispatch();
@@ -27,7 +28,11 @@ export default function Post({ post, topicData, likeData }) {
   const topicText = topic?.map(({ text }) => text);
   const topicId = topic?.map(({ topicId }) => topicId);
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    authUserId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to comment!"));
+  };
   const handleClose = () => setOpen(false);
   const likeCounts =
     `${likes?.length}}` <= 1
@@ -44,18 +49,16 @@ export default function Post({ post, topicData, likeData }) {
     ?.map(({ likeId }) => likeId);
 
   const onLike = () =>
-    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
+    authUserId
+      ? dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()))
+      : dispatch(typeText("Please Login now to like!"));
   const onUnlike = () =>
+    authUserId &&
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   return (
     <>
-      <LikeUsers
-        open={open}
-        handleClose={handleClose}
-        likes={likes}
-        users={users}
-      />
+      <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="postContent">
         <div className="post">
           {post.image && (
@@ -74,7 +77,7 @@ export default function Post({ post, topicData, likeData }) {
         {/* added post like and comment number acording to count */}
         <div className="postIcons">
           <Link
-            to={`/userProfile/${user?.userId}`}
+            to={authUserId && `/userProfile/${user?.userId}`}
             className="postIconsUsername"
           >
             <Box className="postAvatarIcon">
@@ -97,6 +100,7 @@ export default function Post({ post, topicData, likeData }) {
           </div>
           <div>
             <Tooltip
+              onClick={handleOpen}
               title={
                 `${post?._count?.comments}` <= 1
                   ? `${post?._count?.comments} Comment`
