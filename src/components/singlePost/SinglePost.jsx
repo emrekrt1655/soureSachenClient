@@ -73,7 +73,9 @@ export default function SinglePost({
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
 
   const showComment = () => {
-    setShowComments(!showComments);
+    authUser?.userId
+      ? setShowComments(!showComments)
+      : dispatch(typeText("Please Login to see comments!"));
   };
 
   return (
