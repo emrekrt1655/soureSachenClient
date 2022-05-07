@@ -8,6 +8,7 @@ import Sidebar from "../../components/sidebar/SideBar";
 import { getComments } from "../../redux/actions/commentAction";
 
 import "./single.css";
+import CreateNewComment from "../../components/newCommentAdd/CreateComment";
 
 export default function Single() {
   const dispatch = useDispatch();

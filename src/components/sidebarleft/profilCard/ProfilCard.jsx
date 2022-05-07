@@ -10,7 +10,6 @@ import Tooltip from "@mui/material/Tooltip";
 
 export default function ProfilCard({ profileOfUser, followerData }) {
   const user = useSelector((state) => state?.authReducer?.user);
-  console.log(user);
   const access_token = useSelector((state) => state?.authReducer?.access_token);
   const users = useSelector((state) => state?.userReducer?.data);
   const [openFollower, setOpenFollower] = useState(false);
