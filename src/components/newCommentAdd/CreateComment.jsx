@@ -10,7 +10,6 @@ import Stack from "@mui/material/Stack";
 import Input from "@mui/material/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { createComment, getComments } from "../../redux/actions/commentAction";
-//import { getTopics } from "../../redux/actions/topicAction";
 import { typeText } from "../../redux/actions/alertAction";
 import "../newPostAdd/newPostAdd.css";
 
@@ -55,24 +54,19 @@ function CreateNewComment({ handleClose, open, post }) {
     });
   };
 
-  const showImgInput = () => {
-    setImgInput(!imgInput);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text.length > 40) {
-      dispatch(createComment(comment, access_token)).then(() => {
-        handleClose();
-      });
+    if (text.length > 20) {
+      dispatch(createComment(comment, access_token))
+        .then(() => dispatch(getComments(commentPostId)))
+        .then(() => {
+          handleClose();
+        });
     } else {
-      dispatch(typeText("Enter a text of at least 40 characters"));
+      dispatch(typeText("Enter a text of at least 20 characters"));
     }
   };
 
-  React.useEffect(() => {
-    dispatch(getComments(commentPostId));
-  }, [comments?.length]);
   return (
     <div>
       <Modal
@@ -97,21 +91,9 @@ function CreateNewComment({ handleClose, open, post }) {
             value={text}
             onChange={handleChangeInput}
           />
-          {/* <div className={!imgInput && "hideImg"}>
-            <Input
-              fullWidth
-              id="image"
-              name="image"
-              style={{ marginTop: "19px" }}
-              placeholder="Copy the Img url"
-              value={image}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <AddAPhotoIcon onClick={showImgInput} /> */}
+
           <div className="buttonPartNewPost">
             <Button
-              // disabled={text.length > 40 ? false : true}
               variant="contained"
               endIcon={<SendIcon />}
               style={{

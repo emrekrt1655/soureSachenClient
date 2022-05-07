@@ -6,9 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../../components/sidebar/SideBar";
 import { getComments } from "../../redux/actions/commentAction";
-
 import "./single.css";
-import CreateNewComment from "../../components/newCommentAdd/CreateComment";
 
 export default function Single() {
   const dispatch = useDispatch();
@@ -39,7 +37,7 @@ export default function Single() {
   const userOfPost = users?.find((user) => user?.userId === post?.postUserId);
 
   useEffect(() => {
-    postId && dispatch(getComments(postId));
+    post?._count?.comments > 0 && dispatch(getComments(postId));
   }, [postId, dispatch]);
 
   const commentData = commentReducer.data;
