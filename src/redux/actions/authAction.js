@@ -1,6 +1,6 @@
 import { AUTH, ALERT } from "../types/types";
 import { postAPI, getAPI, putAPI, deleteAPI } from "../../utils/api";
-import { validRegister } from '../../utils/validRegister'
+import { validRegister, validUpdate } from '../../utils/validRegister'
 import { checkTokenExpire } from '../../utils/checkTokenExpire'
 
 export const login = (userLogin) => async (dispatch) => {
@@ -37,17 +37,16 @@ export const register = (userRegister, access_token) => async (dispatch) => {
 
 export const update = (userUpdate, id, access_token) => async (dispatch) => {
   try {
-    const check = validRegister(userUpdate)
+    const check = validUpdate(userUpdate)
     const accessToken = access_token
-    console.log('accessToken', accessToken)
     if (check?.errLength > 0)
       return dispatch({ type: ALERT, payload: { errors: check.errMsg } })
 
     dispatch({ type: ALERT, payload: { loading: true } });
     const res = await putAPI(`useredit/${id}`, userUpdate, accessToken);
-    dispatch({ type: ALERT, payload: { success: res.data.message } })
+    dispatch({ type: ALERT, payload: { success: res?.data.message } })
   } catch (err) {
-    dispatch({ type: ALERT, payload: err?.response.data.message })
+    dispatch({ type: ALERT, payload: { errors: err.response.data.message } })
   }
 }
 
@@ -56,9 +55,9 @@ export const deleteAcccount = (id, access_token) => async (dispatch) => {
     const accessToken = access_token
     dispatch({ type: ALERT, payload: { loading: true } });
     const res = await deleteAPI(`userdelete/${id}`, accessToken);
-    dispatch({ type: ALERT, payload: { success: res.data.message } })
+    dispatch({ type: ALERT, payload: { success: res?.data.message } })
   } catch (err) {
-    dispatch({ type: ALERT, payload: err?.response.data.message })
+    dispatch({ type: ALERT, payload: "Service Error, Try later!" })
   }
 }
 
