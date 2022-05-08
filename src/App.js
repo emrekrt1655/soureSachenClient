@@ -12,10 +12,11 @@ import Alert from "./components/alert/Alert";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import Settings from "./pages/settings/Settings";
 import TopicPosts from "./pages/TopicPosts/TopicPosts";
 import UserProfil from "./pages/userProfil/UserProfil";
 import Single from "./pages/single/Single";
+import Settings from "./pages/settings/Settings";
+import ChangePassword from "./pages/changePassword/ChangePassword";
 
 function App() {
   const { authReducer } = useSelector((state) => state);
@@ -51,8 +52,11 @@ function App() {
         <Route path="/login">
           {authReducer?.user ? <Homepage /> : <Login />}
         </Route>
-        <Route path="/settings">
+        <Route exact path="/settings/:userId">
           {authReducer?.user ? <Settings /> : <Login />}
+        </Route>
+        <Route path="/settings/changePassword/:userId">
+          {authReducer?.user ? <ChangePassword /> : <Login />}
         </Route>
         <Route exact path="/:topicId" component={TopicPosts} />
         <Route exact path="/userProfile/:userId" component={UserProfil} />
