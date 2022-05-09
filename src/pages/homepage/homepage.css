@@ -1,5 +1,6 @@
 .home {
   display: flex;
+  justify-content: space-between;
 }
 
 .homePage {
@@ -7,6 +8,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* background-color: aqua; */
+  width: 100%;
 }
 
 .homePageTaps {

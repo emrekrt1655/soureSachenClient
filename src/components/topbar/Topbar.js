@@ -6,7 +6,7 @@ import "./topbar.scss";
 export default function Topbar() {
   const { authReducer } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const token = authReducer?.access_token
+  const token = authReducer?.access_token;
 
   return (
     <div className="top">
@@ -24,11 +24,11 @@ export default function Topbar() {
           </div>
           <div className="topListItem">ABOUT</div>
           <div className="topListItem">CONTACT</div>
-          <div className="topListItem">
+          {/* <div className="topListItem">
             <Link className="link" to="/write">
               WRITE
             </Link>
-          </div>
+          </div> */}
 
           {!authReducer?.access_token ? (
             <div className="topbarLoginRegister">
@@ -48,7 +48,11 @@ export default function Topbar() {
           )}
 
           {authReducer?.access_token && (
-            <Link className="link" to="/" onClick={() => dispatch(logOut(token))}>
+            <Link
+              className="link"
+              to="/"
+              onClick={() => dispatch(logOut(token))}
+            >
               {" "}
               <li className="topListItem">LOGOUT</li>{" "}
             </Link>

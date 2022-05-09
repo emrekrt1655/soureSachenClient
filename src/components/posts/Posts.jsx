@@ -1,9 +1,10 @@
+import { FakeDoc } from "../post/FakeDoc";
 import Post from "../post/Post";
 import "./posts.css";
 export default function Posts({ topicData, postData, likeData }) {
   return (
     <div className="posts">
-      {postData &&
+      {postData.length ? (
         postData?.map((p, index) => (
           <Post
             topicData={topicData}
@@ -11,7 +12,10 @@ export default function Posts({ topicData, postData, likeData }) {
             key={index}
             likeData={likeData}
           />
-        ))}
+        ))
+      ) : (
+        <FakeDoc />
+      )}
     </div>
   );
 }
