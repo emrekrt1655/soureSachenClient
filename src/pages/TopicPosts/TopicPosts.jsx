@@ -2,7 +2,7 @@ import { useState } from "react";
 import NewPostAdd from "../../components/newPostAdd/newPostAdd";
 import TopicPost from "../../components/post/TopicPost";
 import { useSelector, useDispatch } from "react-redux";
-import "./topicPosts.css";
+import "./topicPosts.scss";
 import Sidebar from "../../components/sidebar/SideBar";
 import { useParams } from "react-router-dom";
 import LeftBarPostTopic from "../../components/leftBarPostTopic/LeftBarPostTopic";
@@ -39,8 +39,8 @@ export default function TopicPosts() {
         posts={posts}
       />
       <div className="topicPost">
-        <div className="topicPostContainer">
-          <div className="topicHeader">
+        <div className="topicPost__topicPostContainer">
+          <div className="topicPost__topicPostContainer--topicHeader">
             <img src={currentTopic?.image} alt="topic"></img>
             <h1>{currentTopic?.text}</h1>
           </div>
