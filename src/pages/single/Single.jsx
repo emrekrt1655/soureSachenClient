@@ -7,27 +7,21 @@ import Sidebar from "../../components/sidebar/SideBar";
 import { getComments } from "../../redux/actions/commentAction";
 
 import "./single.css";
-import CreateNewComment from "../../components/newCommentAdd/CreateComment";
 
 export default function Single() {
   const dispatch = useDispatch();
   const { postId } = useParams();
   const [open, setOpen] = useState(false);
-  const {
-    authReducer,
-    likeReducer,
-    postReducer,
-    topicReducer,
-    userReducer,
-    commentReducer,
-  } = useSelector((state) => state);
+  const { authReducer, likeReducer, postReducer, topicReducer, userReducer, commentReducer } =
+    useSelector((state) => state);
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
   const likeData = likeReducer?.data;
 
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const user = authReducer?.user;
+  const user = authReducer?.user
   const access_token = authReducer?.access_token;
   const post = postData?.find((post) => post?.postId === postId);
   const currentTopic = topicData?.find(
@@ -56,13 +50,7 @@ export default function Single() {
         comments={comments}
         userOfCommnets={userOfCommnets}
       />
-      <Sidebar
-        user={user}
-        access_token={access_token}
-        postData={postData}
-        topicData={topicData}
-        likeData={likeData}
-      />
+      <Sidebar user={user} access_token={access_token}  postData={postData} topicData={topicData} likeData={likeData} />
     </div>
   );
 }
