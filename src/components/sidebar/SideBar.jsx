@@ -91,12 +91,9 @@ export default function Sidebar({
       <Modal open={open} handleClose={handleClose} />
       <div className="sidebar">
         <div className="sidebarItem">
-         <SearchBar
-         topics = {topics}
-         posts = {postData}
-         />
-         </div>
-         <div className="sidebarItem">
+          <SearchBar topics={topics} posts={postData} />
+        </div>
+        <div className="sidebarItem">
           <div className="sidebarHead">
             <span className="sidebarTitle">Topic</span>
             <div className="sidebarIcons">
@@ -131,7 +128,9 @@ export default function Sidebar({
                       onClick={() => history.push(`/${t?.topicId}`)}
                     >
                       {" "}
-                      {t?.text}{" "}
+                      {t?.text?.length < 30
+                        ? t?.text
+                        : t?.text?.slice(0, 30) + "..."}{" "}
                     </p>
                     <p className="titleCountry"> {t?.country} </p>
                   </div>
@@ -147,7 +146,9 @@ export default function Sidebar({
                       onClick={() => history.push(`/topic/${t?.topicId}`)}
                     >
                       {" "}
-                      {t?.text}{" "}
+                      {t?.text?.length < 30
+                        ? t?.text
+                        : t?.text?.slice(0, 30) + "..."}{" "}
                     </p>
                     <p className="titleCountry"> {t?.country} </p>
                   </div>
@@ -163,7 +164,9 @@ export default function Sidebar({
                       onClick={() => history.push(`/topic/${t?.topicId}`)}
                     >
                       {" "}
-                      {t?.text}{" "}
+                      {t?.text?.length < 30
+                        ? t?.text
+                        : t?.text?.slice(0, 30) + "..."}{" "}
                     </p>
                     <p className="titleCountry"> {t?.country} </p>
                   </div>

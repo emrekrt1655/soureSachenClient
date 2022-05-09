@@ -32,6 +32,7 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
   const avatar = useSelector((state) => state?.authReducer?.user?.avatar);
   const name = useSelector((state) => state?.authReducer?.user?.name);
   const surname = useSelector((state) => state?.authReducer?.user?.surname);
+  const topics = useSelector((state) => state?.topicReducer?.data);
   const access_token = useSelector((state) => state?.authReducer?.access_token);
   const dispatch = useDispatch();
   const [imgInput, setImgInput] = React.useState(false);
@@ -58,6 +59,8 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
     setImgInput(!imgInput);
   };
 
+  const topic = topics?.find((topic) => topic?.topicId === topicId);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (text.length > 40) {
@@ -68,8 +71,6 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
       dispatch(typeText("Enter a text of at least 40 characters"));
     }
   };
-
-
 
   React.useEffect(() => {
     dispatch(getPosts());
@@ -90,6 +91,12 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
               {name} {surname}
             </Typography>
           </Stack>
+          <h4 className="topicTextofNewPost">
+            {" "}
+            {topic?.text.length < 50
+              ? topic?.text
+              : topic?.text?.slice(0, 50) + "..."}{" "}
+          </h4>
           <Input
             fullWidth
             id="text"

@@ -16,7 +16,6 @@ function Comments({ comment }) {
     (user) => user?.userId === comment?.commentUserId
   );
 
-  console.log(comment);
   return (
     <div className="Comments">
       <Paper
