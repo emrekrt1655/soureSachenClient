@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Posts from "../../components/posts/Posts";
 import Topbar from "../../components/topbar/Topbar";
 
-import "./userProfil.css";
+import "./userProfil.scss";
 
 const UserProfil = () => {
   const { userId } = useParams();

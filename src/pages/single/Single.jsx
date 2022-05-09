@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../../components/sidebar/SideBar";
 import { getComments } from "../../redux/actions/commentAction";
 import { typeText } from "../../redux/actions/alertAction";
-import "./single.css";
+import "./single.scss";
 
 export default function Single() {
   const dispatch = useDispatch();

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./login.css";
+import "./login.scss";
 import { login } from "../../redux/actions/authAction";
-import Alert from "../../components/alert/Alert";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -41,18 +40,18 @@ export default function Login() {
   }, [authReducer?.access_token, history]);
   return (
     <div className="login">
-      <div className="loginBorder">
-        <Link className="link" to="/">
+      <div className="login__loginBorder">
+        <Link className="login__loginBorder--link" to="/">
           <i className="topIcon fab fa-pied-piper-alt"></i>
         </Link>
-        <span className="loginTitle">Login</span>
-        <div className="loginBorderDown">
+        <span className="login__loginBorder--loginTitle">Login</span>
+        <div className="login__loginBorder--loginBorderDown">
           <form className="loginForm" onSubmit={handleSubmit}>
-            <label htmlFor="email" className="LoginText">
+            <label htmlFor="email" className="loginForm__LoginText">
               Email
             </label>
             <input
-              className="loginInput"
+              className="loginForm__loginInput"
               type="text"
               placeholder="Enter your email..."
               id="email"
@@ -60,12 +59,12 @@ export default function Login() {
               value={email}
               onChange={handleChangeInput}
             />
-            <label htmlFor="password" className="LoginText">
+            <label htmlFor="password" className="loginForm__LoginText">
               Password
             </label>
             <div>
               <input
-                className="loginInput"
+                className="loginForm__loginInput"
                 type={typePass ? "text" : "password"}
                 id="password"
                 name="password"
@@ -73,21 +72,27 @@ export default function Login() {
                 onChange={handleChangeInput}
                 placeholder="Enter your password..."
               />
-              <small onClick={handleTypePass} className="eyesOnPassword">
+              <small
+                onClick={handleTypePass}
+                className="loginForm__eyesOnPassword"
+              >
                 {!typePass ? <VisibilityOffIcon /> : <VisibilityIcon />}{" "}
               </small>
             </div>
             <button
-              className="loginButton"
+              className="loginForm__loginButton"
               type="submit"
               disabled={email && password ? false : true}
             >
               Login
             </button>
-            <p className="loginTextAcount">
+            <p className="loginForm__registerTextAcount">
               Don't you have an account?
-              <Link className="loginRegisterButton" to="/register">
-                <a>Register</a>
+              <Link
+                className="loginForm__registerTextAcount--loginRegisterButton"
+                to="/register"
+              >
+                Register
               </Link>
             </p>
           </form>
