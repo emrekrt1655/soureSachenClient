@@ -4,7 +4,8 @@ import "./posts.css";
 export default function Posts({ topicData, postData, likeData }) {
   return (
     <div className="posts">
-      {postData.length ? (
+      {postData?.length > 0 ? (
+        postData &&
         postData?.map((p, index) => (
           <Post
             topicData={topicData}

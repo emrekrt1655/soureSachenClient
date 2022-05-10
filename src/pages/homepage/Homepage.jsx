@@ -2,7 +2,7 @@ import { useState } from "react";
 import Posts from "../../components/posts/Posts";
 import Sidebar from "../../components/sidebar/SideBar";
 import { useSelector } from "react-redux";
-import "./homepage.css";
+import "./homepage.scss";
 import SideBarLeft from "../../components/sidebarleft/SideBarLeft";
 import Topbar from "../../components/topbar/Topbar";
 import Tabs from "@mui/material/Tabs";
@@ -39,30 +39,26 @@ export default function Homepage() {
     followingsID.push(following?.followedId);
   });
 
-  console.log(followingsID);
-
   postData?.forEach((post) => {
     if (followingsID?.indexOf(post?.postUserId) !== -1) {
       filteredListforInterested?.push(post);
     }
   });
 
-  console.log(filteredListforInterested);
-
   return (
     <>
       <Topbar />
       <div className="home">
         {user && <SideBarLeft followerData={followerData} />}
-        <div className="homePage">
+        <div className="home__homePage">
           <Tabs
-            className="homePageTaps"
+            className="home__homePage--homePageTaps"
             value={value}
             onChange={handleChange}
             aria-label="icon label tabs example"
           >
-            <Tab label="All" className="homePageTap" />
-            <Tab label="TIMELINE" className="homePageTap" />
+            <Tab label="All" className="homePageTab" />
+            <Tab label="TIMELINE" className="homePageTab" />
           </Tabs>
           <Posts
             topicData={topicData}

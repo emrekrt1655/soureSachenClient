@@ -8,7 +8,7 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import { getLikes, like, unlike } from "../../../redux/actions/likeAction";
-import { getComments } from "../../../redux/actions/commentAction";
+import { typeText } from "../../../redux/actions/alertAction";
 import CreateNewComment from "../../newCommentAdd/CreateComment";
 
 export default function Post({
@@ -23,7 +23,11 @@ export default function Post({
   const topics = topicData;
   const authUserId = user?.userId;
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    authUserId
+      ? setOpen(true)
+      : dispatch(typeText("Please Login now to comment!"));
+  };
   const handleClose = () => setOpen(false);
 
   let newList = [];
@@ -39,20 +43,22 @@ export default function Post({
     return b.count - a.count;
   });
 
-  const post = posts?.find((post) => post.postId === newList[0]?.postId);
+  const likedPost = posts?.find((post) => post.postId === newList[0]?.postId);
   const topic = topics?.find((t) => {
-    return t.topicId === post?.postTopicId;
+    return t.topicId === likedPost?.postTopicId;
   });
 
   const topicId = topic?.topicId;
 
-  const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
+  const likes = likeData?.filter(
+    (like) => like?.likePostId === likedPost?.postId
+  );
   const likeCounts =
     `${likes?.length}}` <= 1
       ? `${likes?.length} Like`
       : `${likes?.length} Likes`;
   const likeState = {
-    likePostId: post?.postId,
+    likePostId: likedPost?.postId,
     likeUserId: authUserId,
   };
 
@@ -61,23 +67,26 @@ export default function Post({
     ?.map(({ likeId }) => likeId);
 
   const onLike = () =>
-    dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()));
+    authUserId
+      ? dispatch(like(likeState, access_token)).then(() => dispatch(getLikes()))
+      : dispatch(typeText("Please Login now to like!"));
   const onUnlike = () =>
+    authUserId &&
     dispatch(unlike(id, access_token)).then(() => dispatch(getLikes()));
-
-  useEffect(() => {
-    post?.postId && dispatch(getComments(post?.postId));
-  }, [post?.postId, dispatch]);
 
   return (
     <>
-      <CreateNewComment post={post} open={open} handleClose={handleClose} />
+      <CreateNewComment
+        post={likedPost}
+        open={open}
+        handleClose={handleClose}
+      />
       <div className="postlked">
-        {post?.image && (
-          <Link to={`/post/${post?.postId}`} className="postlkedLink">
+        {likedPost?.image && (
+          <Link to={`/post/${likedPost?.postId}`} className="postlkedLink">
             <img
               className="postImgliked"
-              src={post?.image}
+              src={likedPost?.image}
               alt="mostLikedpost"
             ></img>
           </Link>
@@ -91,12 +100,12 @@ export default function Post({
             </span>
             <hr />
           </div>
-          <Link to={`/post/${post?.postId}`} className="postlkedLink">
-            <p className="likedPostDesc">{post?.text}</p>
+          <Link to={`/post/${likedPost?.postId}`} className="postlkedLink">
+            <p className="likedPostDesc">{likedPost?.text}</p>
           </Link>
           <div className="extrainfo">
             <span className="postDate">
-              {new Date(post?.createdAt).toDateString()}
+              {new Date(likedPost?.createdAt).toDateString()}
             </span>
           </div>
           <div className="extrainfo">
@@ -112,9 +121,9 @@ export default function Post({
             <Tooltip
               onClick={handleOpen}
               title={
-                `${post?._count?.comments}` <= 1
-                  ? `${post?._count?.comments} Comment`
-                  : `${post?._count?.comments} Comments`
+                `${likedPost?._count?.comments}` <= 1
+                  ? `${likedPost?._count?.comments} Comment`
+                  : `${likedPost?._count?.comments} Comments`
               }
             >
               <MarkChatUnreadIcon style={{ margin: "0 2% " }} />

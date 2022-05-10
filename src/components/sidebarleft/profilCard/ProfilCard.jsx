@@ -6,6 +6,7 @@ import FollowerList from "../followList/FollowerList";
 import FollowingList from "../followList/FollowingList";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import AttractionsSharpIcon from "@mui/icons-material/AttractionsSharp";
+import SettingsIcon from '@mui/icons-material/Settings';
 import Tooltip from "@mui/material/Tooltip";
 
 export default function ProfilCard({ profileOfUser, followerData }) {
@@ -78,6 +79,13 @@ export default function ProfilCard({ profileOfUser, followerData }) {
                 <Tooltip title="Topic Creator">
                   <AttractionsSharpIcon />
                 </Tooltip>
+              )}
+              {currentUser?.userId === user?.userId && (
+                <Link to={`/settings/${user?.userId}`} >
+                <Tooltip title="Settings">
+                  <SettingsIcon/>
+                </Tooltip>
+                </Link>
               )}
             </div>
             <div className="profile-description">

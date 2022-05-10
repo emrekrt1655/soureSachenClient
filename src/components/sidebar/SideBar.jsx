@@ -128,9 +128,9 @@ export default function Sidebar({
                       onClick={() => history.push(`/${t?.topicId}`)}
                     >
                       {" "}
-                      {t?.text?.length < 30
+                      {t?.text?.length < 25
                         ? t?.text
-                        : t?.text?.slice(0, 30) + "..."}{" "}
+                        : t?.text?.slice(0, 25) + "..."}{" "}
                     </p>
                     <p className="titleCountry"> {t?.country} </p>
                   </div>
@@ -146,9 +146,9 @@ export default function Sidebar({
                       onClick={() => history.push(`/topic/${t?.topicId}`)}
                     >
                       {" "}
-                      {t?.text?.length < 30
+                      {t?.text?.length < 25
                         ? t?.text
-                        : t?.text?.slice(0, 30) + "..."}{" "}
+                        : t?.text?.slice(0, 25) + "..."}{" "}
                     </p>
                     <p className="titleCountry"> {t?.country} </p>
                   </div>
@@ -164,9 +164,9 @@ export default function Sidebar({
                       onClick={() => history.push(`/topic/${t?.topicId}`)}
                     >
                       {" "}
-                      {t?.text?.length < 30
+                      {t?.text?.length < 25
                         ? t?.text
-                        : t?.text?.slice(0, 30) + "..."}{" "}
+                        : t?.text?.slice(0, 25) + "..."}{" "}
                     </p>
                     <p className="titleCountry"> {t?.country} </p>
                   </div>

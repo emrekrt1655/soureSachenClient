@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./settings.css";
+import "./settings.scss";
 import { update, deleteAcccount } from "../../redux/actions/authAction";
-import Alert from "../../components/alert/Alert";
+import { getUsers } from "../../redux/actions/userAction";
+import { Link, useHistory } from "react-router-dom";
 import Topbar from "../../components/topbar/Topbar";
 
 export default function Settings() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { authReducer } = useSelector((state) => state);
   const user = authReducer?.user;
   const id = user?.userId;
@@ -14,20 +16,21 @@ export default function Settings() {
 
   const initialState = {
     avatar: user?.avatar,
-    userName: user?.userName,
-    email: user?.email,
-    password: "",
-    cf_password: "",
+    bio: user?.bio,
+    name: user?.name,
+    surname: user?.surname,
   };
   const [userUpdate, setUserUpdate] = useState(initialState);
-  const { userName, email, password, cf_password, avatar } = userUpdate;
+  const { bio, name, surname, avatar } = userUpdate;
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
     setUserUpdate({ ...userUpdate, [name]: value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(update(userUpdate, id, access_token));
+    dispatch(update(userUpdate, id, access_token)).then(() =>
+      dispatch(getUsers()).then(() => history?.push("/"))
+    );
   };
   const handleDeleteAccount = () => {
     dispatch(deleteAcccount(id, access_token));
@@ -37,68 +40,72 @@ export default function Settings() {
     <>
       <Topbar />
       <div className="settings">
-        <div className="settingsWrapper">
-          <div className="settingsTitle">
-            {/* <span className="settingsTitleUpdate">Update Your Account</span> */}
-          </div>
-          <form className="settingsForm" onSubmit={handleSubmit}>
+        <div className="settings__settingsWrapper">
+          <form
+            className="settings__settingsWrapper--settingsForm"
+            onSubmit={handleSubmit}
+          >
             <img
               src={user?.avatar}
               alt={`${user?.userName}`}
-              className="ppimg"
+              className="settings__settingsWrapper--settingsForm__ppimg"
             />
-            {/* <label htmlFor="avatar">Profile Picture</label> */}
             <input
               id="fileInput"
               type="text"
               name="avatar"
               value={avatar}
               onChange={handleChangeInput}
-              className="settingsPPInput"
+              className="settings__settingsWrapper--settingsForm__settingsPPInput"
             />
 
-            <label>Username</label>
+            <label>Name</label>
             <input
               type="text"
-              placeholder="New username"
-              name="userName"
-              value={userName}
+              placeholder="New name"
+              name="name"
+              value={name}
               onChange={handleChangeInput}
             />
-            <label>Email</label>
+            <label>Surname</label>
             <input
-              type="email"
-              placeholder="new email"
-              name="email"
-              value={email}
+              type="text"
+              placeholder="new Surname"
+              name="surname"
+              value={surname}
               onChange={handleChangeInput}
             />
-            <label htmlFor="password">New Password</label>
+            <label htmlFor="Bio">Bio</label>
             <input
-              type="password"
-              placeholder="Please give your old or new Password to update your infos"
-              name="password"
-              value={password}
+              type="text"
+              placeholder="New Bio"
+              name="bio"
+              value={bio}
               onChange={handleChangeInput}
             />
-            <label htmlFor="password">Password Confirm</label>
-            <input
-              type="password"
-              placeholder="Please give your old Password"
-              name="cf_password"
-              value={cf_password}
-              onChange={handleChangeInput}
-            />
-            <Alert />
-            <button className="settingsSubmitButton" type="submit">
+            <button
+              className="settings__settingsWrapper--settingsForm__settingsSubmitButton"
+              type="submit"
+            >
               Update
             </button>
           </form>
-          <span className="settingsTitleDelete" onClick={handleDeleteAccount}>
+          <span className="settings__settingsWrapper--settingsTitleDelete">
+            <Link
+              to={`/settings/changePassword/${user?.userId}`}
+              style={{ textDecoration: "none" }}
+            >
+              {" "}
+              Change Password{" "}
+            </Link>
+          </span>
+          <span
+            className="settings__settingsWrapper--settingsTitleDelete"
+            onClick={handleDeleteAccount}
+          >
             Delete Account
           </span>
         </div>
-        {/* <Sidebar /> */}
       </div>
     </>
   );

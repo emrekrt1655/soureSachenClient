@@ -5,6 +5,7 @@ import "./topbar.scss";
 
 export default function Topbar() {
   const { authReducer } = useSelector((state) => state);
+  const user = authReducer?.user;
   const dispatch = useDispatch();
   const token = authReducer?.access_token;
 
@@ -29,7 +30,6 @@ export default function Topbar() {
               WRITE
             </Link>
           </div> */}
-
           {!authReducer?.access_token ? (
             <div className="topbarLoginRegister">
               <div className="topListItem">
@@ -60,9 +60,8 @@ export default function Topbar() {
         </div>
       </div>
       <div className="topRight">
-        {/* <i className="topSearchIcon fas fa-search"></i> */}
         {authReducer?.access_token && (
-          <Link className="link" to="/settings">
+          <Link className="link" to={`/userProfile/${user?.userId}`}>
             <img
               className="topImg"
               src={authReducer?.user?.avatar}

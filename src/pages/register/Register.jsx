@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/authAction";
-import Alert from "../../components/alert/Alert";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-import "./register.css";
+import "./register.scss";
 
 export default function Register() {
   const initialState = {
@@ -35,13 +34,18 @@ export default function Register() {
 
   return (
     <div className="register">
-      <div className="registerBorder">
+      <div className="register__registerBorder">
         <Link className="link" to="/">
           <i className="topIcon fab fa-pied-piper-alt"></i>
         </Link>
-        <span className="registerTitle">Register</span>
-        <div className="registerBorderDown">
-          <form className="registerForm" onSubmit={handleSubmit}>
+        <span className="register__registerBorder--registerTitle">
+          Register
+        </span>
+        <div className="register__registerBorder--registerBorderDown">
+          <form
+            className="register__registerBorder--registerBorderDown__registerForm"
+            onSubmit={handleSubmit}
+          >
             <label htmlFor="userName" className="form-label">
               Username
             </label>
@@ -109,7 +113,10 @@ export default function Register() {
             </button>
             <p className="loginTextAcount">
               Already have an account?
-              <Link to="/login" className="registerLoginButton">
+              <Link
+                to="/login"
+                className="loginTextAcount__registerLoginButton"
+              >
                 <a>Login</a>
               </Link>
             </p>
