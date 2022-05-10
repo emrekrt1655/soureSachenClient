@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../../components/sidebar/SideBar";
 import { getComments } from "../../redux/actions/commentAction";
-import "./single.css";
+// import "./single.css";
 import { typeText } from "../../redux/actions/alertAction";
 import "./single.scss";
 
