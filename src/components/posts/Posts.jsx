@@ -1,3 +1,4 @@
+import { FakeDoc } from "../post/FakeDoc";
 import Post from "../post/Post";
 import "./posts.css";
 export default function Posts({ topicData, postData, likeData }) {
@@ -14,7 +15,7 @@ export default function Posts({ topicData, postData, likeData }) {
           />
         ))
       ) : (
-        <h2>Your timeline is empty...</h2>
+        <FakeDoc />
       )}
     </div>
   );

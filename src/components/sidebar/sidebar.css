@@ -5,11 +5,12 @@
   height: fit-content;
   margin: 20px;
   padding-bottom: 30px;
-  background-color: #fdfbfb;
-
+  /* background-color: #b51313; */
+  max-width: 450px;
+  /* float: left; */
   /* border-radius: 10px; */
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
 
   /* align-items: center; */
   border-left: rgb(148, 58, 204) solid 1px;

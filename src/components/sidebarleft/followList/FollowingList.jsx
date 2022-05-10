@@ -86,7 +86,7 @@ export default function FollowingList({
                 <Box
                   key={index}
                   className="likeUserfollowAvatarBox"
-                  onClick={() => [handleCloseFollowing()]}
+                  // onClick={() => [handleCloseFollowing()]}
                 >
                   <Box className="likeUserFollowAvatarName">
                     <Avatar
@@ -114,7 +114,7 @@ export default function FollowingList({
                 <Box
                   key={index}
                   className="likeUserfollowAvatarBox"
-                  onClick={() => [handleCloseFollowing()]}
+                  // onClick={() => [handleCloseFollowing()]}
                 >
                   <Box className="likeUserFollowAvatarName">
                     <Avatar

@@ -14,8 +14,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 325,
-  height: 325,
+  width: 475,
+  height: "50%",
   bgcolor: "#ffffff",
   borderRadius: "5%",
   border: "none",
@@ -69,7 +69,7 @@ export default function FollowerList({
               <Box
                 key={index}
                 className="likeUserfollowAvatarBox"
-                onClick={() => [handleCloseFollower()]}
+                // onClick={() => [handleCloseFollower()]}
               >
                 <Box className="likeUserFollowAvatarName">
                   <Avatar
@@ -80,37 +80,34 @@ export default function FollowerList({
                   <Typography variant="overline" display="block" gutterBottom>
                     {i?.name + " " + i?.surname}
                   </Typography>
-
-                  {i?.userId ===
-                  authList?.userId ? null : authFollowings?.includes(
-                      i?.userId
-                    ) ? (
-                    <Button
-                      className="likeUserFollowButton"
-                      variant="contained"
-                    >
-                      Following
-                    </Button>
-                  ) : (
-                    <Button
-                      className="likeUserFollowButton"
-                      variant="contained"
-                      onClick={() => {
-                        dispatch(
-                          follow(
-                            {
-                              followerId: user?.userId,
-                              followedId: i?.userId,
-                            },
-                            access_token
-                          )
-                        )?.then(() => dispatch(getFollowers(access_token)));
-                      }}
-                    >
-                      Follow
-                    </Button>
-                  )}
                 </Box>
+
+                {i?.userId ===
+                authList?.userId ? null : authFollowings?.includes(
+                    i?.userId
+                  ) ? (
+                  <Button className="likeUserFollowButton" variant="contained">
+                    Following
+                  </Button>
+                ) : (
+                  <Button
+                    className="likeUserFollowButton"
+                    variant="contained"
+                    onClick={() => {
+                      dispatch(
+                        follow(
+                          {
+                            followerId: user?.userId,
+                            followedId: i?.userId,
+                          },
+                          access_token
+                        )
+                      )?.then(() => dispatch(getFollowers(access_token)));
+                    }}
+                  >
+                    Follow
+                  </Button>
+                )}
               </Box>
             ))}
         </Stack>
