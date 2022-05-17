@@ -10,12 +10,14 @@ import "./register.scss";
 export default function Register() {
   const initialState = {
     userName: "",
+    name: "",
+    surname: "",
     email: "",
     password: "",
     cf_password: "",
   };
   const [userRegister, setUserRegister] = useState(initialState);
-  const { userName, email, password, cf_password } = userRegister;
+  const { userName, name, surname, email, password, cf_password } = userRegister;
 
   const [typePass, setTypePass] = useState(false);
   const [typeCfPass, setTypeCfPass] = useState(false);
@@ -56,6 +58,30 @@ export default function Register() {
               id="userName"
               name="userName"
               value={userName}
+              onChange={handleChangeInput}
+            />
+             <label htmlFor="userName" className="form-label">
+              Name
+            </label>
+            <input
+              className="registerInput"
+              type="text"
+              placeholder="Enter your first name..."
+              id="name"
+              name="name"
+              value={name}
+              onChange={handleChangeInput}
+            />
+             <label htmlFor="userName" className="form-label">
+              Surname
+            </label>
+            <input
+              className="registerInput"
+              type="text"
+              placeholder="Enter your surname..."
+              id="surname"
+              name="surname"
+              value={surname}
               onChange={handleChangeInput}
             />
             <label className="form-label">Email</label>

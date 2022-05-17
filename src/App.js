@@ -8,7 +8,7 @@ import { getUsers } from "./redux/actions/userAction";
 import { getLikes } from "./redux/actions/likeAction";
 import { getFollowers } from "./redux/actions/followerAction";
 
-import Alert from "./components/alert/Alert";
+import { Alert } from "./components/alert/Alert";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
@@ -17,6 +17,7 @@ import UserProfil from "./pages/userProfil/UserProfil";
 import Single from "./pages/single/Single";
 import Settings from "./pages/settings/Settings";
 import ChangePassword from "./pages/changePassword/ChangePassword";
+import Active from "./pages/active/Active";
 
 function App() {
   const { authReducer } = useSelector((state) => state);
@@ -61,6 +62,7 @@ function App() {
         <Route exact path="/:topicId" component={TopicPosts} />
         <Route exact path="/userProfile/:userId" component={UserProfil} />
         <Route exact path="/post/:postId" component={Single} />
+        <Route exact path="/active/:slug" component={Active} />
       </Switch>
     </Router>
   );

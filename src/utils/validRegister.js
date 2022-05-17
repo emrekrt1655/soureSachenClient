@@ -1,11 +1,22 @@
 export const validRegister = (userRegister) => {
-  const { userName, email, password, cf_password } = userRegister;
+  const { userName, name, surname, email, password, cf_password } = userRegister;
   const errors = [];
 
   if (!userName) {
-    errors.push("Please add your name.")
+    errors.push("Please add your username.")
   } else if (userName.length > 20) {
     errors.push("Your userName is up to 20 chars long.")
+  }
+  if (!name) {
+    errors.push("Please add your name.")
+  } else if (name.length > 20) {
+    errors.push("Your name is up to 20 chars long.")
+  }
+
+  if (!surname) {
+    errors.push("Please add your surname.")
+  } else if (surname.length > 20) {
+    errors.push("Your surname is up to 20 chars long.")
   }
 
   if (!email) {
