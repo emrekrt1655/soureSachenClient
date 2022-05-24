@@ -57,8 +57,8 @@ export default function Homepage() {
             onChange={handleChange}
             aria-label="icon label tabs example"
           >
-            <Tab label="All" className="homePageTab" />
-            <Tab label="TIMELINE" className="homePageTab" />
+            {user ? <Tab label="All" className="homePageTab" /> : ""}
+            {user ? <Tab label="TIMELINE" className="homePageTab" /> : ""}
           </Tabs>
           <Posts
             topicData={topicData}
