@@ -41,22 +41,15 @@ export default function FollowingList({
   followerData,
 }) {
   let followingList = [];
-  let folIdList = [];
-  const authUser = useSelector((state) => state?.authReducer?.user);
 
   const dispatch = useDispatch();
   followings?.forEach((following) => {
     let userFollowing = users?.find(
       (user) => user.userId === following?.followedId
     );
+    if (userFollowing?.userId === following?.followedId)
+      userFollowing.folId = following?.folId;
     if (userFollowing !== undefined) followingList.push(userFollowing);
-  });
-
-  users?.forEach((user) => {
-    let userFollowing = followings?.find(
-      (follow) => follow?.followedId === user?.userId
-    );
-    if (userFollowing !== undefined) folIdList.push(userFollowing?.folId);
   });
 
   const authFollowings = followerData
@@ -103,7 +96,7 @@ export default function FollowingList({
                     className="likeUserFollowButton"
                     variant="contained"
                     onClick={() =>
-                      handleDeleteFollow(folIdList[index], access_token)
+                      handleDeleteFollow(following?.folId, access_token)
                     }
                   >
                     Unfollow
