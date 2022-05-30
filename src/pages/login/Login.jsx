@@ -95,6 +95,15 @@ export default function Login() {
                 Register
               </Link>
             </p>
+            <p className="loginForm__registerTextAcount">
+              Did you
+              <Link
+                className="loginForm__registerTextAcount--loginRegisterButton"
+                to="/forgot/password"
+              >
+                forget your password?
+              </Link>
+            </p>
           </form>
         </div>
       </div>
