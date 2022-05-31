@@ -14,6 +14,7 @@ import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import { useState } from "react";
+import ShareButton from "../shareButton/ShareButton";
 
 export default function SinglePost({
   post,
@@ -30,6 +31,16 @@ export default function SinglePost({
   const [openLikeUsers, setOpenLikeUsers] = useState(false);
   const [open, setOpen] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [openShareButton, setopenShareButton] = useState(false);
+
+  const handleOpenShare = () => {
+    setopenShareButton(true);
+  };
+
+  const closeShareButton = () => setopenShareButton(false);
+
+  const shareLink = window.location.href;
+
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
   const likeCounts =
     `${likes?.length}}` <= 1
@@ -161,8 +172,16 @@ export default function SinglePost({
               </span>
               <div className="toolPostComments">
                 <Tooltip title="Share">
-                  <ShareRoundedIcon style={{ margin: "0 2% " }} />
+                  <ShareRoundedIcon
+                    onClick={handleOpenShare}
+                    style={{ margin: "0 2% " }}
+                  />
                 </Tooltip>
+                <ShareButton
+                  shareLink={shareLink}
+                  openShareButton={openShareButton}
+                  closeShareButton={closeShareButton}
+                />
               </div>
             </div>
           </div>

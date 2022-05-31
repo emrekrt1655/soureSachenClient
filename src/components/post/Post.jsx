@@ -12,6 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import CreateNewComment from "../newCommentAdd/CreateComment";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
+import ShareButton from "../shareButton/ShareButton";
 
 export default function Post({ post, topicData, likeData }) {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ export default function Post({ post, topicData, likeData }) {
     return topic?.topicId === post?.postTopicId;
   });
   const [open, setOpen] = useState(false);
+  const [openShareButton, setopenShareButton] = useState(false);
+  const [shareLink, setShareLink] = useState("");
 
   const { authReducer } = useSelector((state) => state);
   const authUserId = authReducer?.user?.userId;
@@ -28,6 +31,14 @@ export default function Post({ post, topicData, likeData }) {
   const topicText = topic?.map(({ text }) => text);
   const topicId = topic?.map(({ topicId }) => topicId);
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
+
+  const handleOpenShare = () => {
+    setopenShareButton(true);
+    setShareLink(`/post/${post?.postId}`);
+  };
+
+  const closeShareButton = () => setopenShareButton(false);
+
   const handleOpen = () => {
     authUserId
       ? setOpen(true)
@@ -67,6 +78,8 @@ export default function Post({ post, topicData, likeData }) {
           <div className="postInfoHomePage">
             <Link className="postTitleLink" to={`/${topicId}`}>
               <p className="postTitle">{topicText}</p>
+            </Link>
+            <Link className="postTitleLink" to={`post/${post?.postId}`}>
               <p className="postDesc">{post?.text}</p>
             </Link>
             <span className="postDate">
@@ -115,8 +128,16 @@ export default function Post({ post, topicData, likeData }) {
           </div>
           <div>
             <Tooltip title="Share">
-              <ShareRoundedIcon style={{ margin: "0 2% " }} />
+              <ShareRoundedIcon
+                onClick={handleOpenShare}
+                style={{ margin: "0 2% " }}
+              />
             </Tooltip>
+            <ShareButton
+              shareLink={shareLink}
+              openShareButton={openShareButton}
+              closeShareButton={closeShareButton}
+            />
           </div>
         </div>
       </div>
