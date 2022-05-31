@@ -4,6 +4,7 @@ import { AUTH } from '../redux/types/types'
 
 
 export const checkTokenExpire = async (token, dispatch) => {
+  console.log(token)
   const decoded = jwt_decode(token)
 
   if(decoded.exp >= Date.now() / 1000) return;
