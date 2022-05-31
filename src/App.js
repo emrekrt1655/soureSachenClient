@@ -18,6 +18,8 @@ import Single from "./pages/single/Single";
 import Settings from "./pages/settings/Settings";
 import ChangePassword from "./pages/changePassword/ChangePassword";
 import Active from "./pages/active/Active";
+import ForgotPassword from "./pages/forgot_password/ForgotPassword"
+import ResetPassword from "./pages/resetPassword/ResetPassword"
 
 function App() {
   const { authReducer } = useSelector((state) => state);
@@ -63,6 +65,8 @@ function App() {
         <Route exact path="/userProfile/:userId" component={UserProfil} />
         <Route exact path="/post/:postId" component={Single} />
         <Route exact path="/active/:slug" component={Active} />
+        <Route exact path="/reset_password/:slug" component={ResetPassword} />
+        <Route exact path="/forgot/password" component={ForgotPassword} />
       </Switch>
     </Router>
   );

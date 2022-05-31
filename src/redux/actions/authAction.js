@@ -1,6 +1,6 @@
 import { AUTH, ALERT } from "../types/types";
 import { postAPI, getAPI, putAPI, deleteAPI } from "../../utils/api";
-import { validRegister, validUpdate, validChangePassword } from '../../utils/validRegister'
+import { validRegister, validUpdate, validChangePassword, checkPassword } from '../../utils/validRegister'
 import { checkTokenExpire } from '../../utils/checkTokenExpire'
 
 export const login = (userLogin) => async (dispatch) => {
@@ -73,7 +73,7 @@ export const deleteAcccount = (id, access_token) => async (dispatch) => {
     const res = await deleteAPI(`userdelete/${id}`, accessToken);
     dispatch({ type: ALERT, payload: { success: res?.data.message } })
   } catch (err) {
-    dispatch({ type: ALERT, payload: "Service Error, Try later!" })
+    dispatch({ type: ALERT, payload: { errors: err?.response?.data.message } })
   }
 }
 
@@ -92,7 +92,7 @@ export const refreshToken =
       //localStorage.setItem("logged", res.data.access_token);
       dispatch({ type: ALERT, payload: {} })
     } catch (err) {
-      dispatch({ type: ALERT, payload: "Something happened!" });
+      dispatch({ type: ALERT, payload: { errors: err?.response?.data.message } });
     }
   };
 
@@ -106,6 +106,38 @@ export const logOut =
       await getAPI("/logout", access_token);
       window.location.href = "/";
     } catch (err) {
-      dispatch({ type: ALERT, payload: err.response.data.message });
+      dispatch({ type: ALERT, payload: { errors: err?.response?.data.message } });
     }
   };
+
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: ALERT, payload: { loading: true } })
+    const res = await postAPI("forgot_password", { email })
+    dispatch({ type: ALERT, payload: { success: res?.data.message } })
+  }
+  catch (err) {
+    dispatch({ type: ALERT, payload: { errors: err?.response?.data.message } })
+  }
+}
+
+export const resetPassword = (password, cf_password, token) => async (dispatch) => {
+  const result = await checkTokenExpire(token, dispatch);
+  const access_token = result ? result : token
+
+
+  const message = checkPassword(password, cf_password)
+  if (message) return dispatch({ type: ALERT, payload: { errors: message } })
+
+  try {
+    dispatch({ type: ALERT, payload: { loading: true } })
+
+    const res = await putAPI('reset_password', { password }, access_token)
+
+    dispatch({ type: ALERT, payload: { success: res.data.message } })
+
+  } catch (error) {
+    dispatch({ type: ALERT, payload: { errors: error.response.data.message } })
+  }
+
+}
