@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import "../../likeUsers/likeUsers.css";
+import "../../likeUsers/likeUsers.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { follow, getFollowers } from "../../../redux/actions/followerAction";
 

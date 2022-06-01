@@ -1,4 +1,4 @@
-import "./post.css";
+import "./post.scss";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -60,29 +60,29 @@ export default function Post({ post, topicData, likeData }) {
     <>
       <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="postContent">
-        <div className="post">
+        <div className="postContent__post">
           {post.image && (
-            <img className="postImg" src={post.image} alt="post" />
+            <img className="postContent__post--postImg" src={post.image} alt="post" />
           )}
-          <div className="postInfoHomePage">
-            <Link className="postTitleLink" to={`/${topicId}`}>
-              <p className="postTitle">{topicText}</p>
-              <p className="postDesc">{post?.text}</p>
+          <div className="postContent__post--postInfoHomePage">
+            <Link className="postContent__post--postInfoHomePage__postTitleLink" to={`/${topicId}`}>
+              <p className="postContent__post--postInfoHomePage__postTitleLink--postTitle">{topicText}</p>
+              <p className="postContent__post--postInfoHomePage__postTitleLink--postDesc">{post?.text}</p>
             </Link>
-            <span className="postDate">
+            <span className="postContent__post--postInfoHomePage__postDate">
               {new Date(post.createdAt).toDateString()}
             </span>
           </div>
         </div>
         {/* added post like and comment number acording to count */}
-        <div className="postIcons">
+        <div className="postContent__postIcons">
           <Link
             to={authUserId && `/userProfile/${user?.userId}`}
-            className="postIconsUsername"
+            className="postContent__postIcons--postIconsUsername"
           >
-            <Box className="postAvatarIcon">
+            <Box className="postContent__postIcons--postAvatarIcon">
               <Avatar
-                className="postAvatarIconAvatar"
+                className="postContent__postIcons--postAvatarIcon__postAvatarIconAvatar"
                 alt="Profil Foto"
                 src={user?.avatar}
               />

@@ -9,7 +9,7 @@ import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 import CreateNewComment from "../newCommentAdd/CreateComment";
-import "./topicPost.css";
+import "./topicPost.scss";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 
@@ -56,28 +56,28 @@ export default function TopicPost({ post, likeData }) {
     <>
       <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="topicpostContent">
-        <Link to={`post/${post?.postId}`} className="topicPosttextDate">
-          <div className="topicpost">
+        <Link to={`post/${post?.postId}`} className="topicpostContent__topicPosttextDate">
+          <div className="topicpostContent__topicPosttextDate--topicpost">
             {post?.image && (
-              <img className="topicpostImg" src={post?.image} alt="post" />
+              <img className="topicpostContent__topicPosttextDate--topicpost__topicpostImg" src={post?.image} alt="post" />
             )}
-            <div className="topicpostInfoHomePage">
-              <p className="topicpostDesc">{post?.text}</p>
-              <span className="topicpostDate">
+            <div className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage">
+              <p className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDesc">{post?.text}</p>
+              <span className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDate">
                 {new Date(post?.createdAt).toDateString()}
               </span>
             </div>
           </div>
         </Link>
         {/* added post like and comment number acording to count */}
-        <div className="topicpostIcons">
+        <div className="topicpostContent__topicpostIcons">
           <Link
             to={authUserId && `/userProfile/${userOfPost?.userId}`}
-            className="topicpostIconsUsername"
+            className="topicpostContent__topicpostIcons--topicpostIconsUsername"
           >
-            <Box className="topicpostAvatarIcon">
+            <Box className="topicpostContent__topicpostIcons--topicpostIconsUsername__topicpostAvatarIcon">
               <Avatar
-                className="topicpostAvatarIconAvatar"
+                className="topicpostContent__topicpostIcons--topicpostIconsUsername__topicpostAvatarIcon--topicpostAvatarIconAvatar"
                 alt="Profil Foto"
                 src={userOfPost?.avatar}
               />

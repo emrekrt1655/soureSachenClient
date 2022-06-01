@@ -11,7 +11,7 @@ import Input from "@mui/material/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { createComment, getComments } from "../../redux/actions/commentAction";
 import { typeText } from "../../redux/actions/alertAction";
-import "../newPostAdd/newPostAdd.css";
+import "../newPostAdd/newPostAdd.scss";
 
 const style = {
   position: "absolute",

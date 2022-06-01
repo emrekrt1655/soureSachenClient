@@ -1,6 +1,6 @@
 import { FakeDoc } from "../post/FakeDoc";
 import Post from "../post/Post";
-import "./posts.css";
+import "./posts.scss";
 export default function Posts({ topicData, postData, likeData }) {
   return (
     <div className="posts">

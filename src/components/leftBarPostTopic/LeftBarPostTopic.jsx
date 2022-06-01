@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Badge from "@mui/material/Badge";
-import "./leftBarPostTopic.css";
+import "./leftBarPostTopic.scss";
 
 const drawerWidth = 100;
 

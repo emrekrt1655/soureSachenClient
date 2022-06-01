@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import "../../likeUsers/likeUsers.css";
+import "../../likeUsers/likeUsers.scss";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteFollower,
