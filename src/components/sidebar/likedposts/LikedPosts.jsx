@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./likedposts.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Tooltip from "@mui/material/Tooltip";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
@@ -10,6 +10,7 @@ import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import { getLikes, like, unlike } from "../../../redux/actions/likeAction";
 import { typeText } from "../../../redux/actions/alertAction";
 import CreateNewComment from "../../newCommentAdd/CreateComment";
+import ShareButton from "../../shareButton/ShareButton";
 
 export default function Post({
   postData,
@@ -30,6 +31,11 @@ export default function Post({
   };
   const handleClose = () => setOpen(false);
 
+  const [openShareButton, setOpenShareButton] = useState(false);
+  const [shareLink, setShareLink] = useState("");
+
+  const handleCloseShareButton = () => setOpenShareButton(false);
+
   let newList = [];
 
   posts?.map((post) => {
@@ -49,6 +55,11 @@ export default function Post({
   });
 
   const topicId = topic?.topicId;
+
+  const handleOpenShare = () => {
+    setOpenShareButton(true);
+    setShareLink(`/post/${likedPost?.postId}`);
+  };
 
   const likes = likeData?.filter(
     (like) => like?.likePostId === likedPost?.postId
@@ -76,6 +87,11 @@ export default function Post({
 
   return (
     <>
+      <ShareButton
+        shareLink={shareLink}
+        openShareButton={openShareButton}
+        closeShareButton={handleCloseShareButton}
+      />
       <CreateNewComment
         post={likedPost}
         open={open}
@@ -129,7 +145,10 @@ export default function Post({
               <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
             </Tooltip>
             <Tooltip title="Share">
-              <ShareRoundedIcon style={{ margin: "0 2% " }} />
+              <ShareRoundedIcon
+                onClick={handleOpenShare}
+                style={{ margin: "0 2% " }}
+              />
             </Tooltip>
           </div>
         </div>

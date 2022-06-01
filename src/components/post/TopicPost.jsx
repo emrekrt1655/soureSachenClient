@@ -12,6 +12,7 @@ import CreateNewComment from "../newCommentAdd/CreateComment";
 import "./topicPost.scss";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
+import ShareButton from "../shareButton/ShareButton";
 
 export default function TopicPost({ post, likeData }) {
   const dispatch = useDispatch();
@@ -20,6 +21,15 @@ export default function TopicPost({ post, likeData }) {
   const authUserId = authReducer?.user?.userId;
   const access_token = authReducer?.access_token;
   const [open, setOpen] = useState(false);
+  const [openShareButton, setOpenShareButton] = useState(false);
+  const [shareLink, setShareLink] = useState("");
+
+  const handleOpenShare = () => {
+    setOpenShareButton(true);
+    setShareLink(`/post/${post?.postId}`);
+  };
+
+  const handleCloseShareButton = () => setOpenShareButton(false);
 
   const handleOpen = () => {
     authUserId
@@ -54,6 +64,11 @@ export default function TopicPost({ post, likeData }) {
 
   return (
     <>
+      <ShareButton
+        shareLink={shareLink}
+        openShareButton={openShareButton}
+        closeShareButton={handleCloseShareButton}
+      />
       <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="topicpostContent">
         <Link to={`post/${post?.postId}`} className="topicpostContent__topicPosttextDate">
@@ -111,7 +126,10 @@ export default function TopicPost({ post, likeData }) {
           </div>
           <div>
             <Tooltip title="Share">
-              <ShareRoundedIcon style={{ margin: "0 2% " }} />
+              <ShareRoundedIcon
+                onClick={handleOpenShare}
+                style={{ margin: "0 2% " }}
+              />
             </Tooltip>
           </div>
         </div>
