@@ -21,15 +21,15 @@ export default function TopicPost({ post, likeData }) {
   const authUserId = authReducer?.user?.userId;
   const access_token = authReducer?.access_token;
   const [open, setOpen] = useState(false);
-  const [openShareButton, setopenShareButton] = useState(false);
+  const [openShareButton, setOpenShareButton] = useState(false);
   const [shareLink, setShareLink] = useState("");
 
   const handleOpenShare = () => {
-    setopenShareButton(true);
+    setOpenShareButton(true);
     setShareLink(`/post/${post?.postId}`);
   };
 
-  const closeShareButton = () => setopenShareButton(false);
+  const handleCloseShareButton = () => setOpenShareButton(false);
 
   const handleOpen = () => {
     authUserId
@@ -64,6 +64,11 @@ export default function TopicPost({ post, likeData }) {
 
   return (
     <>
+      <ShareButton
+        shareLink={shareLink}
+        openShareButton={openShareButton}
+        closeShareButton={handleCloseShareButton}
+      />
       <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="topicpostContent">
         <Link to={`post/${post?.postId}`} className="topicPosttextDate">
@@ -126,11 +131,6 @@ export default function TopicPost({ post, likeData }) {
                 style={{ margin: "0 2% " }}
               />
             </Tooltip>
-            <ShareButton
-              shareLink={shareLink}
-              openShareButton={openShareButton}
-              closeShareButton={closeShareButton}
-            />
           </div>
         </div>
       </div>
