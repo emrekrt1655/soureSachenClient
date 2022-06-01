@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import "./likeUsers.css";
+import "./likeUsers.scss"
 
 const style = {
   position: "absolute",
@@ -53,9 +53,9 @@ export default function LikeUsers({
                 className="likeUserfollowAvatarBox"
                 onClick={() => [handleCloseLikeUsers()]}
               >
-                <Box className="likeUserFollowAvatarName">
+                <Box className="likeUserfollowAvatarBox__likeUserFollowAvatarName">
                   <Avatar
-                    className="likeUserFollowAvatar"
+                    className="likeUserfollowAvatarBox__likeUserFollowAvatarName--likeUserFollowAvatar"
                     alt={user?.name}
                     src={user?.avatar}
                   />
@@ -63,7 +63,7 @@ export default function LikeUsers({
                     {user?.name + " " + user?.surname}
                   </Typography>
                 </Box>
-                {/* <Button className="likeUserFollowButton" variant="contained">
+                {/* <Button className="likeUserfollowAvatarBox__likeUserFollowButton" variant="contained">
                   Follow
                 </Button> */}
               </Box>

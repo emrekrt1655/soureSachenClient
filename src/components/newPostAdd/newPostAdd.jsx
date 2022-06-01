@@ -10,9 +10,8 @@ import Stack from "@mui/material/Stack";
 import Input from "@mui/material/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { createPost, getPosts } from "../../redux/actions/postAction";
-import { getTopics } from "../../redux/actions/topicAction";
 import { typeText } from "../../redux/actions/alertAction";
-import "./newPostAdd.css";
+import "./newPostAdd.scss";
 
 const style = {
   position: "absolute",

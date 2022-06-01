@@ -1,0 +1,20 @@
+.likeUserfollowAvatarBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px !important;
+
+  &__likeUserFollowAvatarName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--likeUserFollowAvatar {
+      margin-right: 7px !important;
+    }
+  }
+
+  &__likeUserFollowButton {
+    background-color: rgb(148, 58, 204) !important;
+  }
+}

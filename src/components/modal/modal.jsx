@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Input from "@mui/material/Input";
 // import Alert from "../alert/Alert";
-import "./modal.css";
+import "./modal.scss";
 import CountrySelect from "./CountryBox";
 import { useDispatch, useSelector } from "react-redux";
 import { createTopic, getTopics } from "../../redux/actions/topicAction";
