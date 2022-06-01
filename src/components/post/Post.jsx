@@ -12,6 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import CreateNewComment from "../newCommentAdd/CreateComment";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
+import ShareButton from "../shareButton/ShareButton";
 
 export default function Post({ post, topicData, likeData }) {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ export default function Post({ post, topicData, likeData }) {
     return topic?.topicId === post?.postTopicId;
   });
   const [open, setOpen] = useState(false);
+  const [openShareButton, setopenShareButton] = useState(false);
+  const [shareLink, setShareLink] = useState("");
 
   const { authReducer } = useSelector((state) => state);
   const authUserId = authReducer?.user?.userId;
@@ -28,6 +31,14 @@ export default function Post({ post, topicData, likeData }) {
   const topicText = topic?.map(({ text }) => text);
   const topicId = topic?.map(({ topicId }) => topicId);
   const likes = likeData?.filter((like) => like?.likePostId === post?.postId);
+
+  const handleOpenShare = () => {
+    setopenShareButton(true);
+    setShareLink(`/post/${post?.postId}`);
+  };
+
+  const closeShareButton = () => setopenShareButton(false);
+
   const handleOpen = () => {
     authUserId
       ? setOpen(true)
@@ -64,10 +75,13 @@ export default function Post({ post, topicData, likeData }) {
           {post.image && (
             <img className="postContent__post--postImg" src={post.image} alt="post" />
           )}
+
           <div className="postContent__post--postInfoHomePage">
-            <Link className="postContent__post--postInfoHomePage__postTitleLink" to={`/${topicId}`}>
-              <p className="postContent__post--postInfoHomePage__postTitleLink--postTitle">{topicText}</p>
-              <p className="postContent__post--postInfoHomePage__postTitleLink--postDesc">{post?.text}</p>
+           <Link className="postContent__post--postInfoHomePage__postTitleLink" to={`/${topicId}`}>
+              <p className="postTitle">{topicText}</p>
+            </Link>
+             <Link className="postContent__post--postInfoHomePage__postTitleLink" to={`post/${post?.postId}`}>
+              <p className="postDesc">{post?.text}</p>
             </Link>
             <span className="postContent__post--postInfoHomePage__postDate">
               {new Date(post.createdAt).toDateString()}
@@ -115,8 +129,16 @@ export default function Post({ post, topicData, likeData }) {
           </div>
           <div>
             <Tooltip title="Share">
-              <ShareRoundedIcon style={{ margin: "0 2% " }} />
+              <ShareRoundedIcon
+                onClick={handleOpenShare}
+                style={{ margin: "0 2% " }}
+              />
             </Tooltip>
+            <ShareButton
+              shareLink={shareLink}
+              openShareButton={openShareButton}
+              closeShareButton={closeShareButton}
+            />
           </div>
         </div>
       </div>

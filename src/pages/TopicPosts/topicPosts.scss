@@ -1,26 +1,41 @@
-.topicPost {
-  display: flex;
-
-  &__topicPostContainer {
+.topicDevContainer {
     display: flex;
-    flex-direction: column;
-    margin: 20px;
-    position: relative;
+    justify-content: space-between;
 
-    &--topicHeader {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    // background-color: aquamarine;
+}
 
-      > h1 {
-        color: black;
-        padding: 50px;
-        text-decoration: underline;
-      }
+.topicPost {
+    display: flex;
+    width: 100%;
 
-      > img {
-        width: 100px;
-      }
+    // justify-content: space-around;
+    // background-color: aqua;
+
+    &__topicPostContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+        width: 100% !important;
+
+        // position: relative;
+        // background-color: red;
+
+        &--topicHeader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            > h1 {
+                color: black;
+                padding: 50px;
+                text-decoration: none;
+            }
+
+            > img {
+                width: 100px;
+            }
+        }
     }
-  }
 }

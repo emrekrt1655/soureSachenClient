@@ -30,7 +30,7 @@ export default function TopicPosts() {
   const currentTopic = topicData?.find((top) => top.topicId === topicId);
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="topicDevContainer">
       <LeftBarPostTopic handleOpen={handleOpen} />
       <NewPostAdd
         open={open}
