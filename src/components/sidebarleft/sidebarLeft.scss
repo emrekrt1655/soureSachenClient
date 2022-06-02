@@ -1,0 +1,21 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
+.sidebarLeft {
+  display: flex;
+  flex: 3;
+  height: fit-content;
+  margin: 20px;
+  padding-bottom: 30px;
+  /* background-color: #cb2727; */
+  max-width: 450px;
+
+  flex-direction: column;
+
+  /* align-items: center; */
+  /* border-right: rgba(25, 167, 120, 0.3) solid 2px; */
+  &__sidebarLeftItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

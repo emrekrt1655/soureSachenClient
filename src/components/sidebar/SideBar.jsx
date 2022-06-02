@@ -7,7 +7,7 @@ import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@mui/material/Tooltip";
-import "./sidebar.css";
+import "./sidebar.scss";
 import SearchBar from "./searchBar/SearchBar";
 import CountryFilter from "./countryfilter/CountryFilter";
 import { useSelector } from "react-redux";
@@ -90,13 +90,15 @@ export default function Sidebar({
 
       <Modal open={open} handleClose={handleClose} />
       <div className="sidebar">
-        <div className="sidebarItem">
+        <div className="sidebar__sidebarItem">
           <SearchBar topics={topics} posts={postData} />
         </div>
-        <div className="sidebarItem">
-          <div className="sidebarHead">
-            <span className="sidebarTitle">Topic</span>
-            <div className="sidebarIcons">
+        <div className="sidebar__sidebarItem">
+          <div className="sidebar__sidebarItem--sidebarHead">
+            <span className="sidebar__sidebarItem--sidebarHead__sidebarTitle">
+              Topic
+            </span>
+            <div className="sidebar__sidebarItem--sidebarHead__sidebarIcons">
               <Tooltip title="Most Rated">
                 <LocalFireDepartmentIcon
                   className={classes.root}
@@ -117,14 +119,14 @@ export default function Sidebar({
               </Tooltip>
             </div>
           </div>
-          <div className="sidebarTopic">
+          <div className="sidebar__sidebarItem--sidebarTopic">
             {topics && filter === "mostRated" ? (
               sortedCountTopics?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
-                  <div className="titleInfoPart">
+                  <div className="titleinfoSide__titleInfoPart">
                     <p
-                      className="titleInfo"
+                      className="titleinfoSide__titleInfoPart--titleInfo"
                       onClick={() => history.push(`/${t?.topicId}`)}
                     >
                       {" "}
@@ -132,7 +134,10 @@ export default function Sidebar({
                         ? t?.text
                         : t?.text?.slice(0, 25) + "..."}{" "}
                     </p>
-                    <p className="titleCountry"> {t?.country} </p>
+                    <p className="titleinfoSide__titleInfoPart--titleCountry">
+                      {" "}
+                      {t?.country}{" "}
+                    </p>
                   </div>
                 </div>
               ))
@@ -140,9 +145,9 @@ export default function Sidebar({
               sortedDateTopics?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
-                  <div className="titleInfoPart">
+                  <div className="titleinfoSide__titleInfoPart">
                     <p
-                      className="titleInfo"
+                      className="titleinfoSide__titleInfoPart--titleInfo"
                       onClick={() => history.push(`/topic/${t?.topicId}`)}
                     >
                       {" "}
@@ -150,7 +155,10 @@ export default function Sidebar({
                         ? t?.text
                         : t?.text?.slice(0, 25) + "..."}{" "}
                     </p>
-                    <p className="titleCountry"> {t?.country} </p>
+                    <p className="titleinfoSide__titleInfoPart--titleCountry">
+                      {" "}
+                      {t?.country}{" "}
+                    </p>
                   </div>
                 </div>
               ))
@@ -158,9 +166,9 @@ export default function Sidebar({
               topicList?.slice(0, 9)?.map((t) => (
                 <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
-                  <div className="titleInfoPart">
+                  <div className="titleinfoSide__titleInfoPart">
                     <p
-                      className="titleInfo"
+                      className="titleinfoSide__titleInfoPart--titleInfo"
                       onClick={() => history.push(`/topic/${t?.topicId}`)}
                     >
                       {" "}
@@ -168,7 +176,10 @@ export default function Sidebar({
                         ? t?.text
                         : t?.text?.slice(0, 25) + "..."}{" "}
                     </p>
-                    <p className="titleCountry"> {t?.country} </p>
+                    <p className="titleinfoSide__titleInfoPart--titleCountry">
+                      {" "}
+                      {t?.country}{" "}
+                    </p>
                   </div>
                 </div>
               ))
@@ -178,7 +189,10 @@ export default function Sidebar({
 
             <div className="addButtonContainer">
               {user?.isTopicCreator === "true" && (
-                <div onClick={handleOpen} className="buttonAddTopic">
+                <div
+                  onClick={handleOpen}
+                  className="addButtonContainer__buttonAddTopic"
+                >
                   <i className="fab fa-buffer"></i>
                   <span style={{ margin: "5px" }}>Add Topic</span>
                 </div>
@@ -187,20 +201,22 @@ export default function Sidebar({
           </div>
         </div>
 
-        <div className="sidebarItem">
-          <div className="sidebarItem">
-            <span className="sidebarTitle">THE MOST LIKED</span>
-            <LikedPosts
-              postData={postData}
-              topicData={topicData}
-              likeData={likeData}
-              user={user}
-              access_token={access_token}
-            />
-          </div>
+        <div className="sidebar__sidebarItem">
+          <span className="sidebar__sidebarItem--mostLikedTitle">
+            THE MOST LIKED
+          </span>
+          <LikedPosts
+            postData={postData}
+            topicData={topicData}
+            likeData={likeData}
+            user={user}
+            access_token={access_token}
+          />
         </div>
-        <div className="sidebarItem">
-          <span className="sidebarTitle">FOLLOW US</span>
+        <div className="sidebar__sidebarItem">
+          <span className="sidebar__sidebarItem--mostLikedTitle">
+            FOLLOW US
+          </span>
 
           <div className="sidebarSocial">
             <div>

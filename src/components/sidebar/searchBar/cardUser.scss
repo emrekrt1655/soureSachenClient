@@ -1,0 +1,9 @@
+.searchCard {
+  width: 100%;
+  list-style: square;
+  max-height: 10px;
+
+  > a {
+    text-decoration: none;
+  }
+}

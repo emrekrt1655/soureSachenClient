@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { follow, getFollowers } from "../../../redux/actions/followerAction";
-import "./whoToFollow.css";
+import "./whoToFollow.scss";
 
 export default function WoToFollow() {
   const dispatch = useDispatch();
@@ -48,11 +48,11 @@ export default function WoToFollow() {
   return (
     <div className="whotoFollowContainer">
       {newSuggestionList?.length > 0 && (
-        <p id="whotofollow" className="sidebarTitle">
+        <p id="whotofollow" >
           WHO TO FOLLOW
         </p>
       )}
-      <Stack direction="row" spacing={2} className="whoToFollowSugg">
+      <Stack direction="row" spacing={2} >
         {newSuggestionList?.map((p, index) => (
           <Box key={index} className="whotofollowavatar">
             <Link to={`/userProfile/${p?.userId}`}>

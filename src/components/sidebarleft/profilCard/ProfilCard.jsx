@@ -1,4 +1,4 @@
-import "./profilCard.css";
+import "./profilCard.scss";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
