@@ -1,0 +1,26 @@
+.countryFilterTitle {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.countryList {
+  list-style: none;
+
+  &__country {
+    padding: 5px;
+    width: 100%;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+
+  &__country:hover {
+    background-color: black;
+    color: white;
+    padding: 6px;
+    border-color: white;
+  }
+}

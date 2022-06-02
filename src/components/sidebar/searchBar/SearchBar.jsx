@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Scroll from "./Scroll";
 import SearchList from "./SearchList";
 import { useSelector } from "react-redux";
+import "./searchBar.scss"
 
 const SearchBar = ({ topics, posts }) => {
   const users = useSelector((state) => state?.userReducer?.data);
@@ -76,25 +77,25 @@ const SearchBar = ({ topics, posts }) => {
 
   return (
     <div className="wrap">
-      <div className="searchButtonContainer">
-        <div className="searchButtonState" onClick={onSetStatetopic}>
-          <span className={search === "Topic" && "active"}>Topic</span>
+      <div className="wrap__searchButtonContainer">
+        <div className="wrap__searchButtonContainer--searchButtonState" onClick={onSetStatetopic}>
+          <span className={search === "wrap__searchButtonContainer--searchButtonState__Topic" && "wrap__searchButtonContainer--searchButtonState__active"}>Topic</span>
         </div>
         <div className="searchButtonState" onClick={onSetStateopinion}>
-          <span className={search === "Opinion" && "active"}>Opinion</span>
+          <span className={search === "wrap__searchButtonContainer--searchButtonState__Opinion" && "wrap__searchButtonContainer--searchButtonState__active"}>Opinion</span>
         </div>
         <div className="searchButtonState" onClick={onSetStateuser}>
-          <span className={search === "User" && "active"}>User</span>
+          <span className={search === "wrap__searchButtonContainer--searchButtonState__User" && "wrap__searchButtonContainer--searchButtonState__active"}>User</span>
         </div>
       </div>
-      <div className="search">
+      <div className="wrap__search">
         <input
           type="text"
-          className="searchTerm"
+          className="wrap__search--searchTerm"
           placeholder={`Search a ${search}...`}
           onChange={handleChange}
         />
-        <button type="submit" className="searchButton">
+        <button type="submit" className="wrap__search--searchButton">
           <i className="fa fa-search"></i>
         </button>
       </div>

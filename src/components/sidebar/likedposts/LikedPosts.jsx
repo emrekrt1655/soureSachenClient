@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./likedposts.css";
+import "./likedposts.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Tooltip from "@mui/material/Tooltip";
@@ -99,32 +99,32 @@ export default function Post({
       />
       <div className="postlked">
         {likedPost?.image && (
-          <Link to={`/post/${likedPost?.postId}`} className="postlkedLink">
+          <Link to={`/post/${likedPost?.postId}`} className="postlked__postlkedLink">
             <img
-              className="postImgliked"
+              className="postlked__postlkedLink--postImgliked"
               src={likedPost?.image}
               alt="mostLikedpost"
             ></img>
           </Link>
         )}
-        <div className="posttextinfo">
-          <div className="postInfo">
-            <span className="likedPostTitle">
-              <Link to={`/${topicId}`} className="link">
+        <div className="postlked__posttextinfo">
+          <div className="postlked__posttextinfo--postInfo">
+            <span className="postlked__posttextinfo--postInfo__likedPostTitle">
+              <Link to={`/${topicId}`} className="postlked__posttextinfo--postInfo__likedPostTitle--link">
                 {topic?.text}
               </Link>
             </span>
             <hr />
           </div>
-          <Link to={`/post/${likedPost?.postId}`} className="postlkedLink">
-            <p className="likedPostDesc">{likedPost?.text}</p>
+          <Link to={`/post/${likedPost?.postId}`} className="postlked__posttextinfo--postlkedLink">
+            <p className="postlked__posttextinfo--postlkedLink__likedPostDesc">{likedPost?.text}</p>
           </Link>
-          <div className="extrainfo">
-            <span className="postDate">
+          <div className="postlked__posttextinfo--extrainfo">
+            <span className="postlked__posttextinfo--extrainfo__postDate">
               {new Date(likedPost?.createdAt).toDateString()}
             </span>
           </div>
-          <div className="extrainfo">
+          <div className="postlked__posttextinfo--extrainfo">
             <span onClick={id?.length === 0 ? onLike : onUnlike}>
               <Tooltip title={likeCounts}>
                 {id?.length === 0 ? (

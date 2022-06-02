@@ -81,9 +81,9 @@ export default function FollowingList({
                   className="likeUserfollowAvatarBox"
                   // onClick={() => [handleCloseFollowing()]}
                 >
-                  <Box className="likeUserFollowAvatarName">
+                  <Box className="likeUserfollowAvatarBox__likeUserFollowAvatarName">
                     <Avatar
-                      className="likeUserFollowAvatar"
+                      className="likeUserfollowAvatarBox__likeUserFollowAvatarName--likeUserFollowAvatar"
                       alt={following?.name}
                       src={following?.avatar}
                     />
@@ -93,7 +93,7 @@ export default function FollowingList({
                   </Box>
 
                   <Button
-                    className="likeUserFollowButton"
+                    className="likeUserfollowAvatarBox__likeUserFollowButton"
                     variant="contained"
                     onClick={() =>
                       handleDeleteFollow(following?.folId, access_token)
@@ -109,9 +109,9 @@ export default function FollowingList({
                   className="likeUserfollowAvatarBox"
                   // onClick={() => [handleCloseFollowing()]}
                 >
-                  <Box className="likeUserFollowAvatarName">
+                  <Box className="likeUserfollowAvatarBox__likeUserFollowAvatarName">
                     <Avatar
-                      className="likeUserFollowAvatar"
+                      className="likeUserfollowAvatarBox__likeUserFollowAvatarName--likeUserFollowAvatar"
                       alt={i?.name}
                       src={i?.avatar}
                     />
@@ -125,14 +125,14 @@ export default function FollowingList({
                       i?.userId
                     ) ? (
                     <Button
-                      className="likeUserFollowButton"
+                      className="likeUserfollowAvatarBox__likeUserFollowButton"
                       variant="contained"
                     >
                       Following
                     </Button>
                   ) : (
                     <Button
-                      className="likeUserFollowButton"
+                      className="likeUserfollowAvatarBox__likeUserFollowButton"
                       variant="contained"
                       onClick={() => {
                         dispatch(

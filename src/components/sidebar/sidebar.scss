@@ -1,0 +1,205 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
+.sidebar {
+  flex: 3;
+  height: fit-content;
+  margin: 20px;
+  padding-bottom: 30px;
+  /* background-color: #b51313; */
+  max-width: 450px;
+  /* float: left; */
+  /* border-radius: 10px; */
+  /* display: flex; */
+  /* flex-direction: column; */
+
+  /* align-items: center; */
+  border-left: rgb(148, 58, 204) solid 1px;
+
+  &__sidebarItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1%;
+
+    > img {
+      margin-top: 15px;
+      width: 250px;
+      height: 250px;
+    }
+
+    > p {
+      padding: 30px;
+    }
+
+    &--sidebarHead {
+      width: 75%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: solid 1px rgb(148, 58, 204);
+      border-bottom: solid 1px rgb(148, 58, 204);
+
+      &__sidebarTitle {
+        margin: 10px;
+        padding: 5px;
+        font-family: "Varela Round", sans-serif;
+        font-size: 16px;
+        line-height: 19px;
+        color: rgb(148, 58, 204);
+        font-weight: 600;
+      }
+
+      &__sidebarIcons {
+        display: flex;
+      }
+    }
+
+    &--sidebarTopic {
+      margin-top: 10px;
+      width: 75%;
+
+      .titleinfoSide {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__titleInfoPart {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &--titleInfo {
+            padding-left: 10px;
+          }
+          &--titleInfo:hover {
+            color: rgb(148, 58, 204);
+            cursor: pointer;
+          }
+        }
+      }
+
+      .addButtonContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__buttonAddTopic {
+          margin-top: 7%;
+          display: inline-block;
+          background: #9600cc;
+          color: #fff;
+          text-transform: uppercase;
+          padding: 5px 15px;
+          border-radius: 5px;
+          box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
+          cursor: pointer;
+          -webkit-transition: all ease-in-out 300ms;
+          transition: all ease-in-out 300ms;
+        }
+        &__buttonAddTopic:hover {
+          box-shadow: 0px 37px 20px -20px rgba(0, 0, 0, 0.2);
+          -webkit-transform: translate(0px, -10px) scale(1.2);
+          transform: translate(0px, -4px) scale(1);
+          color: black;
+        }
+      }
+    }
+
+    &--mostLikedTitle {
+      margin: 10px;
+      padding: 5px;
+      font-family: "Varela Round", sans-serif;
+      font-size: 16px;
+      line-height: 19px;
+      color: rgb(148, 58, 204);
+      font-weight: 600;
+      margin-bottom: 3%;
+      margin-top: 4%;
+    }
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.sidebarSocial {
+  margin-top: 15px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarSocial ul {
+  position: relative;
+  display: flex;
+  transform: rotate(0deg) skew(25deg);
+  transform-style: preserve-3d;
+}
+.sidebarSocial ul li {
+  position: relative;
+  list-style: none;
+  width: 40px;
+  height: 40px;
+  margin: 0px 20px;
+}
+
+.sidebarSocial ul li:after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -9px;
+  width: 9px;
+  height: 100%;
+  background: rgb(148, 58, 204);
+  transform-origin: right;
+  transform: skewY(-49deg);
+}
+.sidebarSocial ul li span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  background: rgb(148, 58, 204);
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 30px !important;
+  transition: 1.5s ease-out;
+}
+.sidebarSocial ul li:hover span {
+  z-index: 1000;
+  transition: 0.3s;
+  color: #fff;
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.sidebarSocial ul li:hover span:nth-child(5) {
+  transform: translate(40px, -40px);
+  opacity: 1;
+}
+.sidebarSocial ul li:hover span:nth-child(4) {
+  transform: translate(30px, -30px);
+  opacity: 0.8;
+}
+.sidebarSocial ul li:hover span:nth-child(3) {
+  transform: translate(20px, -20px);
+  opacity: 0.6;
+}
+.sidebarSocial ul li:hover span:nth-child(2) {
+  transform: translate(10px, -10px);
+  opacity: 0.4;
+}
+.sidebarSocial ul li:hover span:nth-child(1) {
+  transform: translate(0px, 0px);
+  opacity: 0.2;
+}
+.sidebarSocial ul li:nth-child(1):hover span {
+  background: #4267b2 !important;
+}
+
+.sidebarSocial ul li:nth-child(4):hover span {
+  background: #0072b1 !important;
+}

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { countries } from "../../modal/CountryBox";
-import "./countryFilter.css";
+import "./countryFilter.scss";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -72,7 +72,7 @@ export default function CountryFilter({
           {countries &&
             countryList?.map((country, index) => (
               <li
-                className="country"
+                className="countryList__country"
                 key={index}
                 onClick={() => [
                   setFilter("countryTopic"),

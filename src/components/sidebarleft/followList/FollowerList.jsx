@@ -71,9 +71,9 @@ export default function FollowerList({
                 className="likeUserfollowAvatarBox"
                 // onClick={() => [handleCloseFollower()]}
               >
-                <Box className="likeUserFollowAvatarName">
+                <Box className="likeUserfollowAvatarBox__likeUserFollowAvatarName">
                   <Avatar
-                    className="likeUserFollowAvatar"
+                    className="likeUserfollowAvatarBox__likeUserFollowAvatarName--likeUserFollowAvatar"
                     alt={i?.name}
                     src={i?.avatar}
                   />
@@ -86,12 +86,12 @@ export default function FollowerList({
                 authList?.userId ? null : authFollowings?.includes(
                     i?.userId
                   ) ? (
-                  <Button className="likeUserFollowButton" variant="contained">
+                  <Button className="likeUserfollowAvatarBox__likeUserFollowButton" variant="contained">
                     Following
                   </Button>
                 ) : (
                   <Button
-                    className="likeUserFollowButton"
+                    className="likeUserfollowAvatarBox__likeUserFollowButton"
                     variant="contained"
                     onClick={() => {
                       dispatch(

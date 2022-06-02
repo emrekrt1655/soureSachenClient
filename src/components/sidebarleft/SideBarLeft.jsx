@@ -2,13 +2,13 @@ import React from "react";
 import ProfilCard from "./profilCard/ProfilCard";
 import WoToFollow from "../sidebar/whoToFollow/WhoToFollow";
 
-import "./sidebarLeft.css";
+import "./sidebarLeft.scss";
 
 export default function SideBarLeft({ profileOfUser, followerData }) {
   return (
     <div className="sidebarLeft">
       <ProfilCard profileOfUser={profileOfUser} followerData={followerData} />
-      <div className="sidebarLeftItem">
+      <div className="sidebarLeft__sidebarLeftItem">
         <WoToFollow />
       </div>
     </div>
