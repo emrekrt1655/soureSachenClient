@@ -7,6 +7,7 @@ import { userReducer } from "./userReducer";
 import { likeReducer } from "./likeReducer";
 import { commentReducer } from "./commentReducer";
 import { followerReducer } from "./followerReducer";
+import socket  from "./socketReducer";
 
 export default combineReducers({
   authReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   likeReducer,
   commentReducer,
   followerReducer,
+  socket
 });
