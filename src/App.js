@@ -7,6 +7,8 @@ import { getPosts } from "./redux/actions/postAction";
 import { getUsers } from "./redux/actions/userAction";
 import { getLikes } from "./redux/actions/likeAction";
 import { getFollowers } from "./redux/actions/followerAction";
+import io from 'socket.io-client'
+
 
 import { Alert } from "./components/alert/Alert";
 import Homepage from "./pages/homepage/Homepage";
@@ -37,6 +39,12 @@ function App() {
 
 
   useEffect(() => access_token && dispatch(getFollowers(access_token)), [dispatch, access_token])
+
+  useEffect(() => {
+    const socket = io()
+    dispatch({ type: 'SOCKET', payload: socket })
+    return () => { socket.close() }
+  },[dispatch])
 
 
   return (

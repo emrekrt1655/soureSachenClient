@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NewPostAdd from "../../components/newPostAdd/newPostAdd";
 import TopicPost from "../../components/post/TopicPost";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ export default function TopicPosts() {
   const dispatch = useDispatch();
   const { topicId } = useParams();
   const [open, setOpen] = useState(false);
-  const { authReducer, postReducer, topicReducer, likeReducer } = useSelector(
+  const { authReducer, postReducer, topicReducer, likeReducer, socket } = useSelector(
     (state) => state
   );
   const postData = postReducer?.data;
@@ -28,6 +28,15 @@ export default function TopicPosts() {
   const handleClose = () => setOpen(false);
   const posts = postData?.filter((post) => post.postTopicId === topicId);
   const currentTopic = topicData?.find((top) => top.topicId === topicId);
+
+  useEffect(() => {
+    if(!topicId || !socket) return;
+    socket?.emit('joinRoom', topicId)
+
+    return () => {
+      socket?.emit('outRoom', topicId)
+    }
+  },[socket, topicId])
 
   return (
     <div className="topicDevContainer">

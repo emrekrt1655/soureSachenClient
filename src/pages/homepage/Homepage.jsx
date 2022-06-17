@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Posts from "../../components/posts/Posts";
 import Sidebar from "../../components/sidebar/SideBar";
 import { useSelector } from "react-redux";
@@ -20,6 +20,7 @@ export default function Homepage() {
     topicReducer,
     likeReducer,
     followerReducer,
+    socket
   } = useSelector((state) => state);
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
@@ -27,6 +28,7 @@ export default function Homepage() {
   const user = authReducer?.user;
   const access_token = authReducer?.access_token;
   const followerData = followerReducer?.data;
+  const userId = user?.userId
 
   const followings = followerData?.filter(
     (follower) => follower?.followerId === user.userId
@@ -44,6 +46,15 @@ export default function Homepage() {
       filteredListforInterested?.push(post);
     }
   });
+
+  useEffect(() => {
+    if(!userId || !socket) return;
+    socket?.emit('joinRoom', userId)
+
+    return () => {
+      socket?.emit('outRoom', userId)
+    }
+  },[socket, userId])
 
   return (
     <>
