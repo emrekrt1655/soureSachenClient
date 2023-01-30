@@ -12,7 +12,7 @@ export default function TopicPosts() {
   const dispatch = useDispatch();
   const { topicId } = useParams();
   const [open, setOpen] = useState(false);
-  const { authReducer, postReducer, topicReducer, likeReducer, socket } = useSelector(
+  const { authReducer, postReducer, topicReducer, likeReducer } = useSelector(
     (state) => state
   );
   const postData = postReducer?.data;
@@ -28,15 +28,8 @@ export default function TopicPosts() {
   const handleClose = () => setOpen(false);
   const posts = postData?.filter((post) => post.postTopicId === topicId);
   const currentTopic = topicData?.find((top) => top.topicId === topicId);
-
-  useEffect(() => {
-    if(!topicId || !socket) return;
-    socket?.emit('joinRoom', topicId)
-
-    return () => {
-      socket?.emit('outRoom', topicId)
-    }
-  },[socket, topicId])
+  const currentTopicId = currentTopic?.topicId
+  
 
   return (
     <div className="topicDevContainer">
@@ -44,7 +37,7 @@ export default function TopicPosts() {
       <NewPostAdd
         open={open}
         handleClose={handleClose}
-        topicId={currentTopic?.topicId}
+        topicId={currentTopicId}
         posts={posts}
       />
       <div className="topicPost">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LikedPosts from "./likedposts/LikedPosts";
 import Modal from "../modal/modal";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
@@ -26,7 +26,7 @@ export default function Sidebar({
   user,
   access_token,
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
   let sortedCountTopics;
   let sortedDateTopics;
@@ -127,7 +127,7 @@ export default function Sidebar({
                   <div className="titleinfoSide__titleInfoPart">
                     <p
                       className="titleinfoSide__titleInfoPart--titleInfo"
-                      onClick={() => history.push(`/${t?.topicId}`)}
+                      onClick={() => navigate(`/${t?.topicId}`)}
                     >
                       {" "}
                       {t?.text?.length < 25
@@ -148,7 +148,7 @@ export default function Sidebar({
                   <div className="titleinfoSide__titleInfoPart">
                     <p
                       className="titleinfoSide__titleInfoPart--titleInfo"
-                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                      onClick={() => navigate(`/topic/${t?.topicId}`)}
                     >
                       {" "}
                       {t?.text?.length < 25
@@ -169,7 +169,7 @@ export default function Sidebar({
                   <div className="titleinfoSide__titleInfoPart">
                     <p
                       className="titleinfoSide__titleInfoPart--titleInfo"
-                      onClick={() => history.push(`/topic/${t?.topicId}`)}
+                      onClick={() => navigate(`/topic/${t?.topicId}`)}
                     >
                       {" "}
                       {t?.text?.length < 25

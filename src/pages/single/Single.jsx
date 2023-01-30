@@ -22,7 +22,6 @@ export default function Single() {
     topicReducer,
     userReducer,
     commentReducer,
-    socket
   } = useSelector((state) => state);
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
@@ -47,15 +46,6 @@ export default function Single() {
   useEffect(() => {
     post?._count?.comments > 0 && dispatch(getComments(postId));
   }, [postId, dispatch]);
-
-  useEffect(() => {
-    if(!postId || !socket) return;
-    socket?.emit('joinRoom', postId)
-
-    return () => {
-      socket?.emit('outRoom', postId)
-    }
-  },[socket, postId])
 
   const commentData = commentReducer.data;
 

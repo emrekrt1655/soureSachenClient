@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { postAPI } from "../../utils/api";
 import { showErrMsg, showSuccessMsg } from "../../components/alert/Alert";
@@ -9,7 +9,7 @@ const Active = () => {
   const { slug } = useParams();
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (slug) {
@@ -22,10 +22,10 @@ const Active = () => {
   }, [slug]);
 
   const goLogin = () => {
-    history.push("/login");
+    navigate("/login");
   };
   const goRegister = () => {
-    history.push("/register");
+    navigate("/register");
   };
 
   return (

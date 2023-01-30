@@ -43,6 +43,8 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
     image: "",
   };
 
+
+
   const [post, setPost] = React.useState(initialState);
   const { text, image } = post;
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../../redux/actions/authAction";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -9,7 +9,7 @@ import "./resetPassword.scss";
 const ResetPassword = () => {
   const token = useParams().slug;
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useNavigate();
 
   const [password, setPassword] = useState("");
   const [cf_password, setCfPassword] = useState("");

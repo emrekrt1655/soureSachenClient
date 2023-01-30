@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import "./settings.scss";
 import { update, deleteAcccount } from "../../redux/actions/authAction";
 import { getUsers } from "../../redux/actions/userAction";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Topbar from "../../components/topbar/Topbar";
 
 export default function Settings() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { authReducer } = useSelector((state) => state);
   const user = authReducer?.user;
   const id = user?.userId;
@@ -29,7 +29,7 @@ export default function Settings() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(update(userUpdate, id, access_token)).then(() =>
-      dispatch(getUsers()).then(() => history?.push("/"))
+      dispatch(getUsers()).then(() => navigate("/"))
     );
   };
   const handleDeleteAccount = () => {

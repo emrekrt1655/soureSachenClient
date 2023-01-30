@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import SideBarLeft from "../../components/sidebarleft/SideBarLeft";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -15,7 +15,6 @@ const UserProfil = () => {
     postReducer,
     likeReducer,
     followerReducer,
-    socket
   } = useSelector((state) => state);
   const topicData = topicReducer?.data;
   const posts = postReducer?.data;
@@ -27,16 +26,6 @@ const UserProfil = () => {
   const postData = posts?.filter(
     (p) => p?.postUserId === profileOfUser?.userId
   );
-
-
-  useEffect(() => {
-    if(!userId || !socket) return;
-    socket?.emit('joinRoom', userId)
-
-    return () => {
-      socket?.emit('outRoom', userId)
-    }
-  },[socket, userId])
 
   return (
     <div>

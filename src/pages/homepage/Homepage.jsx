@@ -19,8 +19,7 @@ export default function Homepage() {
     postReducer,
     topicReducer,
     likeReducer,
-    followerReducer,
-    socket
+    followerReducer
   } = useSelector((state) => state);
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
@@ -47,14 +46,7 @@ export default function Homepage() {
     }
   });
 
-  useEffect(() => {
-    if(!userId || !socket) return;
-    socket?.emit('joinRoom', userId)
 
-    return () => {
-      socket?.emit('outRoom', userId)
-    }
-  },[socket, userId])
 
   return (
     <>

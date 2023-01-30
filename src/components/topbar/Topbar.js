@@ -25,11 +25,6 @@ export default function Topbar() {
           </div>
           <div className="topListItem">ABOUT</div>
           <div className="topListItem">CONTACT</div>
-          {/* <div className="topListItem">
-            <Link className="link" to="/write">
-              WRITE
-            </Link>
-          </div> */}
           {!authReducer?.access_token ? (
             <div className="topbarLoginRegister">
               <div className="topListItem">

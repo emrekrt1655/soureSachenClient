@@ -27,7 +27,7 @@ export default function LeftBarPostTopic({ handleOpen }) {
     <Box>
       <CssBaseline />
       <div>
-        {authReducer?.access_token && (
+        {authReducer?.access_token && ( 
           <Link className="link" to="/settings">
             <img
               className="topImg"

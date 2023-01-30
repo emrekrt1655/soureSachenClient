@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./changePassword.scss";
 import { changeOldPassword } from "../../redux/actions/authAction";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Topbar from "../../components/topbar/Topbar";
 
 export default function ChangePassword() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { authReducer } = useSelector((state) => state);
   const user = authReducer?.user;
   const id = user?.userId;

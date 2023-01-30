@@ -99,19 +99,20 @@ export default function Post({ post, topicData, likeData }) {
         </div>
         {/* added post like and comment number acording to count */}
         <div className="postContent__postIcons">
-          <Link
-            to={authUserId && `/userProfile/${user?.userId}`}
+         
+            <Box className="postContent__postIcons--postAvatarIcon">
+            <Link
+            to={ authReducer && `/userProfile/${user?.userId}`}
             className="postContent__postIcons--postIconsUsername"
           >
-            <Box className="postContent__postIcons--postAvatarIcon">
               <Avatar
                 className="postContent__postIcons--postAvatarIcon__postAvatarIconAvatar"
                 alt="Profil Foto"
                 src={user?.avatar}
               />
+          </Link>
               <p>{authReducer?.user && "@" + user?.userName}</p>
             </Box>
-          </Link>
           <div onClick={id?.length === 0 ? onLike : onUnlike}>
             <Tooltip title={likeCounts}>
               {id?.length === 0 ? (
