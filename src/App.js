@@ -7,7 +7,6 @@ import { getPosts } from "./redux/actions/postAction";
 import { getUsers } from "./redux/actions/userAction";
 import { getLikes } from "./redux/actions/likeAction";
 import { getFollowers } from "./redux/actions/followerAction";
-import io from "socket.io-client";
 
 import { Alert } from "./components/alert/Alert";
 import Homepage from "./pages/homepage/Homepage";
@@ -34,13 +33,10 @@ function App() {
     dispatch(getUsers());
     dispatch(getPosts());
     dispatch(getLikes());
-  }, [dispatch]);
+    access_token && dispatch(getFollowers(access_token));
+  }, [access_token,dispatch]);
 
-  useEffect(
-    () => access_token && dispatch(getFollowers(access_token)),
-    [dispatch, access_token]
-  );
-
+ 
   //  useEffect(() => {
   //    const socket = io()
   //    dispatch({ type: 'SOCKET', payload: socket })
@@ -75,7 +71,11 @@ function App() {
         />
 
         <Route exact path="/:topicId" element={<TopicPosts />} />
-        <Route exact path="/userProfile/:userId" element={<UserProfil />} />
+        <Route
+          exact
+          path="/userProfile/:userId"
+          element={authReducer?.user ? <UserProfil /> : <Login />}
+        />
         <Route exact path="/post/:postId" element={<Single />} />
         <Route exact path="/active/:slug" element={<Active />} />
         <Route exact path="/reset_password/:slug" element={<ResetPassword />} />
