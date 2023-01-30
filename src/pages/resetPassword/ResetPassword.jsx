@@ -9,7 +9,7 @@ import "./resetPassword.scss";
 const ResetPassword = () => {
   const token = useParams().slug;
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const [cf_password, setCfPassword] = useState("");
@@ -20,7 +20,7 @@ const ResetPassword = () => {
     e.preventDefault();
 
     dispatch(resetPassword(password, cf_password, token));
-    if (password === cf_password) history.push("/login");
+    if (password === cf_password) navigate("/login");
   };
 
   return (

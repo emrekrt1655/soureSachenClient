@@ -185,7 +185,7 @@ export default function SinglePost({
               </div>
             </div>
           </div>
-          <div className={!showComments && "comments"}>
+          <div className={!showComments ? "comments" : null}>
             {comments &&
               comments.map((comment) => (
                 <Comments key={comment?.commentId} comment={comment} />

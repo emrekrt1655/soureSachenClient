@@ -107,7 +107,7 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
             value={text}
             onChange={handleChangeInput}
           />
-          <div className={!imgInput && "hideImg"}>
+          <div className={!imgInput ? "hideImg" : null}>
             <Input
               fullWidth
               id="image"

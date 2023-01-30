@@ -101,6 +101,7 @@ export default function Post({ post, topicData, likeData }) {
         <div className="postContent__postIcons">
          
             <Box className="postContent__postIcons--postAvatarIcon">
+            <Tooltip title = {authReducer.user &&   `@` + user?.userName}>
             <Link
             to={ authReducer && `/userProfile/${user?.userId}`}
             className="postContent__postIcons--postIconsUsername"
@@ -111,12 +112,12 @@ export default function Post({ post, topicData, likeData }) {
                 src={user?.avatar}
               />
           </Link>
-              <p>{authReducer?.user && "@" + user?.userName}</p>
+          </Tooltip>
             </Box>
           <div onClick={id?.length === 0 ? onLike : onUnlike}>
             <Tooltip title={likeCounts}>
               {id?.length === 0 ? (
-                <RecommendRoundedIcon />
+                <RecommendRoundedIcon /> 
               ) : (
                 <RecommendOutlinedIcon />
               )}
@@ -124,7 +125,7 @@ export default function Post({ post, topicData, likeData }) {
           </div>
           <div>
             <Tooltip
-              onClick={handleOpen}
+              onClick={authReducer?.user ? handleOpen : null }
               title={
                 `${post?._count?.comments}` <= 1
                   ? `${post?._count?.comments} Comment`
@@ -133,7 +134,7 @@ export default function Post({ post, topicData, likeData }) {
             >
               <MarkChatUnreadIcon
                 style={{ margin: "0 2% " }}
-                disable={authReducer?.user && true}
+                //disable={authReducer?.user ? true : false}
               />
             </Tooltip>
           </div>

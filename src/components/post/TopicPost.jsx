@@ -7,7 +7,7 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateNewComment from "../newCommentAdd/CreateComment";
 import "./topicPost.scss";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
@@ -15,6 +15,7 @@ import { typeText } from "../../redux/actions/alertAction";
 import ShareButton from "../shareButton/ShareButton";
 
 export default function TopicPost({ post, likeData }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { authReducer, userReducer } = useSelector((state) => state);
   const authUser = authReducer?.user;
@@ -71,34 +72,39 @@ export default function TopicPost({ post, likeData }) {
       />
       <CreateNewComment post={post} open={open} handleClose={handleClose} />
       <div className="topicpostContent">
-        <Link to={`post/${post?.postId}`} className="topicpostContent__topicPosttextDate">
-          <div className="topicpostContent__topicPosttextDate--topicpost">
-            {post?.image && (
-              <img className="topicpostContent__topicPosttextDate--topicpost__topicpostImg" src={post?.image} alt="post" />
-            )}
-            <div className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage">
-              <p className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDesc">{post?.text}</p>
-              <span className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDate">
-                {new Date(post?.createdAt).toDateString()}
-              </span>
-            </div>
+        <div
+          className="topicpostContent__topicPosttextDate--topicpost"
+          onClick={() => navigate( post && `post/${post?.postId}`)}
+        >
+          {post?.image && (
+            <img
+              className="topicpostContent__topicPosttextDate--topicpost__topicpostImg"
+              src={post?.image}
+              alt="post"
+            />
+          )}
+          <div className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage">
+            <p className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDesc">
+              {post?.text}
+            </p>
+            <span className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDate">
+              {new Date(post?.createdAt).toDateString()}
+            </span>
           </div>
-        </Link>
+        </div>
         {/* added post like and comment number acording to count */}
-        <div className="topicpostContent__topicpostIcons">
-          <Link
-            to={authUserId && `/userProfile/${userOfPost?.userId}`}
-            className="topicpostContent__topicpostIcons--topicpostIconsUsername"
-          >
-            <Box className="topicpostContent__topicpostIcons--topicpostIconsUsername__topicpostAvatarIcon">
-              <Avatar
-                className="topicpostContent__topicpostIcons--topicpostIconsUsername__topicpostAvatarIcon--topicpostAvatarIconAvatar"
-                alt="Profil Foto"
-                src={userOfPost?.avatar}
-              />
-              <p>{authUser && "@" + userOfPost?.userName}</p>
-            </Box>
-          </Link>
+        <div className="topicpostContent__topicPostIcons">
+          <Box className="topicpostContent__topicPostIcons--topicpostIconsUsername__topicpostAvatarIcon">
+            <Tooltip title={`@` + userOfPost?.userName}>
+              
+                <Avatar
+                  onClick={() => navigate(authReducer?.user && `/userProfile/${userOfPost?.userId}`)}
+                  className="topicpostContent__topicPostIcons--topicpostIconsUsername__topicpostAvatarIcon--topicpostAvatarIconAvatar"
+                  alt="Profil Foto"
+                  src={userOfPost?.avatar}
+                />
+            </Tooltip>
+          </Box>
           <div onClick={id?.length === 0 ? onLike : onUnlike}>
             <Tooltip title={likeCounts}>
               {id?.length === 0 ? (
@@ -111,7 +117,7 @@ export default function TopicPost({ post, likeData }) {
 
           <div>
             <Tooltip
-              onClick={handleOpen}
+              onClick={authReducer?.user ? handleOpen : null}
               title={
                 `${post?._count?.comments}` <= 1
                   ? `${post?._count?.comments} Comment`
@@ -120,7 +126,7 @@ export default function TopicPost({ post, likeData }) {
             >
               <MarkChatUnreadIcon
                 style={{ margin: "0 2% " }}
-                disable={authUser && true}
+                //disable={authUser ? true : false}
               />
             </Tooltip>
           </div>

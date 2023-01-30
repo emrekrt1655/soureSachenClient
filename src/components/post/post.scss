@@ -1,3 +1,7 @@
+.postTitleLink{
+  text-decoration: none;
+}
+
 .postContent {
   width: 100% !important;
   margin: 30px 25px 20px 25px;
@@ -60,6 +64,7 @@
           display: -webkit-box;
           -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
+
         }
       }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NewPostAdd from "../../components/newPostAdd/newPostAdd";
 import TopicPost from "../../components/post/TopicPost";
 import { useSelector, useDispatch } from "react-redux";

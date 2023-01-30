@@ -9,7 +9,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export default function Login() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const initialState = {
     email: "",
     password: "",
@@ -33,11 +33,12 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(userLogin));
+    navigate("/")
   };
 
-  useEffect(() => {
-    if (authReducer?.access_token) history.push("/");
-  }, [authReducer?.access_token, history]);
+  // useEffect(async () => {
+  //   if (authReducer?.access_token) navigate("/");
+  // }, [authReducer?.access_token, navigate]);
   return (
     <div className="login">
       <div className="login__loginBorder">

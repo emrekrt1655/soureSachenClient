@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Posts from "../../components/posts/Posts";
 import Sidebar from "../../components/sidebar/SideBar";
 import { useSelector } from "react-redux";

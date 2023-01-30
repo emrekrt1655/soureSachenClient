@@ -79,13 +79,13 @@ const SearchBar = ({ topics, posts }) => {
     <div className="wrap">
       <div className="wrap__searchButtonContainer">
         <div className="wrap__searchButtonContainer--searchButtonState" onClick={onSetStatetopic}>
-          <span className={search === "wrap__searchButtonContainer--searchButtonState__Topic" && "wrap__searchButtonContainer--searchButtonState__active"}>Topic</span>
+          <span className={search === "wrap__searchButtonContainer--searchButtonState__Topic" ? "wrap__searchButtonContainer--searchButtonState__active": null}>Topic</span>
         </div>
         <div className="searchButtonState" onClick={onSetStateopinion}>
-          <span className={search === "wrap__searchButtonContainer--searchButtonState__Opinion" && "wrap__searchButtonContainer--searchButtonState__active"}>Opinion</span>
+          <span className={search === "wrap__searchButtonContainer--searchButtonState__Opinion" ? "wrap__searchButtonContainer--searchButtonState__active": null}>Opinion</span>
         </div>
         <div className="searchButtonState" onClick={onSetStateuser}>
-          <span className={search === "wrap__searchButtonContainer--searchButtonState__User" && "wrap__searchButtonContainer--searchButtonState__active"}>User</span>
+          <span className={search === "wrap__searchButtonContainer--searchButtonState__User" ? "wrap__searchButtonContainer--searchButtonState__active" : null}>User</span>
         </div>
       </div>
       <div className="wrap__search">

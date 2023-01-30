@@ -98,7 +98,7 @@ export default function BasicModal({ open, handleClose }) {
             value={text}
             onChange={handleChangeInput}
           />
-          <div className={!imgInput && "hide"}>
+          <div className={!imgInput ? "hide" : null}>
             <Input
               fullWidth
               id="image"
