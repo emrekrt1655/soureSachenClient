@@ -1,5 +1,6 @@
 .fontSizeLeftbarIcon {
   font-size: 30px !important;
+  cursor: pointer;
 }
 
 .topImgLeftBar {
@@ -9,4 +10,28 @@
   object-fit: cover;
   margin-right: 10px !important;
   cursor: pointer;
+}
+
+.authUserImgBox {
+  width: 100%;
+  min-height: 100px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.settingIconBox {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

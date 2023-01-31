@@ -8,35 +8,24 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import HomeIcon from "@mui/icons-material/Home";
-import EditNotificationsRoundedIcon from "@mui/icons-material/EditNotificationsRounded";
+//import EditNotificationsRoundedIcon from "@mui/icons-material/EditNotificationsRounded";
 import SignpostRoundedIcon from "@mui/icons-material/SignpostRounded";
 import FollowTheSignsRoundedIcon from "@mui/icons-material/FollowTheSignsRounded";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
-import Badge from "@mui/material/Badge";
+//import Badge from "@mui/material/Badge";
 import "./leftBarPostTopic.scss";
 
 const drawerWidth = 100;
 
-export default function LeftBarPostTopic({ handleOpen }) {
+export default function LeftBarPostTopic({ handleOpen, post }) {
   const { authReducer } = useSelector((state) => state);
-
+  const navigate = useNavigate();
   return (
     <Box>
       <CssBaseline />
-      <div>
-        {authReducer?.access_token && ( 
-          <Link className="link" to="/settings">
-            <img
-              className="topImg"
-              src={authReducer?.user?.avatar}
-              alt="avatar"
-            />
-          </Link>
-        )}
-      </div>
       <Drawer
         variant="permanent"
         sx={{
@@ -48,35 +37,42 @@ export default function LeftBarPostTopic({ handleOpen }) {
           },
         }}
       >
-        <Toolbar />
         <Box sx={{ overflow: "auto" }}>
-          <div style={{ margin: "25px", position: "relative" }}>
+          <div className="authUserImgBox">
             {authReducer?.access_token && (
-              <Link className="link" to="/settings">
+              <Toolbar title="Go 2 ur profile">
                 <img
+                  onClick={() =>
+                    navigate(`/userProfile/${authReducer?.user?.userId}`)
+                  }
                   className="topImgLeftBar"
                   style={{ fontsize: "35px" }}
                   src={authReducer?.user?.avatar}
                   alt="avatar"
                 />
-              </Link>
+              </Toolbar>
             )}
           </div>
           <Divider />
-          <div style={{ margin: "45px 20px" }}>
+          <div className="iconBox">
             <List>
-              <ListItem button>
-                <Link className="link" to="/">
-                  <ListItemIcon
-                    style={{ display: "flex", flexDirection: "column" }}
-                  >
-                    <HomeIcon className="fontSizeLeftbarIcon" />
-                  </ListItemIcon>
-                </Link>
+              <ListItem>
+                <ListItemIcon
+                  style={{ display: "flex", flexDirection: "column" }}
+                  id="icon"
+                >
+                  <Toolbar title="Homepage">
+                    {" "}
+                    <HomeIcon
+                      className="fontSizeLeftbarIcon"
+                      onClick={() => navigate("/")}
+                    />{" "}
+                  </Toolbar>
+                </ListItemIcon>
               </ListItem>
             </List>
-            <List>
-              <ListItem button>
+            {/* <List>
+              <ListItem >
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
@@ -94,46 +90,70 @@ export default function LeftBarPostTopic({ handleOpen }) {
                   </Badge>
                 </ListItemIcon>
               </ListItem>
-            </List>
+            </List> */}
             <List>
-              <ListItem button>
+              <ListItem>
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <SignpostRoundedIcon className="fontSizeLeftbarIcon" />
+                  <Toolbar title="Topic page">
+                    {" "}
+                    <SignpostRoundedIcon
+                      className="fontSizeLeftbarIcon"
+                      onClick={() => navigate(`/${post?.postTopicId}`)}
+                    />{" "}
+                  </Toolbar>
                 </ListItemIcon>
               </ListItem>
             </List>
             <List>
-              <ListItem button>
+              <ListItem>
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <FollowTheSignsRoundedIcon className="fontSizeLeftbarIcon" />
+                  <Toolbar title="User page">
+                    {" "}
+                    <FollowTheSignsRoundedIcon
+                      className="fontSizeLeftbarIcon"
+                      onClick={() =>
+                        navigate(`/userProfile/${post?.postUserId}`)
+                      }
+                    />
+                  </Toolbar>
                 </ListItemIcon>
               </ListItem>
             </List>
             <List>
-              <ListItem button>
+              <ListItem>
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <HistoryEduIcon
-                    className="fontSizeLeftbarIcon"
-                    onClick={handleOpen}
-                  />
+                  <Toolbar title="Give ur Opinion">
+                    <HistoryEduIcon
+                      className="fontSizeLeftbarIcon"
+                      onClick={handleOpen}
+                    />
+                  </Toolbar>
                 </ListItemIcon>
               </ListItem>
             </List>
           </div>
           <Divider />
-          <div style={{ margin: "10px 20px" }}>
+          <div className="settingIconBox">
             <List>
-              <ListItem button>
+              <ListItem>
                 <ListItemIcon
                   style={{ display: "flex", flexDirection: "column" }}
                 >
-                  <SettingsIcon className="fontSizeLeftbarIcon" />
+                  <Toolbar title="Settings">
+                    {" "}
+                    <SettingsIcon
+                      className="fontSizeLeftbarIcon"
+                      onClick={() =>
+                        navigate(`/settings/${authReducer.user.userId}`)
+                      }
+                    />{" "}
+                  </Toolbar>
                 </ListItemIcon>
               </ListItem>
             </List>

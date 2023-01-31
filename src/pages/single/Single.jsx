@@ -58,7 +58,7 @@ export default function Single() {
         posts={postData}
       />
       <div className="single">
-        <LeftBarPostTopic handleOpen={handleOpen} />
+        <LeftBarPostTopic handleOpen={handleOpen} post={post} />
         <SinglePost
           post={post}
           topicTitle={currentTopic}
