@@ -109,7 +109,7 @@ export default function SinglePost({
                   <Box
                     className="avatarPostSingle"
                     onClick={() =>
-                      navigate(`userProfile/${userOfPost?.userId}`)
+                      navigate(`/${userOfPost?.userId}/userProfile`)
                     }
                   >
                     <Avatar

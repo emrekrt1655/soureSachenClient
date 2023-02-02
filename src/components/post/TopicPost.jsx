@@ -7,7 +7,7 @@ import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import MarkChatUnreadIcon from "@mui/icons-material/MarkChatUnread";
 import Tooltip from "@mui/material/Tooltip";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CreateNewComment from "../newCommentAdd/CreateComment";
 import "./topicPost.scss";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
@@ -18,7 +18,6 @@ export default function TopicPost({ post, likeData }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { authReducer, userReducer } = useSelector((state) => state);
-  const authUser = authReducer?.user;
   const authUserId = authReducer?.user?.userId;
   const access_token = authReducer?.access_token;
   const [open, setOpen] = useState(false);
@@ -74,7 +73,7 @@ export default function TopicPost({ post, likeData }) {
       <div className="topicpostContent">
         <div
           className="topicpostContent__topicPosttextDate--topicpost"
-          onClick={() => navigate( post && `post/${post?.postId}`)}
+          onClick={() => navigate(post && `/post/${post?.postId}`)}
         >
           {post?.image && (
             <img
@@ -96,13 +95,16 @@ export default function TopicPost({ post, likeData }) {
         <div className="topicpostContent__topicPostIcons">
           <Box className="topicpostContent__topicPostIcons--topicpostIconsUsername__topicpostAvatarIcon">
             <Tooltip title={`@` + userOfPost?.userName}>
-              
-                <Avatar
-                  onClick={() => navigate(authReducer?.user && `/userProfile/${userOfPost?.userId}`)}
-                  className="topicpostContent__topicPostIcons--topicpostIconsUsername__topicpostAvatarIcon--topicpostAvatarIconAvatar"
-                  alt="Profil Foto"
-                  src={userOfPost?.avatar}
-                />
+              <Avatar
+                onClick={() =>
+                  navigate(
+                    authReducer?.user && `/${userOfPost?.userId}/userProfile`
+                  )
+                }
+                className="topicpostContent__topicPostIcons--topicpostIconsUsername__topicpostAvatarIcon--topicpostAvatarIconAvatar"
+                alt="Profil Foto"
+                src={userOfPost?.avatar}
+              />
             </Tooltip>
           </Box>
           <div onClick={id?.length === 0 ? onLike : onUnlike}>

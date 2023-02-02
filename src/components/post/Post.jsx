@@ -1,6 +1,6 @@
 import "./post.scss";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -15,6 +15,8 @@ import { typeText } from "../../redux/actions/alertAction";
 import ShareButton from "../shareButton/ShareButton";
 
 export default function Post({ post, topicData, likeData }) {
+  const params = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const topic = topicData?.filter((topic) => {
     return topic?.topicId === post?.postTopicId;
@@ -35,6 +37,10 @@ export default function Post({ post, topicData, likeData }) {
   const handleOpenShare = () => {
     setopenShareButton(true);
     setShareLink(`/post/${post?.postId}`);
+  };
+
+  const onNavigate = () => {
+    navigate(`/${user?.userId}/userProfile`);
   };
 
   const closeShareButton = () => setopenShareButton(false);
@@ -89,7 +95,7 @@ export default function Post({ post, topicData, likeData }) {
                 {topicText}
               </p>
             </Link>
-            <Link className="postTitleLink" to={`post/${post?.postId}`}>
+            <Link className="postTitleLink" to={`/post/${post?.postId}`}>
               <p className="postDesc">{post?.text}</p>
             </Link>
             <span className="postContent__post--postInfoHomePage__postDate">
@@ -99,25 +105,22 @@ export default function Post({ post, topicData, likeData }) {
         </div>
         {/* added post like and comment number acording to count */}
         <div className="postContent__postIcons">
-         
-            <Box className="postContent__postIcons--postAvatarIcon">
-            <Tooltip title = {authReducer.user &&   `@` + user?.userName}>
-            <Link
-            to={ authReducer && `/userProfile/${user?.userId}`}
-            className="postContent__postIcons--postIconsUsername"
-          >
+          <Box className="postContent__postIcons--postAvatarIcon">
+            <Tooltip title={authReducer.user && `@` + user?.userName}>
               <Avatar
                 className="postContent__postIcons--postAvatarIcon__postAvatarIconAvatar"
                 alt="Profil Foto"
                 src={user?.avatar}
+                onClick={
+                  authReducer && !params.userId ? () => onNavigate() : null
+                }
               />
-          </Link>
-          </Tooltip>
-            </Box>
+            </Tooltip>
+          </Box>
           <div onClick={id?.length === 0 ? onLike : onUnlike}>
             <Tooltip title={likeCounts}>
               {id?.length === 0 ? (
-                <RecommendRoundedIcon /> 
+                <RecommendRoundedIcon />
               ) : (
                 <RecommendOutlinedIcon />
               )}
@@ -125,7 +128,7 @@ export default function Post({ post, topicData, likeData }) {
           </div>
           <div>
             <Tooltip
-              onClick={authReducer?.user ? handleOpen : null }
+              onClick={authReducer?.user ? handleOpen : null}
               title={
                 `${post?._count?.comments}` <= 1
                   ? `${post?._count?.comments} Comment`

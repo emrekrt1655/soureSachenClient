@@ -20,7 +20,6 @@ import ChangePassword from "./pages/changePassword/ChangePassword";
 import Active from "./pages/active/Active";
 import ForgotPassword from "./pages/forgot_password/ForgotPassword";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
-import Home from "@mui/icons-material/Home";
 
 function App() {
   const { authReducer } = useSelector((state) => state);
@@ -34,9 +33,8 @@ function App() {
     dispatch(getPosts());
     dispatch(getLikes());
     access_token && dispatch(getFollowers(access_token));
-  }, [access_token,dispatch]);
+  }, [access_token, dispatch]);
 
- 
   //  useEffect(() => {
   //    const socket = io()
   //    dispatch({ type: 'SOCKET', payload: socket })
@@ -73,7 +71,7 @@ function App() {
         <Route exact path="/:topicId" element={<TopicPosts />} />
         <Route
           exact
-          path="/userProfile/:userId"
+          path="/:userId/userProfile"
           element={authReducer?.user ? <UserProfil /> : <Login />}
         />
         <Route exact path="/post/:postId" element={<Single />} />

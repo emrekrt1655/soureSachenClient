@@ -1,4 +1,4 @@
-.postTitleLink{
+.postTitleLink {
   text-decoration: none;
 }
 
@@ -64,7 +64,6 @@
           display: -webkit-box;
           -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
-
         }
       }
 
@@ -86,6 +85,7 @@
     align-items: center;
     margin-left: -14px;
     margin-right: 5px;
+    cursor: pointer;
     /* background-color: rgb(217, 135, 217); */
     /*border-radius: 10% 70% 0% 100% / 0% 0% 100% 100%; */
   }

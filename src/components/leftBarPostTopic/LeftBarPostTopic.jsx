@@ -43,7 +43,7 @@ export default function LeftBarPostTopic({ handleOpen, post }) {
               <Toolbar title="Go 2 ur profile">
                 <img
                   onClick={() =>
-                    navigate(`/userProfile/${authReducer?.user?.userId}`)
+                    navigate(`/${authReducer?.user?.userId}/userProfile`)
                   }
                   className="topImgLeftBar"
                   style={{ fontsize: "35px" }}
@@ -116,7 +116,7 @@ export default function LeftBarPostTopic({ handleOpen, post }) {
                     <FollowTheSignsRoundedIcon
                       className="fontSizeLeftbarIcon"
                       onClick={() =>
-                        navigate(`/userProfile/${post?.postUserId}`)
+                        navigate(`/${post?.postUserId}/userProfile/`)
                       }
                     />
                   </Toolbar>
