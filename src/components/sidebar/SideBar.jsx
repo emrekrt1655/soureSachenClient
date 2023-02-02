@@ -125,15 +125,18 @@ export default function Sidebar({
                 <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
                   <div className="titleinfoSide__titleInfoPart">
+                    <Tooltip title = {t?.text?.length > 25 && "Click to see the full topic"}>
                     <p
                       className="titleinfoSide__titleInfoPart--titleInfo"
                       onClick={() => navigate(`/${t?.topicId}`)}
                     >
-                      {" "}
+
+                      
                       {t?.text?.length < 25
                         ? t?.text
                         : t?.text?.slice(0, 25) + "..."}{" "}
                     </p>
+                    </Tooltip>
                     <p className="titleinfoSide__titleInfoPart--titleCountry">
                       {" "}
                       {t?.country}{" "}
