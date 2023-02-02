@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -24,6 +24,7 @@ export default function SinglePost({
   likeData,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { authReducer } = useSelector((state) => state);
   const users = useSelector((state) => state?.userReducer?.data);
   const authUser = authReducer?.user;
@@ -105,21 +106,21 @@ export default function SinglePost({
               <div className="postImageTitleComments">
                 <h1 className="singlePostTitle">{topicTitle?.text}</h1>
                 <div className="singlePostAuthor">
-                  <Link
-                    className="link"
-                    to={`userProfile/${userOfPost?.userId}`}
+                  <Box
+                    className="avatarPostSingle"
+                    onClick={() =>
+                      navigate(`userProfile/${userOfPost?.userId}`)
+                    }
                   >
-                    <Box className="avatarPostSingle">
-                      <Avatar
-                        className="whotoFollowAvatarComments"
-                        alt="Profil Foto"
-                        src={userOfPost?.avatar}
-                      />
-                      <p className="commentPostAvatar">
-                        {authUser && "@" + userOfPost?.userName}
-                      </p>
-                    </Box>
-                  </Link>
+                    <Avatar
+                      className="whotoFollowAvatarComments"
+                      alt="Profil Foto"
+                      src={userOfPost?.avatar}
+                    />
+                    <p className="commentPostAvatar">
+                      {authUser && "@" + userOfPost?.userName}
+                    </p>
+                  </Box>
                 </div>
                 {post?.image ? (
                   <img

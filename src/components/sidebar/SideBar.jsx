@@ -10,7 +10,6 @@ import Tooltip from "@mui/material/Tooltip";
 import "./sidebar.scss";
 import SearchBar from "./searchBar/SearchBar";
 import CountryFilter from "./countryfilter/CountryFilter";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,11 +75,9 @@ export default function Sidebar({
   });
   sortedDateTopics = sorted2date?.map((t) => t);
 
-  const { authReducer, userReducer } = useSelector((state) => state);
-  const authUser = authReducer?.user?.userId;
 
   return (
-    <div>
+    <>
       <CountryFilter
         open2={open2}
         handleClose2={handleClose2}
@@ -136,7 +133,7 @@ export default function Sidebar({
                       >
                         {t?.text?.length < 25
                           ? t?.text
-                          : t?.text?.slice(0, 25) + "..."}{" "}
+                          : t?.text?.slice(0, 20) + "..."}{" "}
                       </p>
                     </Tooltip>
                     <p className="titleinfoSide__titleInfoPart--titleCountry">
@@ -151,15 +148,21 @@ export default function Sidebar({
                 <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
                   <div className="titleinfoSide__titleInfoPart">
-                    <p
-                      className="titleinfoSide__titleInfoPart--titleInfo"
-                      onClick={() => navigate(`/topic/${t?.topicId}`)}
+                    <Tooltip
+                      title={
+                        t?.text?.length > 25 && "Click to see the full topic"
+                      }
                     >
-                      {" "}
-                      {t?.text?.length < 25
-                        ? t?.text
-                        : t?.text?.slice(0, 25) + "..."}{" "}
-                    </p>
+                      <p
+                        className="titleinfoSide__titleInfoPart--titleInfo"
+                        onClick={() => navigate(`/topic/${t?.topicId}`)}
+                      >
+                        {" "}
+                        {t?.text?.length < 25
+                          ? t?.text
+                          : t?.text?.slice(0, 20) + "..."}{" "}
+                      </p>
+                    </Tooltip>
                     <p className="titleinfoSide__titleInfoPart--titleCountry">
                       {" "}
                       {t?.country}{" "}
@@ -172,15 +175,21 @@ export default function Sidebar({
                 <div className="titleinfoSide" key={t?.topicId}>
                   <i className="fab fa-buffer"></i>
                   <div className="titleinfoSide__titleInfoPart">
-                    <p
-                      className="titleinfoSide__titleInfoPart--titleInfo"
-                      onClick={() => navigate(`/topic/${t?.topicId}`)}
+                    <Tooltip
+                      title={
+                        t?.text?.length > 25 && "Click to see the full topic"
+                      }
                     >
-                      {" "}
-                      {t?.text?.length < 25
-                        ? t?.text
-                        : t?.text?.slice(0, 25) + "..."}{" "}
-                    </p>
+                      <p
+                        className="titleinfoSide__titleInfoPart--titleInfo"
+                        onClick={() => navigate(`/topic/${t?.topicId}`)}
+                      >
+                        {" "}
+                        {t?.text?.length < 25
+                          ? t?.text
+                          : t?.text?.slice(0, 20) + "..."}{" "}
+                      </p>
+                    </Tooltip>
                     <p className="titleinfoSide__titleInfoPart--titleCountry">
                       {" "}
                       {t?.country}{" "}
@@ -260,7 +269,7 @@ export default function Sidebar({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div>‚
+    </>
   );
 }

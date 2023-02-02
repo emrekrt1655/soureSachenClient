@@ -45,7 +45,7 @@ export default function Single() {
 
   useEffect(() => {
     post?._count?.comments > 0 && dispatch(getComments(postId));
-  }, [postId, dispatch]);
+  }, [post?._count?.comments, postId, dispatch]);
 
   const commentData = commentReducer.data;
 
