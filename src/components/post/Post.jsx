@@ -38,7 +38,7 @@ export default function Post({ post, topicData, likeData }) {
     setopenShareButton(true);
     setShareLink(`/post/${post?.postId}`);
   };
-
+  
   const onNavigate = () => {
     navigate(`/${user?.userId}/userProfile`);
   };
@@ -120,9 +120,15 @@ export default function Post({ post, topicData, likeData }) {
           <div onClick={id?.length === 0 ? onLike : onUnlike}>
             <Tooltip title={likeCounts}>
               {id?.length === 0 ? (
-                <RecommendRoundedIcon />
+                <>
+                  {" "}
+                  <RecommendRoundedIcon />{" "}
+                </>
               ) : (
-                <RecommendOutlinedIcon />
+                <>
+                  {" "}
+                  <RecommendOutlinedIcon />{" "}
+                </>
               )}
             </Tooltip>
           </div>

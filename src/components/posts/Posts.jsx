@@ -6,11 +6,11 @@ export default function Posts({ topicData, postData, likeData }) {
     <div className="posts">
       {postData?.length > 0 ? (
         postData &&
-        postData?.map((p, index) => (
+        postData?.map((p) => (
           <Post
             topicData={topicData}
             post={p}
-            key={index}
+            key={p?.postId}
             likeData={likeData}
           />
         ))
