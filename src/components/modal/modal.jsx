@@ -47,9 +47,11 @@ export default function BasicModal({ open, handleClose }) {
   const topicData = {
     text: text,
     image: image,
-    topicUserId: topicUserId,
+    topicUserId: currentUser?.userId,
     country: country,
   };
+
+  console.log(topicUserId)
 
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
