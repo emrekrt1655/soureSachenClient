@@ -42,7 +42,7 @@ export default function BasicModal({ open, handleClose }) {
   const dispatch = useDispatch();
   const [imgInput, setImgInput] = React.useState(false);
   const [topic, setTopic] = React.useState(initialState);
-  const { text, image, topicUserId } = topic;
+  const { text, image } = topic;
 
   const topicData = {
     text: text,
@@ -50,8 +50,6 @@ export default function BasicModal({ open, handleClose }) {
     topicUserId: currentUser?.userId,
     country: country,
   };
-
-  console.log(topicUserId)
 
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
