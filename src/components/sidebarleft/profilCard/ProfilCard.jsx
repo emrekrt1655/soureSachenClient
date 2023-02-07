@@ -1,15 +1,17 @@
 import "./profilCard.scss";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FollowerList from "../followList/FollowerList";
 import FollowingList from "../followList/FollowingList";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import AttractionsSharpIcon from "@mui/icons-material/AttractionsSharp";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function ProfilCard({ profileOfUser, followerData }) {
+  const navigate = useNavigate();
+  const { userId } = useParams();
   const user = useSelector((state) => state?.authReducer?.user);
   const access_token = useSelector((state) => state?.authReducer?.access_token);
   const users = useSelector((state) => state?.userReducer?.data);
@@ -36,6 +38,11 @@ export default function ProfilCard({ profileOfUser, followerData }) {
     (follower) => follower?.followerId === currentUser?.userId
   );
 
+  const onNavigate = () => {
+    userId !== currentUser?.userId &&
+      navigate(`/${currentUser?.userId}/userProfile`);
+  };
+
   return (
     <>
       <FollowerList
@@ -59,13 +66,12 @@ export default function ProfilCard({ profileOfUser, followerData }) {
       />
       <div>
         <div className="profile-card-4 text-center">
-          <Link to={`/userProfile/${currentUser?.userId}`}>
-            <img
-              src={currentUser?.avatar}
-              className="img img-responsive"
-              alt="profilcard"
-            />
-          </Link>
+          <img
+            src={currentUser?.avatar}
+            className="img img-responsive"
+            alt="profilcard"
+            onClick={() => onNavigate()}
+          />
           <div className="profile-content">
             <div className="profile-name">
               {`${currentUser?.name} ${currentUser?.surname}`}
@@ -81,11 +87,12 @@ export default function ProfilCard({ profileOfUser, followerData }) {
                 </Tooltip>
               )}
               {currentUser?.userId === user?.userId && (
-                <Link to={`/settings/${user?.userId}`} >
-                <Tooltip title="Settings">
-                  <SettingsIcon/>
+                <Tooltip
+                  title="Settings"
+                  onClick={() => navigate(`/settings/${user?.userId}`)}
+                >
+                  <SettingsIcon />
                 </Tooltip>
-                </Link>
               )}
             </div>
             <div className="profile-description">

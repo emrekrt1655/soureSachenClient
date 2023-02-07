@@ -56,7 +56,7 @@ export default function Topbar() {
       </div>
       <div className="topRight">
         {authReducer?.access_token && (
-          <Link className="link" to={`/userProfile/${user?.userId}`}>
+          <Link className="link" to={`/${user?.userId}/userProfile`}>
             <img
               className="topImg"
               src={authReducer?.user?.avatar}

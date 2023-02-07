@@ -47,15 +47,11 @@ export default function WoToFollow() {
 
   return (
     <div className="whotoFollowContainer">
-      {newSuggestionList?.length > 0 && (
-        <p id="whotofollow" >
-          WHO TO FOLLOW
-        </p>
-      )}
-      <Stack direction="row" spacing={2} >
+      {newSuggestionList?.length > 0 && <p id="whotofollow">WHO TO FOLLOW</p>}
+      <Stack direction="row" spacing={2}>
         {newSuggestionList?.map((p, index) => (
           <Box key={index} className="whotofollowavatar">
-            <Link to={`/userProfile/${p?.userId}`}>
+            <Link to={`/${p?.userId}/userProfile`}>
               <Avatar
                 className="whotoFollowAvatar"
                 alt={p?.name}
