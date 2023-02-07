@@ -51,6 +51,11 @@
 
       &__sidebarIcons {
         display: flex;
+
+        svg{
+          font-size: 1.2rem;
+        }
+
       }
     }
 

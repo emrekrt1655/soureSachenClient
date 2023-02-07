@@ -9,11 +9,11 @@ import Tooltip from "@mui/material/Tooltip";
 
 const style = {
   position: "absolute",
-  top: "30%",
-  left: "70%",
+  top: "40%",
+  left: "87%",
   transform: "translate(-50%, -50%)",
-  width: 325,
-  height: 325,
+  width: 410,
+  height: 400,
   bgcolor: "background.paper",
   borderRadius: "3%",
   border: "1px solid #195d49",
@@ -64,6 +64,7 @@ export default function CountryFilter({
                 setFilter("mostRated"),
                 setCountry(""),
                 handleClose2(),
+                setCountryList(countries),
               ]}
             />
           </Tooltip>
