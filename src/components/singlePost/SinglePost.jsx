@@ -98,7 +98,13 @@ export default function SinglePost({
         likes={likes}
         users={users}
       />
-      <CreateNewComment post={post} open={open} handleClose={handleClose} />
+      <CreateNewComment
+        access_token={authReducer?.access_token}
+        authUser={authUser}
+        post={post}
+        open={open}
+        handleClose={handleClose}
+      />
       <div className="singlePost">
         <div className="singlePostWrapper">
           <div className="singlePostRealPost">

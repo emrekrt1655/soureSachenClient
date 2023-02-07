@@ -14,7 +14,7 @@ import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import ShareButton from "../shareButton/ShareButton";
 
-export default function Post({ post, topicData, likeData }) {
+export default function Post({ authUser, post, topicData, likeData }) {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export default function Post({ post, topicData, likeData }) {
     setopenShareButton(true);
     setShareLink(`/post/${post?.postId}`);
   };
-  
+
   const onNavigate = () => {
     navigate(`/${user?.userId}/userProfile`);
   };
@@ -75,7 +75,13 @@ export default function Post({ post, topicData, likeData }) {
 
   return (
     <>
-      <CreateNewComment post={post} open={open} handleClose={handleClose} />
+      <CreateNewComment
+        access_token={access_token}
+        authUser={authUser}
+        post={post}
+        open={open}
+        handleClose={handleClose}
+      />
       <div className="postContent">
         <div className="postContent__post">
           {post.image && (

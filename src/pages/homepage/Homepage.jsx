@@ -19,7 +19,7 @@ export default function Homepage() {
     postReducer,
     topicReducer,
     likeReducer,
-    followerReducer
+    followerReducer,
   } = useSelector((state) => state);
   const postData = postReducer?.data;
   const topicData = topicReducer?.data;
@@ -27,7 +27,6 @@ export default function Homepage() {
   const user = authReducer?.user;
   const access_token = authReducer?.access_token;
   const followerData = followerReducer?.data;
-  const userId = user?.userId
 
   const followings = followerData?.filter(
     (follower) => follower?.followerId === user.userId
@@ -45,8 +44,6 @@ export default function Homepage() {
       filteredListforInterested?.push(post);
     }
   });
-
-
 
   return (
     <>
@@ -67,6 +64,7 @@ export default function Homepage() {
             topicData={topicData}
             postData={value === 0 ? postData : filteredListforInterested}
             likeData={likeData}
+            authUser={user}
           />
         </div>
         <Sidebar

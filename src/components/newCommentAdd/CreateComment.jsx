@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Modal from "@mui/material/Modal";
 import SendIcon from "@mui/icons-material/Send";
 import Avatar from "@mui/material/Avatar";
@@ -26,28 +25,27 @@ const style = {
   p: 8,
 };
 
-function CreateNewComment({ handleClose, open, post }) {
-  const userId = useSelector((state) => state?.authReducer?.user?.userId);
+function CreateNewComment({ handleClose, access_token, open, post, authUser }) {
   const avatar = useSelector((state) => state?.authReducer?.user?.avatar);
-  const name = useSelector((state) => state?.authReducer?.user?.name);
-  const surname = useSelector((state) => state?.authReducer?.user?.surname);
-  const access_token = useSelector((state) => state?.authReducer?.access_token);
+  const authUserId = authUser?.userId;
+  const name = authUser?.name;
+  const surname = authUser?.surname;
   const dispatch = useDispatch();
   const commentPostId = post?.postId;
 
   const initialState = {
     text: "",
-    commentUserId: userId,
+    commentUserId: authUser?.userId,
     commentPostId: commentPostId,
   };
 
   const [comment, setComment] = React.useState(initialState);
   const { text } = comment;
   const handleChangeInput = (e) => {
-    const { value, name } = e.target;
     setComment({
-      ...comment,
-      [name]: value,
+      commentUserId: authUserId,
+      commentPostId: commentPostId,
+      text: e.target.value,
     });
   };
 

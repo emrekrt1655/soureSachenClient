@@ -1,7 +1,7 @@
 import { FakeDoc } from "../post/FakeDoc";
 import Post from "../post/Post";
 import "./posts.scss";
-export default function Posts({ topicData, postData, likeData }) {
+export default function Posts({ authUser, topicData, postData, likeData }) {
   return (
     <div className="posts">
       {postData?.length > 0 ? (
@@ -12,6 +12,7 @@ export default function Posts({ topicData, postData, likeData }) {
             post={p}
             key={p?.postId}
             likeData={likeData}
+            authUser={authUser}
           />
         ))
       ) : (
