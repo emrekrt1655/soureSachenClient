@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Input from "@mui/material/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { createComment, getComments } from "../../redux/actions/commentAction";
+import { getPosts } from "../../redux/actions/postAction";
 import { typeText } from "../../redux/actions/alertAction";
 import "../newPostAdd/newPostAdd.scss";
 
@@ -54,6 +55,7 @@ function CreateNewComment({ handleClose, access_token, open, post, authUser }) {
     if (text.length > 20) {
       dispatch(createComment(comment, access_token))
         .then(() => dispatch(getComments(commentPostId)))
+        .then(() => dispatch(getPosts()))
         .then(() => {
           handleClose();
         });

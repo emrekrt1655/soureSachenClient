@@ -69,7 +69,7 @@ export default function TopicPost({ post, likeData }) {
         openShareButton={openShareButton}
         closeShareButton={handleCloseShareButton}
       />
-      <CreateNewComment post={post} open={open} handleClose={handleClose} />
+      <CreateNewComment access_token={access_token} authUser={authReducer?.user} post={post} open={open} handleClose={handleClose} />
       <div className="topicpostContent">
         <div
           className="topicpostContent__topicPosttextDate--topicpost"

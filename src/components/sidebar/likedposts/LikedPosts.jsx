@@ -93,6 +93,8 @@ export default function Post({
         closeShareButton={handleCloseShareButton}
       />
       <CreateNewComment
+        authUser={user}
+        access_token={access_token}
         post={likedPost}
         open={open}
         handleClose={handleClose}
