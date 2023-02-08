@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import "./login.scss";
 import { login } from "../../redux/actions/authAction";
 import { Link } from "react-router-dom";
@@ -18,7 +17,6 @@ export default function Login() {
   const [userLogin, setUserLogin] = useState(initialState);
   const { email, password } = userLogin;
   const [typePass, setTypePass] = useState(false);
-  const { authReducer } = useSelector((state) => state);
 
   const handleChangeInput = (e) => {
     const { value, name } = e.target;
@@ -33,12 +31,9 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(userLogin));
-    navigate("/")
+    navigate("/");
   };
 
-  // useEffect(async () => {
-  //   if (authReducer?.access_token) navigate("/");
-  // }, [authReducer?.access_token, navigate]);
   return (
     <div className="login">
       <div className="login__loginBorder">

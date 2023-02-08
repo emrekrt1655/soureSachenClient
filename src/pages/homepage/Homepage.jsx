@@ -1,32 +1,24 @@
 import { useState } from "react";
 import Posts from "../../components/posts/Posts";
 import Sidebar from "../../components/sidebar/SideBar";
-import { useSelector } from "react-redux";
 import "./homepage.scss";
 import SideBarLeft from "../../components/sidebarleft/SideBarLeft";
 import Topbar from "../../components/topbar/Topbar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-export default function Homepage() {
+export default function Homepage({
+  postData,
+  user,
+  topicData,
+  likeData,
+  followerData,
+  access_token,
+}) {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const {
-    authReducer,
-    postReducer,
-    topicReducer,
-    likeReducer,
-    followerReducer,
-  } = useSelector((state) => state);
-  const postData = postReducer?.data;
-  const topicData = topicReducer?.data;
-  const likeData = likeReducer?.data;
-  const user = authReducer?.user;
-  const access_token = authReducer?.access_token;
-  const followerData = followerReducer?.data;
 
   const followings = followerData?.filter(
     (follower) => follower?.followerId === user.userId
@@ -47,7 +39,7 @@ export default function Homepage() {
 
   return (
     <>
-      <Topbar />
+      <Topbar access_token={access_token} user={user} />
       <div className="home">
         {user && <SideBarLeft followerData={followerData} />}
         <div className="home__homePage">

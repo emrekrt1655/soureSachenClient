@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
@@ -23,13 +23,12 @@ export default function SinglePost({
   userOfPost,
   commentData,
   likeData,
+  authUser,
+  access_token,
+  users,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authReducer } = useSelector((state) => state);
-  const users = useSelector((state) => state?.userReducer?.data);
-  const authUser = authReducer?.user;
-  const access_token = authReducer?.access_token;
   const [openLikeUsers, setOpenLikeUsers] = useState(false);
   const [open, setOpen] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -100,7 +99,7 @@ export default function SinglePost({
         users={users}
       />
       <CreateNewComment
-        access_token={authReducer?.access_token}
+        access_token={access_token}
         authUser={authUser}
         post={post}
         open={open}
@@ -196,7 +195,12 @@ export default function SinglePost({
           <div className={!showComments ? "comments" : null}>
             {comments &&
               comments.map((comment) => (
-                <Comments key={comment?.commentId} comment={comment} />
+                <Comments
+                  key={comment?.commentId}
+                  users={users}
+                  comment={comment}
+                  authUser={authUser}
+                />
               ))}
           </div>
         </div>

@@ -11,21 +11,18 @@ import { getComments } from "../../redux/actions/commentAction";
 import { typeText } from "../../redux/actions/alertAction";
 import "./single.scss";
 
-export default function Single() {
+export default function Single({
+  likeData,
+  user,
+  postData,
+  topicData,
+  users,
+  access_token,
+}) {
   const dispatch = useDispatch();
   const { postId } = useParams();
   const [open, setOpen] = useState(false);
-  const {
-    authReducer,
-    likeReducer,
-    postReducer,
-    topicReducer,
-    userReducer,
-    commentReducer,
-  } = useSelector((state) => state);
-  const postData = postReducer?.data;
-  const topicData = topicReducer?.data;
-  const likeData = likeReducer?.data;
+  const { commentReducer } = useSelector((state) => state);
 
   const handleOpen = () => {
     user?.userId
@@ -33,14 +30,12 @@ export default function Single() {
       : dispatch(typeText("Please Login now to share your Opinion!"));
   };
   const handleClose = () => setOpen(false);
-  const user = authReducer?.user;
-  const access_token = authReducer?.access_token;
+
   const post = postData?.find((post) => post?.postId === postId);
   const currentTopic = topicData?.find(
     (top) => top?.topicId === post?.postTopicId
   );
 
-  const users = userReducer?.data;
   const userOfPost = users?.find((user) => user?.userId === post?.postUserId);
 
   useEffect(() => {
@@ -56,6 +51,9 @@ export default function Single() {
         handleClose={handleClose}
         topicId={currentTopic?.topicId}
         posts={postData}
+        user={user}
+        topics={topicData}
+        access_token={access_token}
       />
       <div className="single">
         <LeftBarPostTopic handleOpen={handleOpen} post={post} />
@@ -65,6 +63,9 @@ export default function Single() {
           userOfPost={userOfPost}
           commentData={commentData}
           likeData={likeData}
+          authUser={user}
+          access_token={access_token}
+          users={users}
         />
         <Sidebar
           user={user}

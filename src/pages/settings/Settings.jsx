@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./settings.scss";
 import { update, deleteAcccount } from "../../redux/actions/authAction";
 import { getUsers } from "../../redux/actions/userAction";
 import { Link, useNavigate } from "react-router-dom";
 import Topbar from "../../components/topbar/Topbar";
 
-export default function Settings() {
+export default function Settings({authReducer}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authReducer } = useSelector((state) => state);
   const user = authReducer?.user;
   const id = user?.userId;
   const access_token = authReducer?.access_token;
@@ -38,7 +37,7 @@ export default function Settings() {
 
   return (
     <>
-      <Topbar />
+      <Topbar  user={user} access_token={access_token}  />
       <div className="settings">
         <div className="settings__settingsWrapper">
           <form

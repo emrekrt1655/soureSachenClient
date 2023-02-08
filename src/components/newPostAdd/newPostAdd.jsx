@@ -8,7 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Input from "@mui/material/Input";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createPost, getPosts } from "../../redux/actions/postAction";
 import { typeText } from "../../redux/actions/alertAction";
 import "./newPostAdd.scss";
@@ -26,13 +26,19 @@ const style = {
   p: 8,
 };
 
-function NewPostAdd({ topicId, posts, handleClose, open }) {
-  const userId = useSelector((state) => state?.authReducer?.user?.userId);
-  const avatar = useSelector((state) => state?.authReducer?.user?.avatar);
-  const name = useSelector((state) => state?.authReducer?.user?.name);
-  const surname = useSelector((state) => state?.authReducer?.user?.surname);
-  const topics = useSelector((state) => state?.topicReducer?.data);
-  const access_token = useSelector((state) => state?.authReducer?.access_token);
+function NewPostAdd({
+  topicId,
+  posts,
+  handleClose,
+  open,
+  user,
+  topics,
+  access_token,
+}) {
+  const userId = user?.userId;
+  const avatar = user?.avatar;
+  const name = user?.name;
+  const surname = user?.surname;
   const dispatch = useDispatch();
   const [imgInput, setImgInput] = React.useState(false);
 
@@ -42,8 +48,6 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
     postTopicId: topicId,
     image: "",
   };
-
-
 
   const [post, setPost] = React.useState(initialState);
   const { text, image } = post;
@@ -75,7 +79,7 @@ function NewPostAdd({ topicId, posts, handleClose, open }) {
 
   React.useEffect(() => {
     dispatch(getPosts());
-  }, [posts?.length]);
+  }, [dispatch, posts?.length]);
 
   return (
     <div>

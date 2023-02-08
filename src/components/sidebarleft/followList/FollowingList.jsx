@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../../likeUsers/likeUsers.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   deleteFollower,
   getFollowers,

@@ -9,15 +9,14 @@ import { Link } from "react-router-dom";
 import { follow, getFollowers } from "../../../redux/actions/followerAction";
 import "./whoToFollow.scss";
 
-export default function WoToFollow() {
+export default function WoToFollow({followerData}) {
   const dispatch = useDispatch();
-  const { authReducer, userReducer, followerReducer } = useSelector(
+  const { authReducer, userReducer } = useSelector(
     (state) => state
   );
   const authUser = authReducer?.user?.userId;
   const access_token = authReducer?.access_token;
   const userList = userReducer?.data;
-  const followerData = followerReducer?.data;
 
   let authFollowers = followerData
     ?.filter((user) => user?.followerId === authUser)

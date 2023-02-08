@@ -1,25 +1,24 @@
 import { useState } from "react";
 import NewPostAdd from "../../components/newPostAdd/newPostAdd";
 import TopicPost from "../../components/post/TopicPost";
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
 import "./topicPosts.scss";
 import Sidebar from "../../components/sidebar/SideBar";
 import { useParams } from "react-router-dom";
 import LeftBarPostTopic from "../../components/leftBarPostTopic/LeftBarPostTopic";
 import { typeText } from "../../redux/actions/alertAction";
 
-export default function TopicPosts() {
+export default function TopicPosts({
+  likeData,
+  user,
+  postData,
+  topicData,
+  access_token,
+}) {
   const dispatch = useDispatch();
   const { topicId } = useParams();
   const [open, setOpen] = useState(false);
-  const { authReducer, postReducer, topicReducer, likeReducer } = useSelector(
-    (state) => state
-  );
-  const postData = postReducer?.data;
-  const topicData = topicReducer?.data;
-  const likeData = likeReducer?.data;
-  const user = authReducer?.user;
-  const access_token = authReducer?.access_token;
+
   const handleOpen = () => {
     user?.userId
       ? setOpen(true)
@@ -28,8 +27,7 @@ export default function TopicPosts() {
   const handleClose = () => setOpen(false);
   const posts = postData?.filter((post) => post.postTopicId === topicId);
   const currentTopic = topicData?.find((top) => top.topicId === topicId);
-  const currentTopicId = currentTopic?.topicId
-  
+  const currentTopicId = currentTopic?.topicId;
 
   return (
     <div className="topicDevContainer">

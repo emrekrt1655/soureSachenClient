@@ -2,17 +2,11 @@ import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
-import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import { Avatar, Grid, Paper } from "@material-ui/core";
-import { useSelector } from "react-redux";
 import "./comments.css";
 import moment from "moment";
 
-function Comments({ comment }) {
-  const { authReducer, userReducer } = useSelector((state) => state);
-  const authUserId = authReducer?.user?.userId;
-
-  const users = userReducer?.data;
+function Comments({ comment, authUser, users }) {
   const userOfCommnets = users?.find(
     (user) => user?.userId === comment?.commentUserId
   );
@@ -43,7 +37,7 @@ function Comments({ comment }) {
                 to={`/userProfile/${userOfCommnets?.userId}`}
                 className="commentIconsUsername"
               >
-                <p>{authReducer?.user && "@" + userOfCommnets?.userName}</p>
+                <p>{authUser?.user && "@" + userOfCommnets?.userName}</p>
               </Link>
             </div>
             <div className="commentText">

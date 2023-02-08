@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import "../../likeUsers/likeUsers.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { follow, getFollowers } from "../../../redux/actions/followerAction";
 
 const style = {
@@ -86,7 +86,10 @@ export default function FollowerList({
                 authList?.userId ? null : authFollowings?.includes(
                     i?.userId
                   ) ? (
-                  <Button className="likeUserfollowAvatarBox__likeUserFollowButton" variant="contained">
+                  <Button
+                    className="likeUserfollowAvatarBox__likeUserFollowButton"
+                    variant="contained"
+                  >
                     Following
                   </Button>
                 ) : (

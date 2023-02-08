@@ -9,7 +9,7 @@ export default function SideBarLeft({ profileOfUser, followerData }) {
     <div className="sidebarLeft">
       <ProfilCard profileOfUser={profileOfUser} followerData={followerData} />
       <div className="sidebarLeft__sidebarLeftItem">
-        <WoToFollow />
+        <WoToFollow followerData={followerData}  />
       </div>
     </div>
   );

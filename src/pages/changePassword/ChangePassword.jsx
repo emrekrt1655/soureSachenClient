@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./changePassword.scss";
 import { changeOldPassword } from "../../redux/actions/authAction";
-import { useNavigate } from "react-router-dom";
 import Topbar from "../../components/topbar/Topbar";
 
-export default function ChangePassword() {
+export default function ChangePassword({ user, access_token }) {
   const dispatch = useDispatch();
-  const { authReducer } = useSelector((state) => state);
-  const user = authReducer?.user;
   const id = user?.userId;
-  const access_token = authReducer?.access_token;
 
   const initialState = {
     userId: id,
@@ -34,7 +30,7 @@ export default function ChangePassword() {
   };
   return (
     <>
-      <Topbar />
+      <Topbar user={user} access_token={access_token} />
       <div className="changePassword">
         <div className="changePassword__changePasswordWrapper">
           <form

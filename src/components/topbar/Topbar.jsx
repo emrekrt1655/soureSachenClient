@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/actions/authAction";
 import "./topbar.scss";
 
-export default function Topbar() {
-  const { authReducer } = useSelector((state) => state);
-  const user = authReducer?.user;
+export default function Topbar({ user, access_token }) {
   const dispatch = useDispatch();
-  const token = authReducer?.access_token;
 
   return (
     <div className="top">
@@ -25,7 +22,7 @@ export default function Topbar() {
           </div>
           <div className="topListItem">ABOUT</div>
           <div className="topListItem">CONTACT</div>
-          {!authReducer?.access_token ? (
+          {!access_token ? (
             <div className="topbarLoginRegister">
               <div className="topListItem">
                 <Link className="link" to="/login">
@@ -42,11 +39,11 @@ export default function Topbar() {
             <div></div>
           )}
 
-          {authReducer?.access_token && (
+          {access_token && (
             <Link
               className="link"
               to="/"
-              onClick={() => dispatch(logOut(token))}
+              onClick={() => dispatch(logOut(access_token))}
             >
               {" "}
               <li className="topListItem">LOGOUT</li>{" "}
@@ -55,13 +52,9 @@ export default function Topbar() {
         </div>
       </div>
       <div className="topRight">
-        {authReducer?.access_token && (
+        {access_token && (
           <Link className="link" to={`/${user?.userId}/userProfile`}>
-            <img
-              className="topImg"
-              src={authReducer?.user?.avatar}
-              alt="avatar"
-            />
+            <img className="topImg" src={user?.avatar} alt="avatar" />
           </Link>
         )}
       </div>
