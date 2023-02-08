@@ -13,6 +13,7 @@ import CreateNewComment from "../newCommentAdd/CreateComment";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import ShareButton from "../shareButton/ShareButton";
+import moment from "moment";
 
 export default function Post({ authUser, post, topicData, likeData }) {
   const params = useParams();
@@ -105,7 +106,7 @@ export default function Post({ authUser, post, topicData, likeData }) {
               <p className="postDesc">{post?.text}</p>
             </Link>
             <span className="postContent__post--postInfoHomePage__postDate">
-              {new Date(post.createdAt).toDateString()}
+              {moment(post.createdAt).fromNow()}
             </span>
           </div>
         </div>

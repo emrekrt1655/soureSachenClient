@@ -6,6 +6,7 @@ import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import { Avatar, Grid, Paper } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import "./comments.css";
+import moment from "moment";
 
 function Comments({ comment }) {
   const { authReducer, userReducer } = useSelector((state) => state);
@@ -37,9 +38,7 @@ function Comments({ comment }) {
             </Tooltip>
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
-            <div
-               className="commentsAvatartName"
-            >
+            <div className="commentsAvatartName">
               <Link
                 to={`/userProfile/${userOfCommnets?.userId}`}
                 className="commentIconsUsername"
@@ -50,7 +49,7 @@ function Comments({ comment }) {
             <div className="commentText">
               <p style={{ textAlign: "left" }}>{comment?.text}</p>
               <p style={{ textAlign: "left", color: "gray" }}>
-                {new Date(comment?.createdAt).toDateString()}
+                {moment(comment?.createdAt).fromNow()}
               </p>
             </div>
           </Grid>

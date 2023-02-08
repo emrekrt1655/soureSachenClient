@@ -11,6 +11,7 @@ import { getLikes, like, unlike } from "../../../redux/actions/likeAction";
 import { typeText } from "../../../redux/actions/alertAction";
 import CreateNewComment from "../../newCommentAdd/CreateComment";
 import ShareButton from "../../shareButton/ShareButton";
+import moment from "moment"
 
 export default function Post({
   postData,
@@ -123,7 +124,7 @@ export default function Post({
           </Link>
           <div className="postlked__posttextinfo--extrainfo">
             <span className="postlked__posttextinfo--extrainfo__postDate">
-              {new Date(likedPost?.createdAt).toDateString()}
+              {moment(likedPost?.createdAt).fromNow()}
             </span>
           </div>
           <div className="postlked__posttextinfo--extrainfo">

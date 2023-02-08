@@ -65,6 +65,10 @@
       display: flex;
       margin-left: 15px;
 
+      svg {
+        cursor: pointer;
+      }
+
       &__postDate {
         font-family: "Lora", serif;
         font-style: italic;

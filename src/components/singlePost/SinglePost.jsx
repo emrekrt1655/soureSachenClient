@@ -15,6 +15,7 @@ import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import { useState } from "react";
 import ShareButton from "../shareButton/ShareButton";
+import moment from "moment";
 
 export default function SinglePost({
   post,
@@ -148,7 +149,7 @@ export default function SinglePost({
               <div className="singlePostInfo">
                 <span className="singlePostDate">
                   {" "}
-                  {new Date(post?.createdAt).toDateString()}
+                  {moment(post?.createdAt).fromNow()}
                 </span>
               </div>
             </div>

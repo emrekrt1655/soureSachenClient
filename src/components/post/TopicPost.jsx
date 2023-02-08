@@ -13,6 +13,7 @@ import "./topicPost.scss";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import ShareButton from "../shareButton/ShareButton";
+import moment from "moment";
 
 export default function TopicPost({ post, likeData }) {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ export default function TopicPost({ post, likeData }) {
               {post?.text}
             </p>
             <span className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDate">
-              {new Date(post?.createdAt).toDateString()}
+              {moment(post?.createdAt).fromNow()}
             </span>
           </div>
         </div>
