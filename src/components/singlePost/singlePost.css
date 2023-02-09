@@ -6,15 +6,18 @@
 }
 
 .singlePostWrapper {
-  padding: 20px;
+  padding: 30px;
   padding-right: 0;
   margin-top: 10px !important;
-  /* background-color: #b96c6c; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .singlePostavatarTime {
   /* background-color: #a8c2ad; */
-  margin-top: 20px !important;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -68,7 +71,6 @@
 
 .singlePostEdit {
   display: flex;
-  /* float: right; */
   justify-content: space-around;
 
   font-size: 16px;
@@ -114,6 +116,8 @@
   font-size: 18px;
   line-height: 25px;
   margin-top: -15px;
+  padding: 10px;
+  width: 100%;
 }
 
 .singlePostDesc::first-letter {
@@ -135,19 +139,28 @@
   color: white;
 }
 
+.iconBoxy {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  vertical-align: middle;
+  height: 30px;
+  cursor: pointer;
+}
+
 .toolPostComments {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 190px;
   height: 30px;
-  /* background: linear-gradient(
-      10deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 236, 236, 0.3) 100%
-    ),
-    linear-gradient(50deg, rgba(223, 213, 213, 0.1) 0%, transparent 100%);
-  border-radius: 50px; */
+  margin-right: 10px;
+}
+
+.iconBoxy span {
+  vertical-align: middle;
+  height: 30px;
 }
 
 .toolPostComments:hover {
@@ -157,6 +170,9 @@
 .singlePostRealPost {
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
     0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  max-height: 1900px;
+  max-width: 900px;
+  min-height: 460px;
 }
 
 .comments {

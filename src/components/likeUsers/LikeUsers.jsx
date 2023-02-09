@@ -2,17 +2,18 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
 //import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import "./likeUsers.scss"
+import "./likeUsers.scss";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
   top: "50%",
-  left: "50%",
+  left: "40%",
   transform: "translate(-50%, -50%)",
-  width: "30%",
+  width: "20%",
   height: "50%",
   bgcolor: "#ffffff",
   borderRadius: "5%",
@@ -30,6 +31,7 @@ export default function LikeUsers({
   likes,
   users,
 }) {
+  const navigate = useNavigate();
   let likeUsers = [];
 
   likes?.forEach((like) => {
@@ -45,7 +47,7 @@ export default function LikeUsers({
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Stack direction="column" spacing={2}>
+        <Paper direction="column" spacing={2}>
           {likes &&
             likeUsers?.map((user, index) => (
               <Box
@@ -53,14 +55,21 @@ export default function LikeUsers({
                 className="likeUserfollowAvatarBox"
                 onClick={() => [handleCloseLikeUsers()]}
               >
-                <Box className="likeUserfollowAvatarBox__likeUserFollowAvatarName">
+                <Box
+                  className="likeUserfollowAvatarBox__likeUserFollowAvatarName"
+                  onClick={() => navigate(`/${user?.userId}/userProfile`)}
+                >
                   <Avatar
                     className="likeUserfollowAvatarBox__likeUserFollowAvatarName--likeUserFollowAvatar"
                     alt={user?.name}
                     src={user?.avatar}
                   />
-                  <Typography variant="overline" display="block" gutterBottom>
-                    {user?.name + " " + user?.surname}
+                  <Typography
+                    display="block"
+                    gutterBottom
+                    className="likeUserfollowAvatarBox__likeUserFollowAvatarName--likeUserFollowUsername"
+                  >
+                    {"@" + user?.userName}
                   </Typography>
                 </Box>
                 {/* <Button className="likeUserfollowAvatarBox__likeUserFollowButton" variant="contained">
@@ -68,7 +77,7 @@ export default function LikeUsers({
                 </Button> */}
               </Box>
             ))}
-        </Stack>
+        </Paper>
       </Box>
     </Modal>
   );

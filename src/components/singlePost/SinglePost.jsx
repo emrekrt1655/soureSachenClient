@@ -152,42 +152,52 @@ export default function SinglePost({
               </div>
             </div>
             <div className="singlePostEdit">
-              <div
-                className="toolPostComments"
-                onClick={id?.length === 0 ? onLike : onUnlike}
-              >
-                <Tooltip title="Like">
-                  {id?.length === 0 ? (
-                    <RecommendRoundedIcon />
-                  ) : (
-                    <RecommendOutlinedIcon />
-                  )}
-                </Tooltip>
+              <div className="iconBoxy">
+                <div
+                  className="toolPostComments"
+                  onClick={id?.length === 0 ? onLike : onUnlike}
+                >
+                  <Tooltip title="Like">
+                    {id?.length === 0 ? (
+                      <span>
+                        <RecommendRoundedIcon />{" "}
+                      </span>
+                    ) : (
+                      <span>
+                        {" "}
+                        <RecommendOutlinedIcon />{" "}
+                      </span>
+                    )}
+                  </Tooltip>
+                </div>
+                <span onClick={handleOpenLikeUsers}>
+                  {likes?.length > 0 ? likeCounts : ""}{" "}
+                </span>
               </div>
-              <span onClick={handleOpenLikeUsers} style={{ cursor: "pointer" }}>
-                {" "}
-                {likes?.length > 0 ? likeCounts : ""}{" "}
-              </span>
-              <div className="toolPostComments">
-                <Tooltip title="Comment" onClick={handleOpen}>
-                  <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
-                </Tooltip>
+              <div className="iconBoxy">
+                <div className="toolPostComments">
+                  <Tooltip title="Comment" onClick={handleOpen}>
+                    <MarkChatUnreadIcon style={{ margin: "0 2% " }} />
+                  </Tooltip>
+                </div>
+                <span onClick={showComment}>
+                  {comments?.length > 0 ? commentCounts : ""}
+                </span>
               </div>
-              <span onClick={showComment} style={{ cursor: "pointer" }}>
-                {comments?.length > 0 ? commentCounts : ""}
-              </span>
-              <div className="toolPostComments">
-                <Tooltip title="Share">
-                  <ShareRoundedIcon
-                    onClick={handleOpenShare}
-                    style={{ margin: "0 2% " }}
+              <div className="iconBoxy">
+                <div className="toolPostComments">
+                  <Tooltip title="Share">
+                    <ShareRoundedIcon
+                      onClick={handleOpenShare}
+                      style={{ margin: "0 2% " }}
+                    />
+                  </Tooltip>
+                  <ShareButton
+                    shareLink={shareLink}
+                    openShareButton={openShareButton}
+                    closeShareButton={closeShareButton}
                   />
-                </Tooltip>
-                <ShareButton
-                  shareLink={shareLink}
-                  openShareButton={openShareButton}
-                  closeShareButton={closeShareButton}
-                />
+                </div>
               </div>
             </div>
           </div>

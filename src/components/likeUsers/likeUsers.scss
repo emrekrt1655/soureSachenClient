@@ -2,15 +2,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 300px !important;
+  width: 90% !important;
+  flex-direction: column;
 
   &__likeUserFollowAvatarName {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      color: rgb(148, 58, 204);
+      padding: 6px;
+    }
 
     &--likeUserFollowAvatar {
-      margin-right: 7px !important;
+      margin-right: 17px !important;
     }
   }
 

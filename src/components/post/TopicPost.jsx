@@ -118,9 +118,13 @@ export default function TopicPost({ post, likeData }) {
           <div onClick={id?.length === 0 ? onLike : onUnlike}>
             <Tooltip title={likeCounts}>
               {id?.length === 0 ? (
-                <RecommendRoundedIcon />
+                <span>
+                  <RecommendRoundedIcon />
+                </span>
               ) : (
-                <RecommendOutlinedIcon />
+                <span>
+                  <RecommendOutlinedIcon />
+                </span>
               )}
             </Tooltip>
           </div>
