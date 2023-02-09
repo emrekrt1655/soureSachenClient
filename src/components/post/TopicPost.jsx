@@ -13,9 +13,10 @@ import "./topicPost.scss";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import ShareButton from "../shareButton/ShareButton";
-import moment from "moment";
+import { useDate } from "../../utils/useDate";
 
 export default function TopicPost({ post, likeData }) {
+  const day = useDate(post?.createdAt);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { authReducer, userReducer } = useSelector((state) => state);
@@ -70,7 +71,13 @@ export default function TopicPost({ post, likeData }) {
         openShareButton={openShareButton}
         closeShareButton={handleCloseShareButton}
       />
-      <CreateNewComment access_token={access_token} authUser={authReducer?.user} post={post} open={open} handleClose={handleClose} />
+      <CreateNewComment
+        access_token={access_token}
+        authUser={authReducer?.user}
+        post={post}
+        open={open}
+        handleClose={handleClose}
+      />
       <div className="topicpostContent">
         <div
           className="topicpostContent__topicPosttextDate--topicpost"
@@ -88,7 +95,7 @@ export default function TopicPost({ post, likeData }) {
               {post?.text}
             </p>
             <span className="topicpostContent__topicPosttextDate--topicpost__topicpostInfoHomePage--topicpostDate">
-              {moment(post?.createdAt).fromNow()}
+              {day}
             </span>
           </div>
         </div>

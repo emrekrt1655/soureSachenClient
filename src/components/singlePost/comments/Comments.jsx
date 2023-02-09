@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import RecommendRoundedIcon from "@mui/icons-material/RecommendRounded";
 import { Avatar, Grid, Paper } from "@material-ui/core";
 import "./comments.css";
-import moment from "moment";
+import { useDate } from "../../../utils/useDate";
 
 function Comments({ comment, authUser, users }) {
+  const day = useDate(comment?.createdAt);
   const userOfCommnets = users?.find(
     (user) => user?.userId === comment?.commentUserId
   );
@@ -42,9 +43,7 @@ function Comments({ comment, authUser, users }) {
             </div>
             <div className="commentText">
               <p style={{ textAlign: "left" }}>{comment?.text}</p>
-              <p style={{ textAlign: "left", color: "gray" }}>
-                {moment(comment?.createdAt).fromNow()}
-              </p>
+              <p style={{ textAlign: "left", color: "gray" }}>{day}</p>
             </div>
           </Grid>
         </Grid>

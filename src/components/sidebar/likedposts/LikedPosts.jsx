@@ -11,7 +11,7 @@ import { getLikes, like, unlike } from "../../../redux/actions/likeAction";
 import { typeText } from "../../../redux/actions/alertAction";
 import CreateNewComment from "../../newCommentAdd/CreateComment";
 import ShareButton from "../../shareButton/ShareButton";
-import moment from "moment"
+import { useDate } from "../../../utils/useDate";
 
 export default function Post({
   postData,
@@ -51,6 +51,7 @@ export default function Post({
   });
 
   const likedPost = posts?.find((post) => post.postId === newList[0]?.postId);
+  const day = useDate(likedPost?.createdAt);
   const topic = topics?.find((t) => {
     return t.topicId === likedPost?.postTopicId;
   });
@@ -102,7 +103,10 @@ export default function Post({
       />
       <div className="postlked">
         {likedPost?.image && (
-          <Link to={`/post/${likedPost?.postId}`} className="postlked__postlkedLink">
+          <Link
+            to={`/post/${likedPost?.postId}`}
+            className="postlked__postlkedLink"
+          >
             <img
               className="postlked__postlkedLink--postImgliked"
               src={likedPost?.image}
@@ -113,18 +117,26 @@ export default function Post({
         <div className="postlked__posttextinfo">
           <div className="postlked__posttextinfo--postInfo">
             <span className="postlked__posttextinfo--postInfo__likedPostTitle">
-              <Link to={`/${topicId}`} className="postlked__posttextinfo--postInfo__likedPostTitle--link">
+              <Link
+                to={`/${topicId}`}
+                className="postlked__posttextinfo--postInfo__likedPostTitle--link"
+              >
                 {topic?.text}
               </Link>
             </span>
             <hr />
           </div>
-          <Link to={`/post/${likedPost?.postId}`} className="postlked__posttextinfo--postlkedLink">
-            <p className="postlked__posttextinfo--postlkedLink__likedPostDesc">{likedPost?.text}</p>
+          <Link
+            to={`/post/${likedPost?.postId}`}
+            className="postlked__posttextinfo--postlkedLink"
+          >
+            <p className="postlked__posttextinfo--postlkedLink__likedPostDesc">
+              {likedPost?.text}
+            </p>
           </Link>
           <div className="postlked__posttextinfo--extrainfo">
             <span className="postlked__posttextinfo--extrainfo__postDate">
-              {moment(likedPost?.createdAt).fromNow()}
+              {day}
             </span>
           </div>
           <div className="postlked__posttextinfo--extrainfo">

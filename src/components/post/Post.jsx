@@ -13,9 +13,10 @@ import CreateNewComment from "../newCommentAdd/CreateComment";
 import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import ShareButton from "../shareButton/ShareButton";
-import moment from "moment";
+import { useDate } from "../../utils/useDate";
 
 export default function Post({ authUser, post, topicData, likeData }) {
+  const day = useDate(post?.createdAt);
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -106,7 +107,7 @@ export default function Post({ authUser, post, topicData, likeData }) {
               <p className="postDesc">{post?.text}</p>
             </Link>
             <span className="postContent__post--postInfoHomePage__postDate">
-              {moment(post.createdAt).fromNow()}
+              {day}
             </span>
           </div>
         </div>

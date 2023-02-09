@@ -15,7 +15,7 @@ import { getLikes, like, unlike } from "../../redux/actions/likeAction";
 import { typeText } from "../../redux/actions/alertAction";
 import { useState } from "react";
 import ShareButton from "../shareButton/ShareButton";
-import moment from "moment";
+import { useDate } from "../../utils/useDate";
 
 export default function SinglePost({
   post,
@@ -29,6 +29,8 @@ export default function SinglePost({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const day = useDate(post?.createdAt);
+
   const [openLikeUsers, setOpenLikeUsers] = useState(false);
   const [open, setOpen] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -146,10 +148,7 @@ export default function SinglePost({
             <div className="postTextTime">
               <p className="singlePostDesc">{post?.text}</p>
               <div className="singlePostInfo">
-                <span className="singlePostDate">
-                  {" "}
-                  {moment(post?.createdAt).fromNow()}
-                </span>
+                <span className="singlePostDate"> {day}</span>
               </div>
             </div>
             <div className="singlePostEdit">
