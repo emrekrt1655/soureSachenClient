@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import Scroll from "./Scroll";
 import SearchList from "./SearchList";
 import { useSelector } from "react-redux";
-import "./searchBar.scss"
+import "./searchBar.scss";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 const SearchBar = ({ topics, posts }) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const users = useSelector((state) => state?.userReducer?.data);
 
   const [searchTopicField, setSearchTopicField] = useState("");
@@ -24,7 +32,7 @@ const SearchBar = ({ topics, posts }) => {
     return post.text.toLowerCase().includes(searchPostField.toLowerCase());
   });
 
-  const handleChange = (e) => {
+  const handleChangeTopic = (e) => {
     setSearchTopicField(e.target.value);
     setSearchPostField(e.target.value);
     setSearchUserField(e.target.value);
@@ -77,23 +85,33 @@ const SearchBar = ({ topics, posts }) => {
 
   return (
     <div className="wrap">
-      <div className="wrap__searchButtonContainer">
-        <div className="wrap__searchButtonContainer--searchButtonState" onClick={onSetStatetopic}>
-          <span className={search === "wrap__searchButtonContainer--searchButtonState__Topic" ? "wrap__searchButtonContainer--searchButtonState__active": null}>Topic</span>
-        </div>
-        <div className="searchButtonState" onClick={onSetStateopinion}>
-          <span className={search === "wrap__searchButtonContainer--searchButtonState__Opinion" ? "wrap__searchButtonContainer--searchButtonState__active": null}>Opinion</span>
-        </div>
-        <div className="searchButtonState" onClick={onSetStateuser}>
-          <span className={search === "wrap__searchButtonContainer--searchButtonState__User" ? "wrap__searchButtonContainer--searchButtonState__active" : null}>User</span>
-        </div>
-      </div>
+      <Tabs
+        className="homePageTabsSearch"
+        value={value}
+        onChange={handleChange}
+      >
+        <Tab
+          className="homePageTabSearch"
+          label="Topic"
+          onClick={onSetStatetopic}
+        />
+        <Tab
+          className="homePageTabSearch"
+          label="Opinion"
+          onClick={onSetStateopinion}
+        />
+        <Tab
+          className="homePageTabSearch"
+          label="User"
+          onClick={onSetStateuser}
+        />
+      </Tabs>
       <div className="wrap__search">
         <input
           type="text"
           className="wrap__search--searchTerm"
           placeholder={`Search a ${search}...`}
-          onChange={handleChange}
+          onChange={handleChangeTopic}
         />
         <button type="submit" className="wrap__search--searchButton">
           <i className="fa fa-search"></i>

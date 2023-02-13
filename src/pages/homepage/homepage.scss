@@ -1,25 +1,33 @@
 .home {
+  display: flex;
+  justify-content: space-between;
+
+  &__homePage {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    &__homePage {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    // background-color: aqua;
+    width: 100%;
 
-        // background-color: aqua;
-        width: 100%;
+    &--homePageTabs {
+      display: flex !important;
+      justify-content: space-between;
 
-        &--homePageTabs {
-            display: flex !important;
-            justify-content: space-between;
-
-            .homePageTab {
-                display: flex !important;
-                margin-top: 14px !important;
-                width: 220px !important;
-            }
-        }
+      .homePageTab {
+        display: flex !important;
+        margin-top: 14px !important;
+        width: 220px !important;
+      }
     }
+  }
+}
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: rgb(148, 58, 204) !important;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+  background-color: rgb(148, 58, 204) !important;
 }
