@@ -75,7 +75,6 @@ export default function Sidebar({
   });
   sortedDateTopics = sorted2date?.map((t) => t);
 
-
   return (
     <>
       <CountryFilter
@@ -83,8 +82,8 @@ export default function Sidebar({
         handleClose2={handleClose2}
         setCountry={setCountry}
         setFilter={setFilter}
+        country={country}
       />
-
       <Modal open={open} handleClose={handleClose} />
       <div className="sidebar">
         <div className="sidebar__sidebarItem">
@@ -269,7 +268,8 @@ export default function Sidebar({
             </div>
           </div>
         </div>
-      </div>‚
+      </div>
+      ‚
     </>
   );
 }

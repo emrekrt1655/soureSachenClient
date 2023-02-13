@@ -30,6 +30,7 @@ export default function CountryFilter({
   handleClose2,
   setCountry,
   setFilter,
+  country,
 }) {
   const [countryList, setCountryList] = React.useState(countries);
 
@@ -55,7 +56,7 @@ export default function CountryFilter({
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Type your country.."
+            label={country ? country : "Type your country.."}
             variant="outlined"
             onChange={(e) => onSearch(e.target.value)}
           />
