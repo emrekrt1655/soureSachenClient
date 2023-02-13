@@ -54,7 +54,7 @@ export default function CountryFilter({
           <TextField
             fullWidth
             id="outlined-basic"
-            label="Select your country to filter topics.."
+            label="Type your country.."
             variant="outlined"
             onChange={(e) => onSearch(e.target.value)}
           />
