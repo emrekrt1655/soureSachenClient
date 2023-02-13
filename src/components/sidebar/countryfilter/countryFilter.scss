@@ -11,16 +11,13 @@
   }
 }
 
-
 .countryList {
-  list-style: numeric;
+  list-style: none;
+  padding-left: 0px;
 
   &__country {
     padding: 5px;
     width: 100%;
-    border-top: 2px solid black;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
     margin-top: 1px;
     cursor: pointer;
   }

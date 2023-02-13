@@ -6,6 +6,7 @@ import { countries } from "../../modal/CountryBox";
 import "./countryFilter.scss";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Tooltip from "@mui/material/Tooltip";
+import Paper from "@mui/material/Paper";
 
 const style = {
   position: "absolute",
@@ -72,18 +73,20 @@ export default function CountryFilter({
         <ul className="countryList">
           {countries &&
             countryList?.map((country, index) => (
-              <li
-                className="countryList__country"
-                key={index}
-                onClick={() => [
-                  setFilter("countryTopic"),
-                  setCountry(country?.label),
-                  handleClose2(),
-                ]}
-              >
-                {" "}
-                {country.label}{" "}
-              </li>
+              <Paper>
+                <li
+                  className="countryList__country"
+                  key={index}
+                  onClick={() => [
+                    setFilter("countryTopic"),
+                    setCountry(country?.label),
+                    handleClose2(),
+                  ]}
+                >
+                  {" "}
+                  {country.label}{" "}
+                </li>
+              </Paper>
             ))}
         </ul>
       </Box>
