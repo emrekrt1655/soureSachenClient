@@ -12,6 +12,7 @@ import { typeText } from "../../../redux/actions/alertAction";
 import CreateNewComment from "../../newCommentAdd/CreateComment";
 import ShareButton from "../../shareButton/ShareButton";
 import { useDate } from "../../../utils/useDate";
+import Divider from "@mui/material/Divider";
 
 export default function Post({
   postData,
@@ -111,7 +112,7 @@ export default function Post({
               className="postlked__postlkedLink--postImgliked"
               src={likedPost?.image}
               alt="mostLikedpost"
-            ></img>
+            />
           </Link>
         )}
         <div className="postlked__posttextinfo">
@@ -124,7 +125,7 @@ export default function Post({
                 {topic?.text}
               </Link>
             </span>
-            <hr />
+            <Divider />
           </div>
           <Link
             to={`/post/${likedPost?.postId}`}
