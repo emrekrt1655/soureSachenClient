@@ -73,11 +73,10 @@ export default function CountryFilter({
         </div>
         <ul className="countryList">
           {countries &&
-            countryList?.map((country, index) => (
-              <Paper>
+            countryList?.map((country) => (
+              <Paper key={country.label}>
                 <li
                   className="countryList__country"
-                  key={index}
                   onClick={() => [
                     setFilter("countryTopic"),
                     setCountry(country?.label),

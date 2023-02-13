@@ -20,6 +20,7 @@ import ChangePassword from "./pages/changePassword/ChangePassword";
 import Active from "./pages/active/Active";
 import ForgotPassword from "./pages/forgot_password/ForgotPassword";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
+import Topics from "./pages/allTopics/Topics";
 
 function App() {
   const {
@@ -172,12 +173,27 @@ function App() {
             />
           }
         />
+        <Route
+          exact
+          path="/topics"
+          element={
+            <Topics 
+            posts = {postReducer?.data}
+            users={userReducer?.data} topics={topicReducer?.data} authUser={authReducer?.user} access_token={access_token} />
+          }
+        />
         <Route exact path="/active/:slug" element={<Active />} />
         <Route exact path="/reset_password/:slug" element={<ResetPassword />} />
-        <Route exact path="/forgot/password" element={<ForgotPassword 
-        user={authReducer?.user}
-        access_token={access_token}
-        />} />
+        <Route
+          exact
+          path="/forgot/password"
+          element={
+            <ForgotPassword
+              user={authReducer?.user}
+              access_token={access_token}
+            />
+          }
+        />
       </Routes>
     </Router>
   );

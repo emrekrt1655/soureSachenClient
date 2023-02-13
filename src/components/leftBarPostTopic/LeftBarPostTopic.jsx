@@ -13,7 +13,7 @@ import SignpostRoundedIcon from "@mui/icons-material/SignpostRounded";
 import FollowTheSignsRoundedIcon from "@mui/icons-material/FollowTheSignsRounded";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 //import Badge from "@mui/material/Badge";
 import "./leftBarPostTopic.scss";
@@ -22,7 +22,13 @@ const drawerWidth = 100;
 
 export default function LeftBarPostTopic({ handleOpen, post }) {
   const { authReducer } = useSelector((state) => state);
+  const { topicId } = useParams();
   const navigate = useNavigate();
+
+  const onTopicNavigate = () => {
+    topicId ? navigate(`/topics`) : navigate(`/${post?.postTopicId}`);
+  };
+
   return (
     <Box>
       <CssBaseline />
@@ -100,7 +106,7 @@ export default function LeftBarPostTopic({ handleOpen, post }) {
                     {" "}
                     <SignpostRoundedIcon
                       className="fontSizeLeftbarIcon"
-                      onClick={() => navigate(`/${post?.postTopicId}`)}
+                      onClick={() => onTopicNavigate()}
                     />{" "}
                   </Toolbar>
                 </ListItemIcon>
