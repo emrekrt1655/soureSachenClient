@@ -60,7 +60,7 @@ export default function BasicModal({ open, handleClose }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text.length) {
+    if (text.trim().length) {
       dispatch(createTopic(topicData, access_token)).then(() => {
         dispatch(getTopics());
       });
