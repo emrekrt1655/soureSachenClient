@@ -91,8 +91,8 @@ export default function Sidebar({
         </div>
         <div className="sidebar__sidebarItem">
           <div className="sidebar__sidebarItem--sidebarHead">
-            <span className="sidebar__sidebarItem--sidebarHead__sidebarTitle">
-              Topic
+            <span className="sidebar__sidebarItem--sidebarHead__sidebarTitle" onClick={() => navigate("/topics")} >
+              Topics
             </span>
             <div className="sidebar__sidebarItem--sidebarHead__sidebarIcons">
               <Tooltip title="Most Rated">

@@ -64,7 +64,7 @@ export default function CountryFilter({
             <DeleteForeverIcon
               onClick={() => [
                 setFilter("mostRated"),
-                setCountry(""),
+                setCountry("Worldwide"),
                 handleClose2(),
                 setCountryList(countries),
               ]}

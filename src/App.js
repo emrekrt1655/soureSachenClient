@@ -21,6 +21,7 @@ import Active from "./pages/active/Active";
 import ForgotPassword from "./pages/forgot_password/ForgotPassword";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
 import Topics from "./pages/allTopics/Topics";
+import UserTopics from "./pages/allTopics/UserTopics";
 
 function App() {
   const {
@@ -144,6 +145,20 @@ function App() {
         />
         <Route
           exact
+          path="/:userId/topics"
+          element={
+            <UserTopics
+              posts={postReducer?.data}
+              followerData={followerReducer?.data}
+              users={userReducer?.data}
+              topics={topicReducer?.data}
+              authUser={authReducer?.user}
+              access_token={access_token}
+            />
+          }
+        />
+        <Route
+          exact
           path="/:userId/userProfile"
           element={
             authReducer?.user ? (
@@ -177,9 +192,14 @@ function App() {
           exact
           path="/topics"
           element={
-            <Topics 
-            posts = {postReducer?.data}
-            users={userReducer?.data} topics={topicReducer?.data} authUser={authReducer?.user} access_token={access_token} />
+            <Topics
+              posts={postReducer?.data}
+              followerData={followerReducer?.data}
+              users={userReducer?.data}
+              topics={topicReducer?.data}
+              authUser={authReducer?.user}
+              access_token={access_token}
+            />
           }
         />
         <Route exact path="/active/:slug" element={<Active />} />

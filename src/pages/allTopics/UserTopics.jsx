@@ -9,8 +9,9 @@ import { sortByPostCount } from "../../utils/sortByPostCount";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import CountryFilter from "../../components/sidebar/countryfilter/CountryFilter";
+import { useParams } from "react-router-dom";
 
-export default function Topics({
+export default function UserofTopics({
   posts,
   users,
   topics,
@@ -22,24 +23,24 @@ export default function Topics({
   const [filter, setFilter] = React.useState("");
   const handleOpen2 = () => setOpen2(true);
   const handleClose2 = () => setOpen2(false);
-
-  const profileOfUser = users?.find((u) => u?.userId === authUser?.userId);
-
+  const { userId } = useParams();
+  const profileOfUser = users?.find((u) => u?.userId === userId);
+  const userofTopics = topics?.filter((t) => t.topicUserId === userId);
   const [value, setValue] = React.useState(0);
   const [lastAdded, setLastAdded] = React.useState(true);
   const [mostRated, setMostRated] = React.useState(false);
   const [filterCountry, setFilterCountry] = React.useState(false);
-  const filteredCountryTopics = topics?.filter(
+  const filteredCountryTopics = userofTopics?.filter(
     (topic) => topic.country === country
   );
 
   let topicList = lastAdded
-    ? sortListbyDate(topics)
+    ? sortListbyDate(userofTopics)
     : mostRated
-    ? sortByPostCount(topics)
+    ? sortByPostCount(userofTopics)
     : filterCountry
     ? sortListByDay(sortByPostCount(filteredCountryTopics))
-    : topics;
+    : userofTopics;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
