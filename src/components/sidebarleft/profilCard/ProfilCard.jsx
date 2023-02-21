@@ -101,8 +101,23 @@ export default function ProfilCard({ profileOfUser, followerData }) {
             <div className="rowProfil">
               <div className="col-xs-4">
                 <div className="profile-overview">
-                  <p>OPINIONS</p>
-                  <h4>{currentUser?._count?.posts}</h4>
+                  <p>OPINION / TOPICS</p>
+                  <h4>
+                    {" "}
+                    <span
+                      onClick={() =>
+                        navigate(`/${currentUser?.userId}/userProfile`)
+                      }
+                    >
+                      {currentUser?._count?.posts}{" "}
+                    </span>
+                    <span
+                      onClick={() => navigate(`/${currentUser?.userId}/topics`)}
+                    >
+                      {currentUser?.isTopicCreator === "true" &&
+                        " / " + currentUser?._count?.topics}{" "}
+                    </span>
+                  </h4>
                 </div>
               </div>
               <div className="col-xs-4">
