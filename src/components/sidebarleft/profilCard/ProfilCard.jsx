@@ -101,7 +101,11 @@ export default function ProfilCard({ profileOfUser, followerData }) {
             <div className="rowProfil">
               <div className="col-xs-4">
                 <div className="profile-overview">
-                  <p>OPINION / TOPICS</p>
+                  <p>
+                    {currentUser?.isTopicCreator === "true"
+                      ? "OPINION / TOPICS"
+                      : "OPINION"}
+                  </p>
                   <h4>
                     {" "}
                     <span
