@@ -168,6 +168,8 @@ function App() {
                 topicData={topicReducer?.data}
                 users={userReducer?.data}
                 followerData={followerReducer?.data}
+                authUser={authReducer?.user}
+                access_token={access_token}
               />
             ) : (
               <Login />

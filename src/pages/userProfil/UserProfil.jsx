@@ -6,7 +6,7 @@ import Topbar from "../../components/topbar/Topbar";
 
 import "./userProfil.scss";
 
-const UserProfil = ({ likeData, posts, topicData, users, followerData }) => {
+const UserProfil = ({ likeData, posts, topicData, users, followerData, access_token, authUser }) => {
   const { userId } = useParams();
 
   const profileOfUser = users?.find((u) => u?.userId === userId);
@@ -17,7 +17,7 @@ const UserProfil = ({ likeData, posts, topicData, users, followerData }) => {
 
   return (
     <div>
-      <Topbar />
+      <Topbar access_token={access_token} user={authUser} />
 
       <div className="userProfilContainer">
         <SideBarLeft
