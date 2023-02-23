@@ -16,6 +16,7 @@ export default function Topics({
   topics,
   authUser,
   followerData,
+  access_token,
 }) {
   const [open2, setOpen2] = React.useState(false);
   const [country, setCountry] = React.useState("Worldwide");
@@ -72,7 +73,7 @@ export default function Topics({
         setFilter={setFilter}
         country={country}
       />
-      <Topbar user={authUser} />
+      <Topbar user={authUser} access_token={access_token} />
       <div className="topics">
         <SideBarLeft
           profileOfUser={profileOfUser}

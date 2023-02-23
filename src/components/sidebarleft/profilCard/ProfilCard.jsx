@@ -1,7 +1,7 @@
 import "./profilCard.scss";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import FollowerList from "../followList/FollowerList";
 import FollowingList from "../followList/FollowingList";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
@@ -10,6 +10,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function ProfilCard({ profileOfUser, followerData }) {
+  const { pathname } = useLocation();
+
   const navigate = useNavigate();
   const { userId } = useParams();
   const user = useSelector((state) => state?.authReducer?.user);
@@ -41,6 +43,11 @@ export default function ProfilCard({ profileOfUser, followerData }) {
   const onNavigate = () => {
     userId !== currentUser?.userId &&
       navigate(`/${currentUser?.userId}/userProfile`);
+  };
+
+  const onTopicsNavigate = () => {
+    pathname !== `/${currentUser?.userId}/topics` &&
+      navigate(`/${currentUser?.userId}/topics`);
   };
 
   return (
@@ -115,9 +122,7 @@ export default function ProfilCard({ profileOfUser, followerData }) {
                     >
                       {currentUser?._count?.posts}{" "}
                     </span>
-                    <span
-                      onClick={() => navigate(`/${currentUser?.userId}/topics`)}
-                    >
+                    <span onClick={() => onTopicsNavigate()}>
                       {currentUser?.isTopicCreator === "true" &&
                         " / " + currentUser?._count?.topics}{" "}
                     </span>
