@@ -9,7 +9,7 @@ export const useDate = (day) => {
     date?.includes("year") ||
     date?.includes("week")
   ) {
-    date = moment(date).format("DD.MM.YYYY");
+    date = moment(day).format("DD.MM.YYYY");
   } else if (date === "7 days ago") {
     date = "last week";
   } else if (date === "14 days ago") {
